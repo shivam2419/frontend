@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../style/Scrap_Collector/style.css';
+import '../style/Scrap_Collector/Style.css';
 import '../style/Scrap_Collector/responsive.css';
 import loaderGIF from "../assets/loader.gif";
 const ScrapCollectorDashboard = () => {
