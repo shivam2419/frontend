@@ -1,0 +1,97 @@
+.about {
+    background-color: white;
+    text-align: center;
+    padding: 5%;
+}
+
+.about p {
+    color: #4e35f0;
+    background-color: white;
+}
+
+.about h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+}
+
+.about-area {
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+    text-align: left;
+    align-items: center; /* Vertically align items */
+}
+
+.about-left {
+    font-weight: 400;
+    background-color: white;
+    width: 50%;
+}
+
+.about-left p {
+    background-color: white;
+    color: black;
+    font-weight: 400;
+}
+
+.about-right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Ensure the container has a height */
+}
+
+.about-right img {
+    height: 100%;
+    max-width: 100%; /* Make sure the image is responsive */
+    object-fit: contain; /* Keeps aspect ratio */
+}
+
+.btns {
+    background-color: white;
+    text-align: left;
+}
+
+
+#contact-btn{
+    background-color: #4e35f0;
+    border: 1px solid #4e35f0;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: none;
+    color: white;
+    text-decoration: none;
+    margin-right: 10px;
+
+}
+#recycle-btn{
+    background-color: white;
+    color: #4e35f0;
+    text-decoration: none;
+    border: 1px solid #4e35f0;
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+#contact-btn:hover{
+    background-color: white;
+    color: #4e35f0;
+    border: 1px solid #4e35f0;
+}
+#recycle-btn:hover{
+    background-color: #4e35f0;
+    color: white;
+    border: 1px solid white;
+}
+@media screen and (max-width: 768px) {
+    .about-area {
+        flex-direction: column;
+        align-items: center;
+    }
+    .about-left, .about-right {
+        width: 100%;
+    }
+    .about-right img {
+        max-width: 90%; /* Adjust image size on smaller screens */
+    }
+}

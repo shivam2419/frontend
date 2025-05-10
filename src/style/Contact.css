@@ -1,0 +1,92 @@
+.contact-container{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 5%;
+}
+.contact-container .contact-left{
+    padding: 20px 60px;
+    box-shadow: 1px 2px 10px 1px rgb(207, 207, 207);
+    width: 35%;
+}
+.contact-container .contact-left h2{
+    font-size: 26px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: auto;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.contact-container .contact-left label{
+    font-size: 16px;
+    font-family: 'Franklin Gothic Medium';
+}
+.contact-container .contact-left input, .contact-container .contact-left textarea{
+    padding: 8px;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 5px;
+    width: 90%;
+}
+#btn{
+    background-color: white;
+    color: rgb(109, 204, 255);
+    border: 1px solid rgb(109, 204, 255);
+    border-radius: 5px;
+    width: 150px;
+    cursor: pointer;
+}
+#btn:hover{
+    background-color: rgb(109, 204, 255);
+    color: white;
+}
+.contact-container .contact-right{
+    padding: 20px 60px;
+    box-shadow: 1px 2px 10px 1px rgb(207, 207, 207);
+    width: 35%;
+}
+.contact-container .contact-right h2{
+    font-size: 26px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: auto;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.contact-container .contact-right i{
+    margin-top: 10px;
+}
+.fa-linkedin-square:hover, .fa-instagram:hover, .fa-facebook-f:hover, .fa-whatsapp:hover{
+    background-color: black;
+    color: white;
+}
+.contact-container .contact-right h1{
+    height: 2px;
+    width: 100%;
+    background-color: black;
+    margin: 10px 0px;
+}
+
+@media screen and (max-width: 800px) {
+
+.contact-container{
+    display: inline;
+}
+.contact-container .contact-left, .contact-container .contact-right{
+    margin-top: 4%;
+    margin-left: 3%;
+    width: auto;
+}
+
+}
+@media screen and (max-width: 540px) {
+    .contact-container .contact-left{
+        width: auto;
+        margin: auto;
+        padding: auto;
+        margin: 2%;
+    }
+    .contact-container .contact-right{
+        display: none;
+    }
+    .contact-container .contact-left input{
+        width: 80%;
+    }    
+}
