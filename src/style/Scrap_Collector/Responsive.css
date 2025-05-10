@@ -1,13 +1,14 @@
 /* Responsive CSS Here */
 @media screen and (max-width: 950px) {
-  .searchbar{
+  .searchbar {
+    display: none;
+  }
+  .message {
     display: none;
   }
   .nav-img {
     height: 25px;
   }
-
-
   .report-topic-heading,
   .item1,
   .items {
@@ -16,10 +17,9 @@
 }
 
 
-
 @media screen and (max-width: 490px) {
-  .message {
-    display: none;
+  .main {
+    padding: 10px;
   }
 
   .logosec {
@@ -56,6 +56,9 @@
 }
 
 @media screen and (max-width: 400px) {
+  .main{
+    padding: 10px;
+  }
   .recent-Articles {
     font-size: 17px;
   }
@@ -67,6 +70,7 @@
   }
 
   .report-header {
+    display: inline;
     height: 60px;
     padding: 10px 10px 5px 10px;
   }
@@ -88,10 +92,11 @@
   }
 
   .report-header {
+    display: inline;
     height: 60px;
     padding: 10px 5px 5px 5px;
+    margin: auto;
   }
-
   .t-op {
     font-size: 12px;
   }
@@ -105,20 +110,25 @@
   .items {
     width: 300px;
   }
-
-  .report-body {
-    padding: 10px;
-  }
-
   .label-tag {
     width: 70px;
   }
+}
 
-  .searchbtn {
-    width: 40px;
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .searchbar{
+    display: none;
   }
-
-  .searchbar2 input {
-    width: 180px;
+  .message{
+    display: none;
+  }
+  .report-body {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin: 0;
+    width: 100%;
+    align-items: center;
   }
 }

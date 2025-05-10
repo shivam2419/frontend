@@ -129,7 +129,7 @@ header {
   width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 40px 30px 30px 30px;
+  padding:10px;
 }
 
 .main::-webkit-scrollbar-thumb {
@@ -331,14 +331,4 @@ header {
   border-radius: 4px;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-  .searchbar{
-    display: none;
-  }
-  .report-body {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-}
+

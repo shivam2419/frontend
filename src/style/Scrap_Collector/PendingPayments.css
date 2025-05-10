@@ -136,7 +136,7 @@ header {
     width: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
-    padding: 40px 30px 30px 30px;
+    padding: 10px;
 }
 
 .main::-webkit-scrollbar-thumb {
@@ -450,9 +450,20 @@ td:last-child {
         width: 100%;
         justify-content: center;
     }
+    .searchbar{
+        display: none;
+    }
+    .message {
+        display: none;
+    }
     .report-body {
         display: block;
         overflow-x: auto;
         white-space: nowrap;
+        align-items: center;
+    }
+    .report-header {
+        display: inline;
+        margin: auto;
     }
 }

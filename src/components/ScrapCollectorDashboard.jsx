@@ -47,9 +47,11 @@ const ScrapCollectorDashboard = () => {
           }
         } else {
           alert(`Some error occured, please try again later : ${response.status}`);
+          window.location.href = "/login";
         }
       } catch (e) {
           alert(`Some error occured, please try again later : ${response.status}`);
+          window.location.href = "/login";
         console.log("Error:", e);
       } finally {
         setLoading(false);
@@ -90,6 +92,16 @@ const ScrapCollectorDashboard = () => {
       amount.includes(searchQuery)
     );
   });
+
+  const openNav = () => {
+      document.getElementById("mySidebar").style.display = "block";
+      document.getElementById("nav-side-btn").style.display = "none";
+  };
+
+  const closeNav = () => {
+      document.getElementById("mySidebar").style.display = "none";
+      document.getElementById("nav-side-btn").style.display = "block";
+  };
   if (loading) {
     return (
       <div style={{ textAlign: "center", margin: "20%" }}>
@@ -104,12 +116,13 @@ const ScrapCollectorDashboard = () => {
       <div>
         <header>
           <div className="logosec">
-            <div className="logo">{user.username.toUpperCase()}</div>
+            <Link className="logo" to="/scrap-collector">{user.username.toUpperCase()}</Link>
             <img
               src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
               className="icn menuicn"
               id="menuicn"
               alt="menu-icon"
+              onClick={openNav}
             />
           </div>
 
@@ -206,7 +219,7 @@ const ScrapCollectorDashboard = () => {
             </div>
 
             <div className="box-container">
-              <div className="box box1">
+              <Link className="box box1" to='/orders'>
                 <div className="text">
                   <h3 className="topic-heading">60.5kg</h3>
                   <h3 className="topic">Scrap Recycled</h3>
@@ -215,9 +228,9 @@ const ScrapCollectorDashboard = () => {
                   src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(31).png"
                   alt="Views"
                 />
-              </div>
+              </Link>
 
-              <div className="box box2">
+              <Link className="box box2" to="/pending-order">
                 <div className="text">
                   <h3 className="topic-heading">153</h3>
                   <h3 className="topic">Users handled</h3>
@@ -226,9 +239,9 @@ const ScrapCollectorDashboard = () => {
                   src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png"
                   alt="likes"
                 />
-              </div>
+              </Link>
 
-              <div className="box box3">
+              <Link className="box box3" to="/scrap-collector/profile">
                 <div className="text">
                   <h3 className="topic-heading">320</h3>
                   <h3 className="topic">Comments</h3>
@@ -237,9 +250,9 @@ const ScrapCollectorDashboard = () => {
                   src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(32).png"
                   alt="comments"
                 />
-              </div>
+              </Link>
 
-              <div className="box box4">
+              <Link className="box box4" onClick={logout}>
                 <div className="text">
                   <h3 className="topic-heading">70k</h3>
                   <h3 className="topic">Earnings</h3>
@@ -248,7 +261,7 @@ const ScrapCollectorDashboard = () => {
                   src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185029/13.png"
                   alt="published"
                 />
-              </div>
+              </Link>
             </div>
 
             <div className="report-container">

@@ -423,8 +423,11 @@ header {
   .navcontainer {
     display: none;
   }
+  .report-header {
+    display: inline;
+  }
   .report-body {
-    display: flex;
+    align-items: center;
   }
 
   .table-container {
@@ -438,7 +441,7 @@ header {
   }
 
   .searchbar2 {
-    display: flex;
+    display: none;
     width: 100%;
     margin: 10px 0;
   }
@@ -449,6 +452,41 @@ header {
   }
 
   .box-container {
-    gap: 20px;
+    gap: 5px;
+    padding: none;
+    white-space: nowrap;
+    padding: 2%;
+  }
+  .box:nth-child(1) {
+    gap: 10px;
+    height: 100px;
+    width: 150px;
+  }
+  .box:nth-child(1) img {
+    display: none;
+  }
+  .box:nth-child(2) {
+    gap: 10px;
+    height: 100px;
+    width: 150px;
+  }
+  .box:nth-child(2) img {
+    display: none;
+  }
+  .box:nth-child(3) {
+    gap: 10px;
+    height: 100px;
+    width: 150px;
+  }
+  .box:nth-child(3) img {
+    display: none;
+  }
+  .box:nth-child(4) {
+    gap: 10px;
+    height: 100px;
+    width: 150px;
+  }
+  .box:nth-child(4) img {
+    display: none;
   }
 }
