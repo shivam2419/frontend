@@ -156,7 +156,7 @@ margin-left: 20px; /* Adjust button's spacing from the last link */
 list-style: none;
 }
 .nav-item {
-margin-right: 30px;
+    margin-right: 30px;
 }
 .profile-image{
     display: flex;
@@ -238,6 +238,9 @@ background-color: #f0f0f0;
     .profile-image img {
         height: 30px;
         width: 30px;
+    }
+    .nav-item{
+        margin-right: 10px;
     }
     #notification img{
         margin-top: -5px;

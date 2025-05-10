@@ -77,7 +77,7 @@ const About = () => {
           <br />
           <div className="btns">
             <Link to="/contact" id="contact-btn">CONTACT US</Link>
-            <Link to="/recycle" id="recycle-btn">RECYCLE SERVICES</Link>
+            <Link to="/e-facility" id="recycle-btn">RECYCLE SERVICES</Link>
           </div>
         </div>
         <div className="about-right" data-aos="zoom-in-down" >

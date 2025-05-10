@@ -184,7 +184,7 @@ const Efacility = () => {
                         {searchQuery ? (
                             <h2>Search Results for "{searchQuery}"</h2>
                         ) : (
-                            <h1>All Available Scrap Collectors</h1>
+                            <h1>Available Scrap Collectors</h1>
                         )}
                         <form action="" method="GET">
                             <input
