@@ -239,6 +239,7 @@ background-color: #f0f0f0;
         height: 30px;
         width: 30px;
     }
-
-
+    #notification img{
+        margin-top: -5px;
+    }
 }

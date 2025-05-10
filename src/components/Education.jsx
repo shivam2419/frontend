@@ -3,7 +3,7 @@ import "../style/Education.css";
 const Education = () => {
   return (
     <div className="education-container">
-      <h1>Know about - Electronic Waste and Its Management</h1>
+      <h1>Know about - Waste and Its Management</h1>
       <div className="article">
         <h2>Articles:</h2>
         <div className="item">

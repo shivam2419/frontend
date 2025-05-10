@@ -39,6 +39,7 @@
 .video .row{
     display: flex;
     justify-content: space-around;
+    align-items: center;
     margin-top: 1%;
 }
 .video .row .card{
@@ -46,6 +47,7 @@
     box-shadow: 1px 1px 1px 1px rgb(201, 201, 201);
     padding-bottom: 2%;
     margin-top: 2%;
+    margin: auto;
 }
 .video .row .card img{
     height: 200px;
@@ -68,10 +70,14 @@
 }
 
 @media screen and (max-width: 800px) {
+    .education-container .article .item {
+        margin-bottom: 20px;
+    }
     .video .row{
         display: block;
     }
     .video .row .card {
         width: 95%;
+        margin-bottom: 10px;
     }
 }

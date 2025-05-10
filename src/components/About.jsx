@@ -27,46 +27,49 @@ const About = () => {
             <br />
             <br />
             <b style = {{fontSize : '20px'}}>Our Mission </b>
-            At ScrapBridge, we are committed to:
-            <b > Educating</b> the public about the dangers of improper Scrap disposal and the benefits of recycling.
+            <br />
+            At ScrapBridge, we are committed to 
+            educating the public about the dangers of improper Scrap disposal and the benefits of recycling.
             <b > Facilitating</b> the safe and responsible recycling of electronic devices through accessible and
             convenient recycling programs.
             <b > Advocating</b> for stronger regulations and policies to ensure sustainable Scrap management and
             reduce environmental impact.
             <br />
             <br />
-            <b style = {{fontSize : '20px'}}>What We Do </b>
-            <b style = {{fontSize : '20px'}}>Awareness Campaigns </b>: We conduct awareness campaigns to inform individuals and communities about
+            <b style = {{fontSize : '20px'}}>What We Do - </b>
+            <b style = {{fontSize : '20px'}}>Awareness Campaigns </b> 
+            <br /> We conduct awareness campaigns to inform individuals and communities about
             the importance of proper Scrap disposal and the harmful effects of Scrap on the environment and
             human health.
             <br />
-            <b style = {{fontSize : '20px'}}>Recycling Programs </b>: We partner with certified Scrap recycling centers to provide easy and
+            <b style = {{fontSize : '20px'}}>Recycling Programs </b> 
+            <br /> We partner with certified Scrap recycling centers to provide easy and
             efficient recycling solutions. Our programs ensure that valuable materials are recovered and hazardous
             substances are safely managed.
             <br />
-            <b style = {{fontSize : '20px'}}>Community Engagement </b>: We work closely with local communities, schools, and organizations to
+            <b style = {{fontSize : '20px'}}>Community Engagement </b> <br /> We work closely with local communities, schools, and organizations to
             promote Scrap recycling initiatives and encourage participation in our programs.
             <br />
-            <b style = {{fontSize : '20px'}}>Policy Advocacy </b>: We advocate for comprehensive Scrap management policies at local, national, and
+            <b style = {{fontSize : '20px'}}>Policy Advocacy </b> <br /> We advocate for comprehensive Scrap management policies at local, national, and
             international levels to drive systemic change and improve recycling rates.
             <br />
             <br />
-            <b style = {{fontSize : '20px'}}>Our Vision </b>
+            <b style = {{fontSize : '20px'}}>Our Vision </b> <br />
             We envision a world where electronic waste is no longer a threat to our environment and health. Through
             collective efforts and responsible practices, we aim to create a sustainable future where electronics
             are designed, used, and disposed of in ways that minimize their environmental footprint.
             <br />
             <br />
-            <b style = {{fontSize : '20px'}}>Get Involved </b>
+            <b style = {{fontSize : '20px'}}>Get Involved </b> <br />
             Join us in our mission to combat the Scrap crisis. Whether you are an individual looking to recycle
             your old devices, a business seeking sustainable Scrap management solutions, or a community group
             interested in partnering with us, there are many ways to get involved and make a difference.
             <br />
-            <b style = {{fontSize : '20px'}}>Donate Your Electronics </b>: Bring your old electronics to one of our recycling centers or participate in our take-back programs.
+            <b style = {{fontSize : '20px'}}>Donate Your Electronics </b> <br /> Bring your old electronics to one of our recycling centers or participate in our take-back programs.
             <br />
-            <b style = {{fontSize : '20px'}}>Volunteer </b>: Help us spread the word and assist with our awareness campaigns and community events.
+            <b style = {{fontSize : '20px'}}>Volunteer </b> <br /> Help us spread the word and assist with our awareness campaigns and community events.
             <br />
-            <b style = {{fontSize : '20px'}}>Support Our Work </b>: Consider making a donation to support our initiatives and expand our reach.
+            <b style = {{fontSize : '20px'}}>Support Our Work </b> <br /> Consider making a donation to support our initiatives and expand our reach.
             <br />
             Together, we can make a significant impact on reducing Scrap and protecting our planet for future
             generations. Thank you for being part of the solution!

@@ -87,10 +87,10 @@ const Home = () => {
                             <b>Our Mission</b>
                             <br />
                             At ScrapBridge, we are committed to:
-                            <b>Educating</b> the public about the dangers of improper waste disposal and the benefits of recycling.
-                            <b>Facilitating</b> the safe and responsible recycling of electronic devices through accessible and
+                            <b> Educating</b> the public about the dangers of improper waste disposal and the benefits of recycling.
+                            <b> Facilitating</b> the safe and responsible recycling of electronic devices through accessible and
                             convenient recycling programs.
-                            <b>Advocating</b> for stronger regulations and policies to ensure sustainable e-waste management and
+                            <b> Advocating</b> for stronger regulations and policies to ensure sustainable e-waste management and
                             reduce environmental impact... <Link to="/about">Read more</Link>
                         </p>
                         <br /><br />

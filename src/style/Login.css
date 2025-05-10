@@ -92,3 +92,10 @@
     height: 25px;
     border-radius: 50%;
 }
+
+@media screen and (max-width: 500px) {
+    .form{
+        width: auto;
+        margin: 5%;
+    }
+}

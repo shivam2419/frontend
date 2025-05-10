@@ -78,15 +78,18 @@
 }
 @media screen and (max-width: 540px) {
     .contact-container .contact-left{
-        width: auto;
+        width: 90%;
         margin: auto;
-        padding: auto;
-        margin: 2%;
+        padding: 5%;
+        margin: auto;
     }
     .contact-container .contact-right{
         display: none;
     }
     .contact-container .contact-left input{
-        width: 80%;
+        width: 100%;
+    }    
+    .contact-container .contact-left textarea{
+        width: 100%;
     }    
 }

@@ -42,7 +42,7 @@ body{
     text-decoration: none;
     background-color: #4e35f0;
     color: white;
-    font-weight: 600;
+    font-size: 14px;
 }
 
 .content-right img{
@@ -132,6 +132,7 @@ body{
     color: white;
     text-decoration: none;
     margin-right: 10px;
+    font-size: 14px;
 
 }
 #recycle-btn{
@@ -141,6 +142,7 @@ body{
     border: 1px solid #4e35f0;
     padding: 10px 20px;
     border-radius: 3px;
+    font-size: 14px;
 }
 #contact-btn:hover{
     background-color: white;
@@ -299,7 +301,6 @@ footer a{
 }
 .footer-about img{
     height: 40px;
-    margin-right: 20px;
     border-radius: 50%;
 }
 .footer-about p{
@@ -386,9 +387,9 @@ i{
 }
 
 .footer-about button img {
+    margin-left: -20px;
     width: 30px;
     height: 30px;
-    margin-left: 20px;
 }
 @media screen and (max-width: 1050px) {
     .points-card {
@@ -425,7 +426,7 @@ i{
         justify-content: center;
     }
     footer p{
-        font-size: 12px;
+        font-size: 14px;
     }
     .footer-about form {
         margin: auto;
@@ -449,7 +450,7 @@ i{
 /* Media query */
 @media screen and (max-width: 870px) {
     body a{
-        font-size: 10px;
+        font-size: 12px;
     }
     body p{
         font-size: 14px;
