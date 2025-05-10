@@ -213,11 +213,14 @@ td:last-child {
 
 
 .box-container {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.box-container a{
+  text-decoration: none;
 }
 
 .nav {
