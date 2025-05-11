@@ -32,9 +32,9 @@
 
   .logosec {
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-around;
   }
-
+  
   .logo {
     font-size: 20px;
   }
