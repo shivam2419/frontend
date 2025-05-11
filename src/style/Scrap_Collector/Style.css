@@ -41,8 +41,9 @@ header {
 
 .logo {
   font-size: 27px;
-  font-weight: 600;
+  font-weight: bolder;
   color: rgb(47, 141, 70);
+  text-decoration: none;
 }
 
 .icn {
@@ -57,7 +58,6 @@ header {
 .logosec {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .searchbar2 {
@@ -153,6 +153,39 @@ header {
 .box-container a{
   text-decoration: none;
 }
+
+    .navbar {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .navbar h1 {
+      margin: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .menu-btn {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
 
 .nav {
   min-height: 91vh;

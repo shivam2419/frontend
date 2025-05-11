@@ -29,6 +29,7 @@ const ScrapRequestDetails = () => {
                     if (!isNaN(latitude) && !isNaN(longitude)) {
                         setUserData({ ...data.data, latitude, longitude });
                     } else {
+                        console.log(locationArray);
                         console.error("Invalid latitude or longitude values");
                     }
                 } else {

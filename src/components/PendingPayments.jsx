@@ -77,6 +77,9 @@ const PendingPayments = () => {
             window.location.href = "/login";
         }
     };
+    const toggleMenu = () => {
+      document.getElementById("navLinks").classList.toggle("show");
+  };
     return (
         <>
             <header>
@@ -87,6 +90,7 @@ const PendingPayments = () => {
                         className="icn menuicn"
                         id="menuicn"
                         alt="menu-icon"
+                        onClick={toggleMenu}
                     />
                 </div>
 
@@ -117,6 +121,15 @@ const PendingPayments = () => {
                     </div>
                 </div>
             </header>
+            <div class="navbar">
+                                  <div class="nav-links" id="navLinks">
+                                    <Link to="/scrap-collector">Dashboard</Link>
+                                    <Link to="/orders">Orders</Link>
+                                    <Link to="/pending-order">Pending orders</Link>
+                                    <Link to="/scrap-collector/profile">Profile</Link>
+                                    <Link onClick={logout}>Logout</Link>
+                                  </div>
+                                </div>
             <div className="main-container">
                 <div className="navcontainer">
                     <nav className="nav">

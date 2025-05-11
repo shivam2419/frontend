@@ -20,7 +20,7 @@
 
 .col-1 #q {
     padding: 8px;
-    width: 90%;
+    width: 100%;
     margin-top: 1%;
 }
 
@@ -29,7 +29,7 @@
     color: white;
     padding: 8px;
     border: none;
-    width: 90%;
+    width: 100%;
     text-decoration: none;
     border-radius: 5px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;

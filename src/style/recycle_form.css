@@ -4,23 +4,17 @@
     margin: auto;
     margin-top: 5%;
     padding: 10px;
-    overflow-x: hidden; /* Hide horizontal scrollbar */
-    overflow-y: auto; /* Allow vertical scroll if needed */
-    max-height: 90vh; /* Prevent the form from growing taller than 90% of the viewport */
+    overflow-x: hidden;
+    max-height: 90vh;
     display: flex;
-    flex-direction: column; /* Ensure form elements stack vertically */
-    justify-content: flex-start; /* Align content from the top */
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
-.recycleform form {
-    text-align: center;
-    margin: auto;
+.recycleform h1 {
+    font-size: 2rem;
     width: 100%;
-}
-
-.recycleform h2 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 1%;
+    word-wrap: break-word;
 }
 
 form .row-1, form .row-2, form .row-3, form .row-4 {
@@ -28,45 +22,33 @@ form .row-1, form .row-2, form .row-3, form .row-4 {
     justify-content: space-between;
     margin-top: 20px;
     text-align: left;
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
-    gap: 10px; /* Add gap between form elements */
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-form .row-1 .col-1, form .row-2 .col-1, form .row-3 .col-1 {
+form .row-1 .recycle-form-col-1, form .row-2 .recycle-form-col-1, form .row-3 .recycle-form-col-1 {
     flex: 1;
-    min-width: 220px; /* Set a min width to ensure input doesn't get too small */
+    min-width: 220px;
+    
 }
 
-form .row-1 .col-2, form .row-2 .col-2 {
-    flex: 1;
-}
-
-form .row-3 {
-    justify-content: left;
-    margin-left: 20px;
-}
-
-.col-1 label, .col-2 label, .col-3 label {
-    margin-bottom: 10px;
-}
-
-.col-1 input, .col-2 input, .col-3 input, .col-1 select, .col-2 select {
-    width: 100%; /* Ensure inputs take full width */
+.recycle-form-col-1 input, .recycle-form-col-1 select {
+    width: 100%;
     padding: 8px;
     margin-top: 3px;
-    box-sizing: border-box; /* Include padding and border in the width calculation */
+    box-sizing: border-box;
 }
 
 #recycle-btn {
     width: 80%;
-    margin: 3% 1% 2% 1%;
+    margin: 3% auto 2% auto;
     background-color: blue;
     padding: 10px;
     border: none;
     border-radius: 5px;
     color: white;
-    transition: ease-in 0.2s;
     cursor: pointer;
+    display: block;
 }
 
 #recycle-btn:hover {
@@ -74,55 +56,28 @@ form .row-3 {
     scale: 1.01;
 }
 
-.loader {
-    font-size: 24px;
-    color: #007bff;
-    text-align: center;
-    margin-top: 20px;
-}
-
-/* Responsive for medium-sized screens (max-width: 1000px) */
-@media screen and (max-width: 1000px) {
+/* Responsive for screens smaller than 500px */
+@media screen and (max-width: 500px) {
     .recycleform {
-        width: 80%;
+        width: 95%;
+        max-height: none; /* prevent clipping */
     }
-    #recycle-btn {
-        width: 70%;
+
+    .recycleform h1 {
+        font-size: 1.5rem;
+        word-break: break-word;
     }
 
     form .row-1, form .row-2, form .row-3, form .row-4 {
-        display: block;
-        justify-content: center;
+        flex-direction: column;
+        align-items: stretch;
     }
 
-    .col-1 input, .col-2 input {
-        width: 100%; /* Ensure inputs fit within screen */
-        margin: 10px auto;
-    }
-
-    .col-1 select, .col-2 select {
-        width: 100%; /* Ensure select boxes fit within screen */
-        margin: 10px auto;
-    }
-}
-
-/* Responsive for small screens (max-width: 800px) */
-@media screen and (max-width: 800px) {
-    form .row-1, form .row-2, form .row-3, form .row-4 {
-        display: block;
-    }
-
-    .col-1 input, .col-2 input {
-        width: 100%; /* Ensure inputs take full width */
-        margin: 10px auto;
-    }
-
-    .col-1 select, .col-2 select {
-        width: 100%; /* Ensure select boxes take full width */
-        margin: 10px auto;
+    form .recycle-form-col-1 {
+        width: 100%;
     }
 
     #recycle-btn {
-        width: 100%; /* Ensure the button takes full width on mobile */
+        width: 100%;
     }
 }

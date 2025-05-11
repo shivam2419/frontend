@@ -93,14 +93,8 @@ const ScrapCollectorDashboard = () => {
     );
   });
 
-  const openNav = () => {
-      document.getElementById("mySidebar").style.display = "block";
-      document.getElementById("nav-side-btn").style.display = "none";
-  };
-
-  const closeNav = () => {
-      document.getElementById("mySidebar").style.display = "none";
-      document.getElementById("nav-side-btn").style.display = "block";
+  const toggleMenu = () => {
+      document.getElementById("navLinks").classList.toggle("show");
   };
   if (loading) {
     return (
@@ -122,7 +116,7 @@ const ScrapCollectorDashboard = () => {
               className="icn menuicn"
               id="menuicn"
               alt="menu-icon"
-              onClick={openNav}
+              onClick={toggleMenu}
             />
           </div>
 
@@ -153,7 +147,15 @@ const ScrapCollectorDashboard = () => {
             </div>
           </div>
         </header>
-
+         <div class="navbar">
+          <div class="nav-links" id="navLinks">
+            <Link to="/scrap-collector">Dashboard</Link>
+            <Link to="/orders">Orders</Link>
+            <Link to="/pending-order">Pending orders</Link>
+            <Link to="/scrap-collector/profile">Profile</Link>
+            <Link onClick={logout}>Logout</Link>
+          </div>
+        </div>
         <div className="main-container">
           <div className="navcontainer">
             <nav className="nav">

@@ -31,14 +31,10 @@ const ScrapCollectorOrders = () => {
                 if (response.ok) {
                     const normalized = Array.isArray(result.data) ? result.data : [result.data];
                     setItem(normalized);
-                } else {
-                    alert("Some error occurred. Please try again later");
-                    console.log("Error : ", result);
                 }
 
                 if (response.status === 403 || response.status === 401) {
                     alert("You are not Authorized");
-                    window.location.href = "/login";
                 }
             } catch (error) {
                 alert(`Some error occured, please try again later ${error}`);
@@ -67,6 +63,9 @@ const ScrapCollectorOrders = () => {
             window.location.href = "/login";
         }
     };
+    const toggleMenu = () => {
+      document.getElementById("navLinks").classList.toggle("show");
+  };
     return (
         <>
             <header>
@@ -77,6 +76,7 @@ const ScrapCollectorOrders = () => {
                         className="icn menuicn"
                         id="menuicn"
                         alt="menu-icon"
+                        onClick={toggleMenu}
                     />
                 </div>
 
@@ -107,6 +107,15 @@ const ScrapCollectorOrders = () => {
                     </div>
                 </div>
             </header>
+            <div class="navbar">
+                      <div class="nav-links" id="navLinks">
+                        <Link to="/scrap-collector">Dashboard</Link>
+                        <Link to="/orders">Orders</Link>
+                        <Link to="/pending-order">Pending orders</Link>
+                        <Link to="/scrap-collector/profile">Profile</Link>
+                        <Link onClick={logout}>Logout</Link>
+                      </div>
+                    </div>
             <div className="main-container">
                 <div className="navcontainer">
                     <nav className="dashoard-nav">

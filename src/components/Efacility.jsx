@@ -108,7 +108,10 @@ const Efacility = () => {
         function showUserPosition(position) {
             const userLat = position.coords.latitude;
             const userLong = position.coords.longitude;
-
+            if(userLat === null || userLong === null) {
+                alert("Please allow fetching location");
+                return;
+            }
             const yourIcon = L.icon({
                 iconUrl: userMapIcon,
                 iconSize: [80, 80],
