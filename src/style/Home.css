@@ -256,14 +256,12 @@ body {
     width: 97vw;
     display: inline-block;
     white-space: nowrap;
-    animation: marquee 10s linear infinite;
+    animation: marquee 15s linear infinite;
 }
 
-.marquee span {
-    animation-duration: 15s;
-    /* Slower speed */
+.marquee-content:hover {
+    animation-play-state: paused;
 }
-
 @keyframes marquee {
     from {
         transform: translateX(100%);

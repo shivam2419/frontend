@@ -34,6 +34,7 @@ export const Login = () => {
             setLoading(false); // <-- Add this
             return;
         }
+        const old_username = username;
         username = username.toLowerCase();
         username = username.includes(" ")
             ? username.replace(/ /g, "_").toLowerCase()
@@ -71,15 +72,15 @@ export const Login = () => {
                 navigate(result.role === "user" ? "/" : "/scrap-collector");
                 window.location.reload();
             } else {
-                alert(data.error || 'Login failed. Please try again.');
+                alert('Username or password is incorrect');
             }
         } catch (error) {
             console.error('Login error:', error);
-            alert('Login failed. Please try again.');
+            alert('Some error occured, please try again');
         }
 
         setLoading(false); // <-- Add this
-        setFormData({ username: '', password: '' });
+        setFormData({ username: old_username, password: '' });
         loginBtn.innerText = "Login";
     };
 

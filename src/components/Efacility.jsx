@@ -41,7 +41,8 @@ const Efacility = () => {
             const filtered = rooms.filter((room) =>
                 room.organisation_name.toLowerCase().includes(query) ||
                 room.city.toLowerCase().includes(query) ||
-                room.state.toLowerCase().includes(query)
+                room.state.toLowerCase().includes(query) ||
+                room.phone.includes(query)
             ).sort((a, b) => a.distance - b.distance); // sort after filter
             setFilteredRooms(filtered);
         } else {
@@ -75,9 +76,17 @@ const Efacility = () => {
         let recyclerMarkers = [];
         for (let i = 0; i < myLat.length; i++) {
             if (!isNaN(myLat[i]) && !isNaN(myLong[i])) {
-                let marker = L.marker([myLat[i], myLong[i]], {
-                    title: orgNameList[i],
+                let recyclerIcon = L.icon({
+                    iconUrl: "https://chiropracticgilbert.com/wp-content/uploads/2017/12/locatio.png",
+                    iconSize: [45, 60],
+                    iconAnchor: [30, 80],
+                    popupAnchor: [0, -30],
+                });
+                let marker = L.marker([myLat[i], myLong[i]], 
+                    {icon: recyclerIcon}, {
+                    title: orgNameList[i]
                 }).addTo(mymap);
+                
                 marker.bindPopup(orgNameList[i]);
                 recyclerMarkers.push({
                     id: orgIDs[i],
@@ -196,9 +205,9 @@ const Efacility = () => {
                                 id="q"
                                 name="q"
                                 value={searchQuery}
+                                style={{marginBottom: "10px"}}
                                 onChange={handleSearch} // Add onChange handler to search input
                             />
-                            <input type="submit" value="Search" id="search-btn" />
                         </form>
                         <i style={{ color: "gray" }}>
                             *Choose the nearest possible collector for high and fast availability*

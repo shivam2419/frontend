@@ -161,6 +161,7 @@
   }
   .nav-links a{
     background-color: black;
+    font-size: 14px;
   }
   .nav-links.show {
     display: flex;
