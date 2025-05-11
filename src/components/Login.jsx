@@ -34,10 +34,10 @@ export const Login = () => {
             setLoading(false); // <-- Add this
             return;
         }
-
+        username = username.toLowerCase();
         username = username.includes(" ")
             ? username.replace(/ /g, "_").toLowerCase()
-            : username.toLowerCase();
+            : username;
         
         const loginBtn = document.getElementById("login-btn");
         loginBtn.innerText = "Logging In...";
