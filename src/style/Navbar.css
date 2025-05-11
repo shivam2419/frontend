@@ -108,7 +108,7 @@ nav {
 }
 
 /* Navbar links styles */
-.nav-links {
+.navbar-links {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -116,22 +116,22 @@ nav {
     background-color: white;
 }
 
-.nav-links li {
+.navbar-links li {
     margin-right: 20px; /* Adjust spacing between links */
 }
 
-.nav-links li:last-child {
+.navbar-links li:last-child {
     margin-right: 0; /* Remove margin from the last link */
 }
 
-.nav-links a {
+.navbar-links a {
     color: black;
     text-decoration: none;
     background-color: white;
     padding: 5px;
     font-size: 1rem;
 }
-.nav-links a:hover{
+.navbar-links a:hover{
     transition: 1s ease-in-out;
     border-bottom: 1px solid black;
 }
@@ -212,7 +212,7 @@ background-color: #f0f0f0;
 
 @media (max-width: 825px) {
 
-    .nav-links {
+    .navbar-links {
         display: none;
     }
 

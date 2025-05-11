@@ -18,6 +18,9 @@ const Profile = () => {
             Authorization: `Bearer ${localStorage.getItem("access")}`,
           },
         });
+        if(!res.ok) {
+          window.location.href = "/login";
+        }
         const data = await res.json();
         if (data.image) {
           localStorage.setItem("user_profile", data.image);
@@ -25,6 +28,7 @@ const Profile = () => {
         setUser(data);
         setEmail(data?.user?.email || "");
       } catch (err) {
+        window.location.href = "/login";
         console.error("User detail fetching error", err);
       }
     };
@@ -39,7 +43,8 @@ const Profile = () => {
     if (imageFile) {
       formData.append("image", imageFile);
     }
-
+    const profileBtn = document.getElementById("profile-update-btn");
+    profileBtn.innerText = "Updating";
     try {
       const res = await fetch(`${backendUrl}update-user/${localStorage.getItem("user_id")}/`, {
         method: "PUT",
@@ -51,15 +56,17 @@ const Profile = () => {
 
       const data = await res.json();
       if (res.ok) {
-        alert("User info updated successfully!");
         window.location.reload();
       } else {
         console.error("Update failed:", data);
         alert("Something went wrong");
+        window.location.href = "/login";
       }
     } catch (err) {
       console.error("Error:", err);
+      window.location.href = "/login";
     }
+    profileBtn.innerText = "Update";
   };
 
   const profileImg = user?.image ? "https://scrapbridge-api.onrender.com" + user.image : "";
@@ -73,7 +80,7 @@ const Profile = () => {
               <img src={profileImg} alt="Profile" className="profile-img" />
               <h2 className="username">{localStorage.getItem("username").toUpperCase()}</h2>
               <div className="created-at">
-                Created On: {new Date(user.created_at).toISOString().split("T")[0]}
+                Created On: {user.created_at && new Date(user.created_at).toISOString().split("T")[0]}
               </div>
             </div>
 
@@ -94,7 +101,7 @@ const Profile = () => {
               </div>
 
               <div className="btn-center">
-                <button className="submit-btn" onClick={handleUpdateUser}>
+                <button className="submit-btn" onClick={handleUpdateUser} id="profile-update-btn">
                   Update
                 </button>
               </div>

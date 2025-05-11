@@ -38,7 +38,9 @@ export const Login = () => {
         username = username.includes(" ")
             ? username.replace(/ /g, "_").toLowerCase()
             : username.toLowerCase();
-
+        
+        const loginBtn = document.getElementById("login-btn");
+        loginBtn.innerText = "Logging In...";
         try {
             const response = await fetch(backendUrl + "token/", {
                 method: "POST",
@@ -66,8 +68,6 @@ export const Login = () => {
                     localStorage.setItem("role", result.role);
                     localStorage.setItem("user_profile", result.user_profile);
                 }
-
-                alert('User logged in successfully!');
                 navigate(result.role === "user" ? "/" : "/scrap-collector");
                 window.location.reload();
             } else {
@@ -80,6 +80,7 @@ export const Login = () => {
 
         setLoading(false); // <-- Add this
         setFormData({ username: '', password: '' });
+        loginBtn.innerText = "Login";
     };
 
 
@@ -90,7 +91,6 @@ export const Login = () => {
 
     const handleGoogleLogin = async (credentialResponse) => {
         const access_token = credentialResponse.credential;
-
         try {
             const response = await fetch(backendUrl + "auth/google/google-oauth2/", {
                 method: "POST",

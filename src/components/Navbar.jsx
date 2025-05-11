@@ -109,7 +109,7 @@ export const Navbar = () => {
                         </Link>
                     </span>
 
-                    <ul className="nav-links">
+                    <ul className="navbar-links">
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/about">About Us</Link></li>
                         <li><Link to="/e-facility">E-Facilities</Link></li>

@@ -18,9 +18,10 @@ const Efacility = () => {
         const fetchRooms = async () => {
             try {
                 setLoading(true);
-                const res = await axios.get(backendUrl+"owners/"); // Use your actual API endpoint
-                setRooms(res.data);
-                setFilteredRooms(res.data); // Initially set filteredRooms to all rooms
+                const res = await axios.get(backendUrl + "owners/"); // Use your actual API endpoint
+                const sortedRooms = res.data.sort((a, b) => a.distance - b.distance);
+                setRooms(sortedRooms);
+                setFilteredRooms(sortedRooms); // Initially set filteredRooms to all rooms
             } catch (error) {
                 console.error("Failed to fetch rooms:", error);
             } finally {
@@ -36,16 +37,15 @@ const Efacility = () => {
         const query = e.target.value.toLowerCase();
         setSearchQuery(query);
 
-        // Filter rooms based on the search query
         if (query) {
             const filtered = rooms.filter((room) =>
                 room.organisation_name.toLowerCase().includes(query) ||
-                room.city.toLowerCase().includes(query) || // You can add more fields to filter by
+                room.city.toLowerCase().includes(query) ||
                 room.state.toLowerCase().includes(query)
-            );
+            ).sort((a, b) => a.distance - b.distance); // sort after filter
             setFilteredRooms(filtered);
         } else {
-            setFilteredRooms(rooms); // Show all rooms if the search query is empty
+            setFilteredRooms([...rooms]); // already sorted
         }
     };
 
@@ -108,7 +108,7 @@ const Efacility = () => {
         function showUserPosition(position) {
             const userLat = position.coords.latitude;
             const userLong = position.coords.longitude;
-            if(userLat === null || userLong === null) {
+            if (userLat === null || userLong === null) {
                 alert("Please allow fetching location");
                 return;
             }

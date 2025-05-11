@@ -81,17 +81,18 @@
     gap: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
-    margin: 5px 0px;
+    margin: 5px;
+    align-items: center;
 }
 .google-btn a{
     text-decoration: none;
     color: black;
-    margin-top: -10px;
 }
 .google-btn img {
     width: auto;
     height: 30px;
     border-radius: 50%;
+    margin-top: 5px;
 }
 @media screen and (max-width: 800px) {
     .form{

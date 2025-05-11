@@ -3,11 +3,15 @@ import logoFooter from '../assets/logo-footer.png';
 import '../style/Home.css';
 
 export const Footer = () => {
+    const handleSubmit = () => {
+        alert("Thanks for contacting us!")
+        window.location.reload();
+    };
     return (
         <>
         <footer>
             <div className="footer-about">
-                <form onSubmit={(e) => { e.preventDefault(); alert("Subscribed!"); }}>
+                <form onSubmit={handleSubmit}>
                     <span>
                         <img src={logoFooter} alt="Logo" /> SCRAP BRIDGE
                     </span>

@@ -57,6 +57,8 @@ export const Signup = () => {
             formData.username = formData.username.replace(/ /g, "_");
             formData.username = formData.username.toLowerCase();
         }
+        const signupButton = document.getElementById("signup-btn");
+        signupButton.innerText = "Logging In...";
         try {
             const response = await fetch(backendUrl+'register-user/', {
                 method: 'POST',
@@ -80,6 +82,7 @@ export const Signup = () => {
         setFormData({ username: '', email: '', password: '', role: '' });
         setPassword('');
         setConfirmPassword('');
+        signupButton.innerText = "Signup";
     };
 
     return (
@@ -163,7 +166,7 @@ export const Signup = () => {
                 </span>
                 <input type="submit" value="Signup" id="signup-btn" />
 
-                <button className="google-btn" type="button">
+                <button className="google-btn" type="button" onClick={()=>alert('Service isn\'t available right now')}>
                     <img
                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png"
                         alt="Google Logo"
