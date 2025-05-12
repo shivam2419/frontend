@@ -13,6 +13,7 @@ const Efacility = () => {
     const [searchQuery, setSearchQuery] = useState(""); // Add state for search query
     const [filteredRooms, setFilteredRooms] = useState([]); // State for filtered rooms
     const [loading, setLoading] = useState(true);
+    const [locationError, setLocationError] = useState(false);
     useEffect(() => {
         // Fetch data from API
         const fetchRooms = async () => {
@@ -82,11 +83,11 @@ const Efacility = () => {
                     iconAnchor: [30, 80],
                     popupAnchor: [0, -30],
                 });
-                let marker = L.marker([myLat[i], myLong[i]], 
-                    {icon: recyclerIcon}, {
+                let marker = L.marker([myLat[i], myLong[i]],
+                    { icon: recyclerIcon }, {
                     title: orgNameList[i]
                 }).addTo(mymap);
-                
+
                 marker.bindPopup(orgNameList[i]);
                 recyclerMarkers.push({
                     id: orgIDs[i],
@@ -102,7 +103,10 @@ const Efacility = () => {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     showUserPosition,
-                    showError,
+                    (error) => {
+                        setLocationError(true); // show alert
+                        showError(error);
+                    },
                     {
                         enableHighAccuracy: true,
                         timeout: 10000,
@@ -115,12 +119,9 @@ const Efacility = () => {
         }
 
         function showUserPosition(position) {
+            setLocationError(false);
             const userLat = position.coords.latitude;
             const userLong = position.coords.longitude;
-            if (userLat === null || userLong === null) {
-                alert("Please allow fetching location");
-                return;
-            }
             const yourIcon = L.icon({
                 iconUrl: userMapIcon,
                 iconSize: [80, 80],
@@ -160,7 +161,7 @@ const Efacility = () => {
         }
 
         function showError(error) {
-            alert("Error fetching location: " + error.message);
+            console.log("Location isn't allowed");
         }
 
         function getDistance(lat1, lon1, lat2, lon2) {
@@ -191,7 +192,6 @@ const Efacility = () => {
                 </div>
             ) : (
                 <div className="row">
-
                     <div className="col-1">
                         {searchQuery ? (
                             <h2>Search Results for "{searchQuery}"</h2>
@@ -205,36 +205,64 @@ const Efacility = () => {
                                 id="q"
                                 name="q"
                                 value={searchQuery}
-                                style={{marginBottom: "10px"}}
+                                style={{ marginBottom: "10px" }}
                                 onChange={handleSearch} // Add onChange handler to search input
                             />
                         </form>
                         <i style={{ color: "gray" }}>
                             *Choose the nearest possible collector for high and fast availability*
                         </i>
-                        {filteredRooms?.map((items) => (
-
-                            <div className="facility-card" key={items.organisation_id}>
-                                <div className="facility-header">
-                                    <img
-                                        src={items.image ? `https://scrapbridge-api.onrender.com${items.image}` : "../assets/default.jpg"}
-                                        alt="Facility"
-                                        className="facility-image"
-                                    />
-                                    <h3 className="org-name">
-                                        {items.organisation_name.toUpperCase()} (Id: {items.organisation_id})
-                                    </h3>
-                                </div>
-                                <p className="address">
-                                    <b>ADDRESS - </b> {items.street}, {items.city}, {items.state}, {items.zipcode}
-                                </p>
-                                <p className="distance"></p>
-                                <p className="contact">
-                                    <b>Contact - </b> {items.phone}
-                                </p>
-                                <a href={`recycle_main/${items.user.id}`}>Book Recycling</a>
+                        {locationError ? (
+                            <div style={{
+                                backgroundColor: "#ffcccc",
+                                color: "#990000",
+                                padding: "10px",
+                                marginBottom: "10px",
+                                borderRadius: "5px",
+                                textAlign: "center"
+                            }}>
+                                ⚠️ Location access is required to show nearest facilities. Please allow it in your browser settings.
+                                <br /><br />
+                                <button onClick={() => window.location.reload()} style={{
+                                    backgroundColor: "red",
+                                    color: "white",
+                                    cursor: "pointer",
+                                    padding: "10px",
+                                    marginBottom: "10px",
+                                    borderRadius: "5px",
+                                    textAlign: "center"
+                                }}>
+                                    Try Again
+                                </button>
                             </div>
-                        ))}
+                        ) : (
+                            <div>
+                                {filteredRooms?.map((items) => (
+
+                                    <div className="facility-card" key={items.organisation_id}>
+                                        <div className="facility-header">
+                                            <img
+                                                src={items.image ? `https://scrapbridge-api.onrender.com${items.image}` : "../assets/default.jpg"}
+                                                alt="Facility"
+                                                className="facility-image"
+                                            />
+                                            <h3 className="org-name">
+                                                {items.organisation_name.toUpperCase()} (Id: {items.organisation_id})
+                                            </h3>
+                                        </div>
+                                        <p className="address">
+                                            <b>ADDRESS - </b> {items.street}, {items.city}, {items.state}, {items.zipcode}
+                                        </p>
+                                        <p className="distance"></p>
+                                        <p className="contact">
+                                            <b>Contact - </b> {items.phone}
+                                        </p>
+                                        <a href={`recycle_main/${items.user.id}`}>Book Recycling</a>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
                     </div>
                     <div className="col-2">
                         <div id="mapid"></div>
