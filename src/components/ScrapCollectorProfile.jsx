@@ -25,6 +25,9 @@ const ScrapCollectorProfile = () => {
           },
         });
         const data = await res.json();
+        if (res.status == 403 || res.status == 401) {
+          window.location.href = "/login";
+        }
         if (data) {
           localStorage.setItem("user_profile", data.image);
           setUser(data);
@@ -84,6 +87,7 @@ const ScrapCollectorProfile = () => {
       } else {
         console.error("Update failed:", data);
         alert("Something went wrong");
+        window.location.href = "/login";
       }
     } catch (err) {
       console.error("Error:", err);
@@ -94,7 +98,7 @@ const ScrapCollectorProfile = () => {
 
   return (
     <>
-      {user? (
+      {user ? (
         <div className="profile-container">
           <div className="profile-card">
             <div className="created-at">
@@ -178,8 +182,8 @@ const ScrapCollectorProfile = () => {
 
           {previewImage && (
             <div className="image-preview-overlay" onClick={() => setPreviewImage(false)}>
+              <span className="close-button" onClick={() => setPreviewImage(false)}>&times;</span>
               <div className="image-preview-container" onClick={(e) => e.stopPropagation()}>
-                <span className="close-button" onClick={() => setPreviewImage(false)}>&times;</span>
                 <img src={profileImg} alt="Zoom" className="preview-img" />
               </div>
             </div>

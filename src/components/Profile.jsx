@@ -7,6 +7,7 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [imageFile, setImageFile] = useState(null);
+  const [previewImage, setPreviewImage] = useState(false); // ADD THIS
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +19,7 @@ const Profile = () => {
             Authorization: `Bearer ${localStorage.getItem("access")}`,
           },
         });
-        if(!res.ok) {
+        if (!res.ok) {
           window.location.href = "/login";
         }
         const data = await res.json();
@@ -77,7 +78,13 @@ const Profile = () => {
         <div className="profile-container">
           <div className="profile-card">
             <div className="img">
-              <img src={profileImg} alt="Profile" className="profile-img" />
+              <img
+                src={profileImg}
+                alt="Profile"
+                className="profile-img"
+                onClick={() => setPreviewImage(true)} // ADD CLICK HANDLER
+                style={{ cursor: "pointer" }}
+              />
               <h2 className="username">{localStorage.getItem("username").toUpperCase()}</h2>
               <div className="created-at">
                 Created On: {user.created_at && new Date(user.created_at).toISOString().split("T")[0]}
@@ -112,6 +119,17 @@ const Profile = () => {
         <div className="loader">
           <img src={loader} alt="Loader" />
           <p>Check if you are logged-In or wait for a few seconds</p>
+        </div>
+      )}
+
+      {/* Full Screen Image Preview */}
+      {previewImage && (
+        <div className="image-preview-overlay" onClick={() => setPreviewImage(false)}>
+          <span className="close-button" onClick={() => setPreviewImage(false)}>&times;</span>
+          <div className="image-preview-container" onClick={(e) => e.stopPropagation()}>
+              
+            <img src={profileImg} alt="Zoomed" className="preview-img" />
+          </div>
         </div>
       )}
     </>

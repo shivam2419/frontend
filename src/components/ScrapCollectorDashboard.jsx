@@ -139,11 +139,13 @@ const ScrapCollectorDashboard = () => {
               alt=""
             />
             <div className="dp">
-              <img
-                src={profileImg}
-                className="dpicn"
-                alt="dp"
-              />
+              <Link to="/scrap-collector/profile">
+                <img
+                  src={profileImg}
+                  className="dpicn"
+                  alt="dp"
+                />
+              </Link>
             </div>
           </div>
         </header>

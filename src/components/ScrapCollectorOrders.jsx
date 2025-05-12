@@ -35,6 +35,7 @@ const ScrapCollectorOrders = () => {
 
                 if (response.status === 403 || response.status === 401) {
                     alert("You are not Authorized");
+                    window.location.href = "/login";
                 }
             } catch (error) {
                 alert(`Some error occured, please try again later ${error}`);
@@ -64,8 +65,8 @@ const ScrapCollectorOrders = () => {
         }
     };
     const toggleMenu = () => {
-      document.getElementById("navLinks").classList.toggle("show");
-  };
+        document.getElementById("navLinks").classList.toggle("show");
+    };
     return (
         <>
             <header>
@@ -99,23 +100,25 @@ const ScrapCollectorOrders = () => {
                         alt=""
                     />
                     <div className="dp">
-                        <img
-                            src={profileImg}
-                            className="dpicn"
-                            alt="dp"
-                        />
+                        <Link to="/scrap-collector/profile">
+                            <img
+                                src={profileImg}
+                                className="dpicn"
+                                alt="dp"
+                            />
+                        </Link>
                     </div>
                 </div>
             </header>
             <div class="navbar">
-                      <div class="nav-links" id="navLinks">
-                        <Link to="/scrap-collector">Dashboard</Link>
-                        <Link to="/orders">Orders</Link>
-                        <Link to="/pending-order">Pending orders</Link>
-                        <Link to="/scrap-collector/profile">Profile</Link>
-                        <Link onClick={logout}>Logout</Link>
-                      </div>
-                    </div>
+                <div class="nav-links" id="navLinks">
+                    <Link to="/scrap-collector">Dashboard</Link>
+                    <Link to="/orders">Orders</Link>
+                    <Link to="/pending-order">Pending orders</Link>
+                    <Link to="/scrap-collector/profile">Profile</Link>
+                    <Link onClick={logout}>Logout</Link>
+                </div>
+            </div>
             <div className="main-container">
                 <div className="navcontainer">
                     <nav className="dashoard-nav">
