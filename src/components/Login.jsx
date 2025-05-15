@@ -35,6 +35,7 @@ export const Login = () => {
             return;
         }
         const old_username = username;
+        username = username.trimEnd();
         username = username.toLowerCase();
         username = username.includes(" ")
             ? username.replace(/ /g, "_").toLowerCase()

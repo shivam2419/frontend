@@ -13,13 +13,6 @@
   font-family: "Montserrat", sans-serif;
   transition: 2s ease-in-out;
 }
-.custom-translate-btn:hover::after {
-  content: "Translate";
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(180deg); /* center & keep rotation */
-  white-space: nowrap;
-}
 
 .translate-popup {
   display: none;
