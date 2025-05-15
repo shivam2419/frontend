@@ -104,6 +104,7 @@ export const Navbar = () => {
         <button className="closebtn" onClick={closeNav}>
           &times;
         </button>
+        <br />
         <Link to="/">Home</Link>
         <Link to="/about">About Us</Link>
         <Link to="/e-facility">E-Facilities</Link>
