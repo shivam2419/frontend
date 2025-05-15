@@ -28,7 +28,7 @@ body {
 /* Sidebar */
 #mySidebar { display: none; }
 .sidebar {
-    height: 100vh;
+    height: 100%;
     width: 250px;
     position: fixed;
     top: 0;
@@ -61,7 +61,7 @@ body {
     font-size: 36px;
 }
 .closebtn {
-    background-color: black;
+    background-color: #111;
     color: white;
     border: none;
     padding: 0px 5px;
@@ -217,7 +217,7 @@ background-color: #f0f0f0;
     }
 
     .sidebar {
-        height: 100vh;
+        height: 100%;
         width: 300px;
     }
 
@@ -229,20 +229,23 @@ background-color: #f0f0f0;
 }
 
 @media (max-width: 480px) {
+    nav {
+        padding: 5px;
+    }
     .sidebar {
         width: 300px;
-        height: 100vh;
+        height: 100%;
         position: absolute;
     }
     .logo img,
     .profile-image img {
-        height: 30px;
-        width: 30px;
+        height: 45px;
+        width: 45px;
     }
     .nav-item{
         margin-right: 10px;
     }
     #notification img{
-        margin-top: -5px;
+        margin-top: 5px;
     }
 }
