@@ -17,6 +17,7 @@
     </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="./src/assets/title-logo.png" />
+    <link rel="stylesheet" href="./style/index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ScrapBridge</title>
     <!-- Google Tag Manager -->
@@ -71,6 +72,47 @@
         style="display: none; visibility: hidden"
       ></iframe
     ></noscript>
+    <!-- Custom Vertical Translate Button -->
+    <div class="custom-translate-btn" onclick="toggleTranslatePopup()">
+      🌐
+    </div>
+
+    <!-- Hidden Google Translate Widget -->
+    <div id="translatePopup" class="translate-popup" style="display: none">
+      <div class="translate-popup-content">
+        <p style="margin-bottom: 10px;">Select Language</p>
+        <div id="google_translate_element" class="styled-select">
+          <!-- Options will be replaced by Google Translate widget dynamically -->
+        </div>
+        <span class="close-btn" onclick="toggleTranslatePopup()">&times;</span>
+      </div>
+    </div>
+
+    <script>
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+          },
+          "google_translate_element"
+        );
+      }
+
+      function toggleTranslatePopup() {
+        const popup = document.getElementById("translatePopup");
+        popup.style.display =
+          popup.style.display === "block" ? "none" : "block";
+      }
+      window.onclick = function (event) {
+        const popup = document.getElementById("translatePopup");
+        if (event.target === popup) {
+          popup.style.display = "none";
+        }
+      };
+    </script>
+
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>

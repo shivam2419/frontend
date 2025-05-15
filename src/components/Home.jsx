@@ -51,7 +51,7 @@ const Home = () => {
                     </h3>
                     <br />
                     <button><Link to="/prices">PRICE LIST</Link></button>
-                    <button><Link to="/e-facility">LOCATE COLLECTOR</Link></button>
+                    <button><Link to="/e-facility">RECYCLE SCRAP</Link></button>
                 </div>
 
                 <div className="content-right">
