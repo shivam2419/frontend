@@ -73,7 +73,7 @@
       ></iframe
     ></noscript>
     <!-- Custom Vertical Translate Button -->
-    <div class="custom-translate-btn" onclick="toggleTranslatePopup()">
+    <div class="custom-translate-btn" >
       🌐 Translate
     </div>
 
@@ -111,38 +111,77 @@
       };
     </script>
     <script>
-      const dragBtn = document.querySelector(".custom-translate-btn");
+  const dragBtn = document.querySelector(".custom-translate-btn");
 
-      dragBtn.addEventListener("mousedown", function (e) {
-        e.preventDefault();
-        dragBtn.style.cursor = "grabbing";
+  let startX = 0, startY = 0;
+  let shiftX = 0, shiftY = 0;
+  let hasMoved = false;
 
-        let shiftX = e.clientX - dragBtn.getBoundingClientRect().left;
-        let shiftY = e.clientY - dragBtn.getBoundingClientRect().top;
+  function moveAt(x, y) {
+    dragBtn.style.left = x - shiftX + "px";
+    dragBtn.style.top = y - shiftY + "px";
+    dragBtn.style.right = "auto";
+    dragBtn.style.bottom = "auto";
+  }
 
-        function moveAt(pageX, pageY) {
-          dragBtn.style.left = pageX - shiftX + "px";
-          dragBtn.style.top = pageY - shiftY + "px";
-        }
+  // Mouse events
+  dragBtn.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+    startX = e.clientX;
+    startY = e.clientY;
+    shiftX = e.clientX - dragBtn.getBoundingClientRect().left;
+    shiftY = e.clientY - dragBtn.getBoundingClientRect().top;
+    hasMoved = false;
 
-        function onMouseMove(e) {
-          moveAt(e.pageX, e.pageY);
-        }
+    const onMouseMove = (e) => {
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+        hasMoved = true;
+        moveAt(e.pageX, e.pageY);
+      }
+    };
 
-        document.addEventListener("mousemove", onMouseMove);
+    const onMouseUp = () => {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+      if (!hasMoved) {
+        toggleTranslatePopup();
+      }
+    };
 
-        document.addEventListener(
-          "mouseup",
-          function () {
-            document.removeEventListener("mousemove", onMouseMove);
-            dragBtn.style.cursor = "grab";
-          },
-          { once: true }
-        );
-      });
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+  });
 
-      dragBtn.ondragstart = () => false;
-    </script>
+  // Touch events
+  dragBtn.addEventListener("touchstart", (e) => {
+    const touch = e.touches[0];
+    startX = touch.clientX;
+    startY = touch.clientY;
+    shiftX = touch.clientX - dragBtn.getBoundingClientRect().left;
+    shiftY = touch.clientY - dragBtn.getBoundingClientRect().top;
+    hasMoved = false;
+  });
+
+  dragBtn.addEventListener("touchmove", (e) => {
+    const touch = e.touches[0];
+    const dx = touch.clientX - startX;
+    const dy = touch.clientY - startY;
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+      hasMoved = true;
+      moveAt(touch.pageX, touch.pageY);
+    }
+  });
+
+  dragBtn.addEventListener("touchend", () => {
+    if (!hasMoved) {
+      toggleTranslatePopup();
+    }
+  });
+
+  dragBtn.ondragstart = () => false;
+</script>
 
     <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
