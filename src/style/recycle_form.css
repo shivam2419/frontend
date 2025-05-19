@@ -29,7 +29,7 @@ form .row-1, form .row-2, form .row-3, form .row-4 {
 form .row-1 .recycle-form-col-1, form .row-2 .recycle-form-col-1, form .row-3 .recycle-form-col-1 {
     flex: 1;
     min-width: 220px;
-    
+    margin-bottom: 10px;
 }
 
 .recycle-form-col-1 input, .recycle-form-col-1 select {
@@ -49,7 +49,7 @@ form .row-1 .recycle-form-col-1, form .row-2 .recycle-form-col-1, form .row-3 .r
     cursor: pointer;
     display: block;
     margin: auto;
-    margin-top: 30px;
+    margin-top: 0px;
 }
 
 #recycle-btn:hover {

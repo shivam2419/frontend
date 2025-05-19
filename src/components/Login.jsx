@@ -169,13 +169,10 @@ export const Login = () => {
                         <input
                             type="checkbox"
                             id="show-password-checkbox"
-                            style={{ width: '20px' }}
+                            style={{ width: '20px', marginTop: "10px" }}
                             onChange={togglePassword}
                         />
                         <label htmlFor="show-password-checkbox">Show password</label>
-                    </span>
-                    <span className="right">
-                        <a href="#">Forget password?</a>
                     </span>
                 </span>
 
