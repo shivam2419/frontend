@@ -129,6 +129,7 @@ header {
 
 .dpicn {
     height: 42px;
+    object-fit: cover;
 }
 
 .main {

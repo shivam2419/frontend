@@ -42,6 +42,7 @@ header {
   width: 32px;
   height: 32px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .searchbar {
@@ -81,13 +82,12 @@ header {
 /* Navigation styles */
 .navbar {
   display: none;
-  background-color: #34495e;
+  background-color: #000000;
   position: absolute;
   width: 250px;
+  height: 100vh;
   right: 0;
-  top: 50px;
   z-index: 999;
-  margin: 10px;
 }
 
 .nav-links {
