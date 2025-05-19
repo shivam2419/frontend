@@ -4,7 +4,7 @@ import '../style/recycle_form.css';
 import loaderGIF from '../assets/loader.gif';
 
 const Recycle_Form = () => {
-    const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
     const { user_id } = useParams();
 
     const [item, setItem] = useState([]);
@@ -161,7 +161,7 @@ const Recycle_Form = () => {
                     </div>
                     <div className="recycle-form-col-1">
                         <label>Select Date of pickup*</label>
-                        <input type="date" name="date" required value={formData.date} onChange={handleChange} />
+                        <input type="date" name="date" required value={formData.date} onChange={handleChange} min={new Date(Date.now() + 86400000).toISOString().split("T")[0]}/>
                     </div>
                 </div>
 
@@ -171,8 +171,8 @@ const Recycle_Form = () => {
                         <input type="tel" name="phone" pattern="[0-9]{10}" required value={formData.phone} onChange={handleChange} />
                     </div>
                     <div className="recycle-form-col-1">
-                        <label>Scrap weight*</label>
-                        <input type="number" name="weight" required value={formData.weight} onChange={handleChange} />
+                        <label>Expected scrap weight*</label>
+                        <input type="number" name="weight" required value={formData.weight} onChange={handleChange} placeholder='In grams*' />
                     </div>
                 </div>
 

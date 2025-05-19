@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../style/Scrap_Collector/Style.css';
-import '../style/Scrap_Collector/Responsive.css';
+// import '../style/Scrap_Collector/Responsive.css';
 import loaderGIF from "../assets/loader.gif";
 const ScrapCollectorDashboard = () => {
   const backendUrl = "https://scrapbridge-api.onrender.com/api/";
@@ -62,10 +62,6 @@ const ScrapCollectorDashboard = () => {
   }, []);
 
 
-  const user = {
-    username: localStorage.getItem("username") || "Undefined"
-  };
-
   const logout = async () => {
     try {
       await fetch(backendUrl + "logout/", {
@@ -80,6 +76,10 @@ const ScrapCollectorDashboard = () => {
       window.location.href = "/login";
     }
   };
+  const user = {
+    username: localStorage.getItem("username") || "Undefined"
+  };
+
 
   const filteredItems = items.filter(item => {
     const username = users[item.user] || "";
@@ -94,7 +94,12 @@ const ScrapCollectorDashboard = () => {
   });
 
   const toggleMenu = () => {
-      document.getElementById("navLinks").classList.toggle("show");
+      let opt = document.getElementById("navbar");
+      if(opt.style.display === "none") {
+        opt.style.display = "block";
+      } else {
+        opt.style.display = "none";
+      }
   };
   if (loading) {
     return (
@@ -149,8 +154,10 @@ const ScrapCollectorDashboard = () => {
             </div>
           </div>
         </header>
-         <div class="navbar">
-          <div class="nav-links" id="navLinks">
+         <div className="navbar" id='navbar'>
+          <b onClick={toggleMenu} style={{float: "right", margin: "10px", marginRight: "20px", color:"white", fontSize: "20px"}}>X</b>
+          <br />
+          <div className="nav-links" id="navLinks">
             <Link to="/scrap-collector">Dashboard</Link>
             <Link to="/orders">Orders</Link>
             <Link to="/pending-order">Pending orders</Link>

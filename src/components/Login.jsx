@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../style/Login.css';
-import { GoogleLogin } from '@react-oauth/google';
 import loaderGIF from "../assets/loader.gif";
 
 export const Login = () => {
-    const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',

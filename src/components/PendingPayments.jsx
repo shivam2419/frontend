@@ -4,7 +4,7 @@ import "../style/Scrap_Collector/PendingPayments.css";
 import rupeeImg from "../assets/rupee.png";
 import loaderGIF from '../assets/loader.gif';
 const PendingPayments = () => {
-    const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
     const profileImg = "https://scrapbridge-api.onrender.com" + localStorage.getItem("user_profile");
     const user = {
         username: localStorage.getItem("username") ? localStorage.getItem("username") : "Undefined"
@@ -121,8 +121,8 @@ const PendingPayments = () => {
                     </div>
                 </div>
             </header>
-            <div class="navbar">
-                                  <div class="nav-links" id="navLinks">
+            <div className="navbar">
+                                  <div className="nav-links" id="navLinks">
                                     <Link to="/scrap-collector">Dashboard</Link>
                                     <Link to="/orders">Orders</Link>
                                     <Link to="/pending-order">Pending orders</Link>

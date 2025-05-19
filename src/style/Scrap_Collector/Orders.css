@@ -145,7 +145,7 @@ header {
 }
 
 .main::-webkit-scrollbar {
-  width: 5px;
+  width: 2px;
 }
 
 .main::-webkit-scrollbar-track {
@@ -425,7 +425,7 @@ header {
     justify-content: space-around;
   }
   .logo{
-    font-size: 20px;
+    font-size:16px;
   }
   .searchbar{
     display: none;

@@ -34,7 +34,7 @@ const Home = () => {
                 <div className="content-left">
                     <p>-Welcome to ScrapBridge</p>
                     <h1>
-                        "Empowering Communities, <br /> Sustaining futures: Your Guide <br />
+                        "Empowering Communities, <br /> Sustaining future: Your Guide <br />
                         to Responsible Waste Disposal"
                     </h1>
                     <h1
@@ -79,18 +79,18 @@ const Home = () => {
                 <div className="about-area">
                     <div className="about-left">
                         <p>
-                            Welcome to ScrapBridge, your dedicated partner in tackling the global e-waste crisis. Our
+                            Welcome to ScrapBridge, your dedicated partner in tackling the global waste crisis. Our
                             mission is to promote sustainable waste management practices, raise awareness about the
-                            environmental and health impacts of e-waste, and provide practical solutions for responsible disposal
-                            and recycling of electronic devices.
+                            environmental and health impacts of waste, and provide practical solutions for responsible disposal
+                            and recycling of scrap.
                             <br /><br />
                             <b>Our Mission</b>
                             <br />
                             At ScrapBridge, we are committed to:
                             <b> Educating</b> the public about the dangers of improper waste disposal and the benefits of recycling.
-                            <b> Facilitating</b> the safe and responsible recycling of electronic devices through accessible and
+                            <b> Facilitating</b> the safe and responsible recycling of scrap through accessible and
                             convenient recycling programs.
-                            <b> Advocating</b> for stronger regulations and policies to ensure sustainable e-waste management and
+                            <b> Advocating</b> for stronger regulations and policies to ensure sustainable scrap management and
                             reduce environmental impact... <Link to="/about">Read more</Link>
                         </p>
                         <br /><br />

@@ -41,7 +41,6 @@ form .row-1 .recycle-form-col-1, form .row-2 .recycle-form-col-1, form .row-3 .r
 
 #recycle-btn {
     width: 150px;
-    margin: 3% 0;
     background-color: blue;
     padding: 10px;
     border: none;
@@ -49,6 +48,8 @@ form .row-1 .recycle-form-col-1, form .row-2 .recycle-form-col-1, form .row-3 .r
     color: white;
     cursor: pointer;
     display: block;
+    margin: auto;
+    margin-top: 30px;
 }
 
 #recycle-btn:hover {

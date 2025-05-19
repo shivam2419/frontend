@@ -5,272 +5,255 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import axios from "axios";
 import userMapIcon from "../assets/icon.png";
-import loaderGIF from "../assets/loader.gif"; // Optional loader icon, or use a CSS spinner
+import loaderGIF from "../assets/loader.gif";
 
 const Efacility = () => {
-    const backendUrl = "https://scrapbridge-api.onrender.com/api/";
-    const [rooms, setRooms] = useState([]);
-    const [searchQuery, setSearchQuery] = useState(""); // Add state for search query
-    const [filteredRooms, setFilteredRooms] = useState([]); // State for filtered rooms
-    const [loading, setLoading] = useState(true);
-    const [locationError, setLocationError] = useState(false);
-    useEffect(() => {
-        // Fetch data from API
-        const fetchRooms = async () => {
-            try {
-                setLoading(true);
-                const res = await axios.get(backendUrl + "owners/"); // Use your actual API endpoint
-                const sortedRooms = res.data.sort((a, b) => a.distance - b.distance);
-                setRooms(sortedRooms);
-                setFilteredRooms(sortedRooms); // Initially set filteredRooms to all rooms
-            } catch (error) {
-                console.error("Failed to fetch rooms:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const [rooms, setRooms] = useState([]);
+  const [filteredRooms, setFilteredRooms] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [locationError, setLocationError] = useState(false);
 
-        fetchRooms();
-    }, []);
+  const getDistance = (lat1, lon1, lat2, lon2) => {
+    const toRad = (value) => (value * Math.PI) / 180;
+    const R = 6371;
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRad(lat1)) *
+        Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  };
 
-    // Handle search query change and filter rooms
-    const handleSearch = (e) => {
-        const query = e.target.value.toLowerCase();
-        setSearchQuery(query);
+  useEffect(() => {
+    if (!navigator.geolocation) {
+      setLocationError(true);
+      setLoading(false);
+      return;
+    }
 
-        if (query) {
-            const filtered = rooms.filter((room) =>
-                room.organisation_name.toLowerCase().includes(query) ||
-                room.city.toLowerCase().includes(query) ||
-                room.state.toLowerCase().includes(query) ||
-                room.phone.includes(query)
-            ).sort((a, b) => a.distance - b.distance); // sort after filter
-            setFilteredRooms(filtered);
-        } else {
-            setFilteredRooms([...rooms]); // already sorted
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        setLocationError(false);
+        const userLat = position.coords.latitude;
+        const userLong = position.coords.longitude;
+
+        try {
+          const res = await axios.get(backendUrl + "owners/");
+          const roomsWithDistance = res.data.map((room) => {
+            const distance = getDistance(
+              userLat,
+              userLong,
+              parseFloat(room.latitude),
+              parseFloat(room.longitude)
+            );
+            return { ...room, distance };
+          });
+
+          const sortedRooms = roomsWithDistance.sort(
+            (a, b) => a.distance - b.distance
+          );
+
+          setRooms(sortedRooms);
+          setFilteredRooms(sortedRooms);
+        } catch (err) {
+          console.error("Failed to fetch data:", err);
+        } finally {
+          setLoading(false);
         }
-    };
-
-    useEffect(() => {
-        if (!filteredRooms || filteredRooms.length === 0) return;
-
-        if (L.DomUtil.get("mapid") !== null) {
-            L.DomUtil.get("mapid")._leaflet_id = null;
-        }
-
-        const myLat = filteredRooms.map((r) => parseFloat(r.latitude));
-        const myLong = filteredRooms.map((r) => parseFloat(r.longitude));
-        const orgNameList = filteredRooms.map((r) => r.organisation_name);
-        const orgIDs = filteredRooms.map((r) => r.organisation_id);
-
-        const mymap = L.map("mapid", {
-            center: [20, 80],
-            zoom: 5,
-            layers: [
-                L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                    attribution:
-                        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                }),
-            ],
-        });
-
-        let recyclerMarkers = [];
-        for (let i = 0; i < myLat.length; i++) {
-            if (!isNaN(myLat[i]) && !isNaN(myLong[i])) {
-                let recyclerIcon = L.icon({
-                    iconUrl: "https://chiropracticgilbert.com/wp-content/uploads/2017/12/locatio.png",
-                    iconSize: [45, 60],
-                    iconAnchor: [30, 80],
-                    popupAnchor: [0, -30],
-                });
-                let marker = L.marker([myLat[i], myLong[i]],
-                    { icon: recyclerIcon }, {
-                    title: orgNameList[i]
-                }).addTo(mymap);
-
-                marker.bindPopup(orgNameList[i]);
-                recyclerMarkers.push({
-                    id: orgIDs[i],
-                    lat: myLat[i],
-                    lng: myLong[i],
-                    name: orgNameList[i],
-                    marker,
-                });
-            }
-        }
-
-        function getUserLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    showUserPosition,
-                    (error) => {
-                        setLocationError(true); // show alert
-                        showError(error);
-                    },
-                    {
-                        enableHighAccuracy: true,
-                        timeout: 10000,
-                        maximumAge: 0,
-                    }
-                );
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
-        }
-
-        function showUserPosition(position) {
-            setLocationError(false);
-            const userLat = position.coords.latitude;
-            const userLong = position.coords.longitude;
-            const yourIcon = L.icon({
-                iconUrl: userMapIcon,
-                iconSize: [80, 80],
-                iconAnchor: [30, 80],
-                popupAnchor: [0, -30],
-            });
-
-            const userMarker = L.marker([userLat, userLong], { icon: yourIcon })
-                .addTo(mymap)
-                .bindPopup("<b>Your Location</b>")
-                .openPopup();
-
-            mymap.setView([userLat, userLong], 12);
-
-            recyclerMarkers.forEach((recycler, index) => {
-                const distance = getDistance(userLat, userLong, recycler.lat, recycler.lng);
-
-                recycler.marker
-                    .bindPopup(
-                        `<b>${recycler.name}</b><br>Distance: ${distance.toFixed(2)} KM`
-                    )
-                    .openPopup();
-
-                const facilityCards = document.querySelectorAll(".facility-card");
-                if (facilityCards[index]) {
-                    let distanceElement = facilityCards[index].querySelector(".distance");
-                    if (!distanceElement) {
-                        const newDistanceElement = document.createElement("p");
-                        newDistanceElement.classList.add("distance");
-                        newDistanceElement.innerHTML = `<b>Distance:</b> ${distance.toFixed(2)} KM`;
-                        facilityCards[index].appendChild(newDistanceElement);
-                    } else {
-                        distanceElement.innerHTML = `<b>Distance:</b> ${distance.toFixed(2)} KM`;
-                    }
-                }
-            });
-        }
-
-        function showError(error) {
-            console.log("Location isn't allowed");
-        }
-
-        function getDistance(lat1, lon1, lat2, lon2) {
-            function toRad(value) {
-                return (value * Math.PI) / 180;
-            }
-            const R = 6371;
-            const dLat = toRad(lat2 - lat1);
-            const dLon = toRad(lon2 - lon1);
-            const a =
-                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(toRad(lat1)) *
-                Math.cos(toRad(lat2)) *
-                Math.sin(dLon / 2) *
-                Math.sin(dLon / 2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            return R * c;
-        }
-
-        getUserLocation();
-    }, [filteredRooms]);
-
-    return (
-        <>
-            {loading ? (
-                <div className="loader-container">
-                    <center><img src={loaderGIF} alt="" /></center>
-                </div>
-            ) : (
-                <div className="row">
-                    <div className="col-1">
-                        {searchQuery ? (
-                            <h2>Search Results for "{searchQuery}"</h2>
-                        ) : (
-                            <h1>Available Scrap Collectors</h1>
-                        )}
-                        <form action="" method="GET">
-                            <input
-                                type="text"
-                                placeholder="Search your Shopper"
-                                id="q"
-                                name="q"
-                                value={searchQuery}
-                                style={{ marginBottom: "10px" }}
-                                onChange={handleSearch} // Add onChange handler to search input
-                            />
-                        </form>
-                        <i style={{ color: "gray" }}>
-                            *Choose the nearest possible collector for high and fast availability*
-                        </i>
-                        {locationError ? (
-                            <div style={{
-                                backgroundColor: "#ffcccc",
-                                color: "#990000",
-                                padding: "10px",
-                                marginBottom: "10px",
-                                borderRadius: "5px",
-                                textAlign: "center"
-                            }}>
-                                ⚠️ Location access is required to show nearest facilities. Please allow it in your browser settings.
-                                <br /><br />
-                                <button onClick={() => window.location.reload()} style={{
-                                    backgroundColor: "red",
-                                    color: "white",
-                                    cursor: "pointer",
-                                    padding: "10px",
-                                    marginBottom: "10px",
-                                    borderRadius: "5px",
-                                    textAlign: "center"
-                                }}>
-                                    Try Again
-                                </button>
-                            </div>
-                        ) : (
-                            <div>
-                                {filteredRooms?.map((items) => (
-
-                                    <div className="facility-card" key={items.organisation_id}>
-                                        <div className="facility-header">
-                                            <img
-                                                src={items.image ? `https://scrapbridge-api.onrender.com${items.image}` : "../assets/default.jpg"}
-                                                alt="Facility"
-                                                className="facility-image"
-                                            />
-                                            <h3 className="org-name">
-                                                {items.organisation_name.toUpperCase()} (Id: {items.organisation_id})
-                                            </h3>
-                                        </div>
-                                        <p className="address">
-                                            <b>ADDRESS - </b> {items.street}, {items.city}, {items.state}, {items.zipcode}
-                                        </p>
-                                        <p className="distance"></p>
-                                        <p className="contact">
-                                            <b>Contact - </b> {items.phone}
-                                        </p>
-                                        <a href={`recycle_main/${items.user.id}`}>Book Recycling</a>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-
-                    </div>
-                    <div className="col-2">
-                        <div id="mapid"></div>
-                    </div>
-                </div>
-            )}
-        </>
+      },
+      (error) => {
+        setLocationError(true);
+        setLoading(false);
+        console.error("Location access denied:", error);
+      }
     );
+  }, []);
+
+  useEffect(() => {
+    if (!filteredRooms.length) return;
+
+    if (L.DomUtil.get("mapid") !== null) {
+      L.DomUtil.get("mapid")._leaflet_id = null;
+    }
+
+    const mymap = L.map("mapid", {
+      center: [20, 80],
+      zoom: 5,
+      layers: [
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }),
+      ],
+    });
+
+    const userIcon = L.icon({
+      iconUrl: userMapIcon,
+      iconSize: [80, 80],
+      iconAnchor: [30, 80],
+      popupAnchor: [0, -30],
+    });
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      const userLat = position.coords.latitude;
+      const userLong = position.coords.longitude;
+
+      L.marker([userLat, userLong], { icon: userIcon })
+        .addTo(mymap)
+        .bindPopup("<b>Your Location</b>")
+        .openPopup();
+
+      mymap.setView([userLat, userLong], 12);
+    });
+
+    filteredRooms.forEach((room) => {
+      if (!room.latitude || !room.longitude) return;
+
+      const icon = L.icon({
+        iconUrl:
+          "https://chiropracticgilbert.com/wp-content/uploads/2017/12/locatio.png",
+        iconSize: [45, 60],
+        iconAnchor: [30, 80],
+        popupAnchor: [0, -30],
+      });
+
+      L.marker([parseFloat(room.latitude), parseFloat(room.longitude)], {
+        icon,
+      })
+        .addTo(mymap)
+        .bindPopup(
+          `<b>${
+            room.organisation_name
+          }</b><br>Distance: ${room.distance?.toFixed(2)} KM`
+        );
+    });
+  }, [filteredRooms]);
+
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+    if (query) {
+      const filtered = rooms
+        .filter(
+          (room) =>
+            room.organisation_name.toLowerCase().includes(query) ||
+            room.city.toLowerCase().includes(query) ||
+            room.state.toLowerCase().includes(query) ||
+            room.phone.includes(query)
+        )
+        .sort((a, b) => a.distance - b.distance);
+      setFilteredRooms(filtered);
+    } else {
+      setFilteredRooms([...rooms]);
+    }
+  };
+
+  return (
+    <>
+      {loading ? (
+        <div className="loader-container">
+          <center>
+            <img src={loaderGIF} alt="Loading..." />
+          </center>
+        </div>
+      ) : (
+        <div className="row">
+          <div className="col-1">
+            {searchQuery ? (
+              <h2>Search Results for "{searchQuery}"</h2>
+            ) : (
+              <h1>Available Scrap Collectors</h1>
+            )}
+            <input
+              type="text"
+              placeholder="Search your Shopper"
+              id="q"
+              name="q"
+              value={searchQuery}
+              style={{ marginBottom: "10px" }}
+              onChange={handleSearch} // Add onChange handler to search input
+            />
+            <i style={{ color: "gray" }}>
+              *Choose the nearest possible collector for high and fast
+              availability*
+            </i>
+
+            {locationError ? (
+              <div
+                style={{
+                  backgroundColor: "#ffcccc",
+                  color: "#990000",
+                  padding: "10px",
+                  marginBottom: "10px",
+                  borderRadius: "5px",
+                  textAlign: "center",
+                }}
+              >
+                ⚠️ Location access is required to show nearest facilities.
+                Please allow it in your browser settings.
+                <br />
+                <br />
+                <button
+                  onClick={() => window.location.reload()}
+                  style={{
+                    backgroundColor: "red",
+                    color: "white",
+                    cursor: "pointer",
+                    padding: "10px",
+                    marginBottom: "10px",
+                    borderRadius: "5px",
+                  }}
+                >
+                  Try Again
+                </button>
+              </div>
+            ) : (
+              filteredRooms.map((item) => (
+                <div className="facility-card" key={item.organisation_id}>
+                  <div className="facility-header">
+                    <img
+                    // Did changes here
+                      src={
+                        item.image
+                          ? `https://scrapbridge-api.onrender.com${item.image}`
+                          : "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
+                      }
+                      alt="Facility"
+                      className="facility-image"
+                    />
+                    <h3 className="org-name">
+                      {item.organisation_name.toUpperCase()} (Id:{" "}
+                      {item.organisation_id})
+                    </h3>
+                  </div>
+                  <p className="address">
+                    <b>ADDRESS - </b> {item.street}, {item.city}, {item.state},{" "}
+                    {item.zipcode}
+                  </p>
+                  <p className="distance">
+                    <b>Distance:</b> {item.distance?.toFixed(2)} KM
+                  </p>
+                  <p className="contact">
+                    <b>Contact - </b> {item.phone}
+                  </p>
+                  <a href={`recycle_main/${item.user.id}`}>Book Recycling</a>
+                </div>
+              ))
+            )}
+          </div>
+          <div className="col-2">
+            <div id="mapid"></div>
+          </div>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default Efacility;

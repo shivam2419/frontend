@@ -14,8 +14,7 @@ export const Navbar = () => {
   let profileImage = localStorage.getItem("user_profile");
   if (profileImage) {
     profileImage =
-      "https://scrapbridge-api.onrender.com" +
-      localStorage.getItem("user_profile");
+      "https://scrapbridge-api.onrender.com" + localStorage.getItem("user_profile");
   } else {
     profileImage = defaultProfile;
   }
@@ -48,12 +47,10 @@ export const Navbar = () => {
   };
 
   const checkAuth = async () => {
-    const token = localStorage.getItem("access"); // fetch latest token each time
+    const token = localStorage.getItem("access");
     if (!token) {
-      console.log("No token found");
       return;
     }
-
     try {
       const res = await fetch(backendUrl + "check-authentication/", {
         method: "GET",
@@ -63,6 +60,8 @@ export const Navbar = () => {
         },
       });
 
+      if (res.status === 401) return; // silent return on 401
+
       const data = await res.json();
 
       if (data.isAuthenticated) {
@@ -71,12 +70,17 @@ export const Navbar = () => {
         setIsAuthenticated(false);
       }
     } catch (err) {
-      console.error("Auth check failed:", err);
+      // Only log unexpected errors
+      if (!err.message.includes("401")) {
+        console.error("Auth check failed:", err);
+      }
     }
   };
+
   useEffect(() => {
     checkAuth();
   }, []);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       const sidebar = document.getElementById("mySidebar");
@@ -166,28 +170,29 @@ export const Navbar = () => {
           </ul>
 
           {isAuthenticated && (
-            <Link
-              to="/profile"
-              className="right_side"
-              style={{
-                display: "flex",
-                textDecoration: "none",
-                color: "black",
-              }}
-            >
+            <div style={{ display: "flex" }}>
               <button id="notification">
                 <Link to="/notification">
                   <img src={notificationIcon} alt="Notification" />
                 </Link>
               </button>
-
-              <li className="nav-item dropdown">
-                <span className="profile-image" id="profileImage">
-                  <img src={profileImage} alt="Profile" />
-                  <p>{userName}</p>
-                </span>
-              </li>
-            </Link>
+              <Link
+                to="/profile"
+                className="right_side"
+                style={{
+                  display: "flex",
+                  textDecoration: "none",
+                  color: "black",
+                }}
+              >
+                <li className="nav-item dropdown">
+                  <span className="profile-image" id="profileImage">
+                    <img src={profileImage} alt="Profile" />
+                    <p>{userName}</p>
+                  </span>
+                </li>
+              </Link>
+            </div>
           )}
           {!isAuthenticated && (
             <span>

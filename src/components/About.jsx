@@ -21,16 +21,16 @@ const About = () => {
         <div className="about-left">
           <p>
             Welcome to ScrapBridge, your dedicated partner in tackling the global Scrap crisis. Our
-            mission is to promote sustainable electronic waste management practices, raise awareness about the
+            mission is to promote sustainable scrap management practices, raise awareness about the
             environmental and health impacts of Scrap, and provide practical solutions for responsible disposal
-            and recycling of electronic devices.
+            and recycling of scrap.
             <br />
             <br />
             <b style = {{fontSize : '20px'}}>Our Mission </b>
             <br />
             At ScrapBridge, we are committed to 
             educating the public about the dangers of improper Scrap disposal and the benefits of recycling.
-            <b > Facilitating</b> the safe and responsible recycling of electronic devices through accessible and
+            <b > Facilitating</b> the safe and responsible recycling of scrap through accessible and
             convenient recycling programs.
             <b > Advocating</b> for stronger regulations and policies to ensure sustainable Scrap management and
             reduce environmental impact.
@@ -55,7 +55,7 @@ const About = () => {
             <br />
             <br />
             <b style = {{fontSize : '20px'}}>Our Vision </b> <br />
-            We envision a world where electronic waste is no longer a threat to our environment and health. Through
+            We envision a world where scrap is no longer a threat to our environment and health. Through
             collective efforts and responsible practices, we aim to create a sustainable future where electronics
             are designed, used, and disposed of in ways that minimize their environmental footprint.
             <br />
@@ -64,13 +64,13 @@ const About = () => {
             Join us in our mission to combat the Scrap crisis. Whether you are an individual looking to recycle
             your old devices, a business seeking sustainable Scrap management solutions, or a community group
             interested in partnering with us, there are many ways to get involved and make a difference.
-            <br />
+            <br /><br />
             <b style = {{fontSize : '20px'}}>Donate Your Electronics </b> <br /> Bring your old electronics to one of our recycling centers or participate in our take-back programs.
-            <br />
+            <br /><br />
             <b style = {{fontSize : '20px'}}>Volunteer </b> <br /> Help us spread the word and assist with our awareness campaigns and community events.
-            <br />
+            <br /><br />
             <b style = {{fontSize : '20px'}}>Support Our Work </b> <br /> Consider making a donation to support our initiatives and expand our reach.
-            <br />
+            <br /><br />
             Together, we can make a significant impact on reducing Scrap and protecting our planet for future
             generations. Thank you for being part of the solution!
           </p>

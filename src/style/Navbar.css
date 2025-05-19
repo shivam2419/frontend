@@ -184,6 +184,7 @@ list-style: none;
     border-radius: 50%;
     cursor: pointer;
     margin: auto;
+    object-fit: cover;
 }
 
 .dropdown-menu {
