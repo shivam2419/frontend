@@ -130,3 +130,76 @@
   font-weight: bold;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 15px;
+    max-width: 100%;
+  }
+
+  .profile-card {
+    padding: 15px;
+  }
+
+  .profile-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .username {
+    font-size: 18px;
+  }
+
+  .created-at {
+    font-size: 13px;
+  }
+
+  .form-group input {
+    padding: 6px;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .image-preview-container {
+    max-width: 90%;
+    max-height: 90%;
+  }
+
+  .preview-img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .username {
+    font-size: 16px;
+  }
+
+  .created-at {
+    font-size: 12px;
+  }
+
+  .form-group label {
+    font-size: 14px;
+  }
+
+  .submit-btn {
+    font-size: 14px;
+  }
+
+  .close-button {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    line-height: 32px;
+  }
+}
