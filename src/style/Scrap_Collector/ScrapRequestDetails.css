@@ -199,7 +199,7 @@ h2 {
 
 #mapid {
   height: 500px;
-  width: 100%;
+  width: auto;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   margin-top: 20px;

@@ -84,7 +84,7 @@
 }
 #mapid {
     height: 80vh;
-    width: 100%;
+    width: auto;
 }
 
 @media screen and (max-width: 800px) {
