@@ -101,8 +101,8 @@
     }
 
     #mapid {
-        width: auto;
+        width: 95%;
         height: 300px;
-        margin: 1%;
+        margin: 20px;
     }
 }
