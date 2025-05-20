@@ -1,19 +1,46 @@
-.custom-translate-btn {
-    position: fixed;
-    top: 80%;
-    right: 20px;
-    width: 150px; /* Fixed width */
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: grab;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    user-select: none;
-    text-align: center;
-    font-weight: bold;
-    box-sizing: border-box;
-    z-index: 1000;
-  }
+#translateDiv {
+  position: fixed;
+  bottom: 20%;
+  right: -2px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  width: 40px; /* collapsed width */
+  padding: 6px 10px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  z-index: 9999;
+  user-select: none;
+}
+
+#translateDiv.expanded {
+  width: 130px;
+}
+
+#translateDiv img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+#translateText {
+  margin-left: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+
+#translateDiv.expanded #translateText {
+  opacity: 1;
+  pointer-events: auto;
+}
 
 .translate-popup {
   display: none;
@@ -38,12 +65,12 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 20px;
-  cursor: pointer;
-  font-weight: bold;
-  color: #444;
+@media (hover: hover) and (pointer: fine) {
+  #translateDiv:hover {
+    width: 130px;
+  }
+  #translateDiv:hover #translateText {
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
