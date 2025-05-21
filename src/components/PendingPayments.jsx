@@ -160,60 +160,60 @@ const PendingPayments = () => {
         <div className="navcontainer">
           <nav className="nav">
             <div className="nav-upper-options">
-              <div className="nav-option opt">
+              <Link className="nav-option opt" to="/scrap-collector">
                 <img
                   src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
                   className="nav-img"
                   alt="dashboard"
                 />
-                <h3>
-                  <Link to="/scrap-collector">Dashboard</Link>
+                <h3 style={{color: "black"}}>
+                  Dashboard
                 </h3>
-              </div>
+              </Link>
 
-              <div className="opt nav-option">
+              <Link className="opt nav-option" to="/orders">
                 <img
                   src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
                   className="nav-img"
                   alt="articles"
                 />
-                <h3>
-                  <Link to="/orders">Orders</Link>
+                <h3 style={{color: "black"}}>
+                  Orders
                 </h3>
-              </div>
+              </Link>
 
-              <div className="nav-option option4">
+              <Link className="nav-option option4" to="/pending-order">
                 <img
                   src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/6.png"
                   className="nav-img"
                   alt="institution"
                 />
-                <h3>
-                  <Link to="/pending-order">Pending Payments</Link>
+                <h3 >
+                  Pending Payments
                 </h3>
-              </div>
+              </Link>
 
-              <div className="nav-option option6">
+              <Link className="nav-option option6" to={`/scrap-collector/profile`}>
                 <img
                   src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/4.png"
                   className="nav-img"
                   alt="settings"
                 />
-                <h3>
-                  <Link to={`/scrap-collector/profile`}>Settings</Link>
+                <h3 style={{color: "black"}}>
+                  Settings
                 </h3>
-              </div>
+              </Link>
 
-              <div className="nav-option logout">
+              <Link className="nav-option logout" onClick={logout}>
                 <img
                   src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
                   className="nav-img"
                   alt="logout"
                 />
-                <h3>
-                  <Link onClick={logout}>Logout</Link>
+                <h3 style={{color: "black"}}>
+                  Logout
                 </h3>
-              </div>
+              </Link>
             </div>
           </nav>
         </div>
@@ -246,8 +246,8 @@ const PendingPayments = () => {
                 padding: "30px",
                 borderRadius: "15px",
                 boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)",
-                width: "100%",
-                maxWidth: "900px",
+                width: "95%",
+                margin: "2rem",
               }}
             >
               <form>

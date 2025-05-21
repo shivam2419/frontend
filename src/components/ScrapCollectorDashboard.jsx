@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import '../style/Scrap_Collector/Style.css';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "../style/Scrap_Collector/Style.css";
 // import '../style/Scrap_Collector/Responsive.css';
 import loaderGIF from "../assets/loader.gif";
 const ScrapCollectorDashboard = () => {
@@ -9,18 +9,24 @@ const ScrapCollectorDashboard = () => {
   const [users, setUsers] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
-  const profileImg = "https://scrapbridge-api.onrender.com" + localStorage.getItem("user_profile");
+  const profileImg =
+    "https://scrapbridge-api.onrender.com" + localStorage.getItem("user_profile");
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`${backendUrl}transaction-details/${localStorage.getItem("user_id")}/`, {
-          method: "GET",
-          headers: {
-            "Authorization": `Bearer ${localStorage.getItem("access")}`,
-          },
-        });
+        const response = await fetch(
+          `${backendUrl}transaction-details/${localStorage.getItem(
+            "user_id"
+          )}/`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access")}`,
+            },
+          }
+        );
 
         if (response.ok) {
           const data = await response.json();
@@ -29,16 +35,19 @@ const ScrapCollectorDashboard = () => {
             const enduser_id = transaction.user;
 
             if (!users[enduser_id]) {
-              const userResponse = await fetch(`${backendUrl}enduser/${enduser_id}/`, {
-                method: "GET",
-                headers: {
-                  "Authorization": `Bearer ${localStorage.getItem("access")}`,
-                },
-              });
+              const userResponse = await fetch(
+                `${backendUrl}enduser/${enduser_id}/`,
+                {
+                  method: "GET",
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("access")}`,
+                  },
+                }
+              );
 
               if (userResponse.ok) {
                 const userData = await userResponse.json();
-                setUsers(prev => ({
+                setUsers((prev) => ({
                   ...prev,
                   [enduser_id]: userData.username,
                 }));
@@ -46,12 +55,16 @@ const ScrapCollectorDashboard = () => {
             }
           }
         } else {
-          alert(`Some error occured, please try again later : ${response.status}`);
+          alert(
+            `Some error occured, please try again later : ${response.status}`
+          );
           window.location.href = "/login";
         }
       } catch (e) {
-          alert(`Some error occured, please try again later : ${response.status}`);
-          window.location.href = "/login";
+        alert(
+          `Some error occured, please try again later : ${response.status}`
+        );
+        window.location.href = "/login";
         console.log("Error:", e);
       } finally {
         setLoading(false);
@@ -60,7 +73,6 @@ const ScrapCollectorDashboard = () => {
 
     fetchData();
   }, []);
-
 
   const logout = async () => {
     try {
@@ -77,11 +89,10 @@ const ScrapCollectorDashboard = () => {
     }
   };
   const user = {
-    username: localStorage.getItem("username") || "Undefined"
+    username: localStorage.getItem("username") || "Undefined",
   };
 
-
-  const filteredItems = items.filter(item => {
+  const filteredItems = items.filter((item) => {
     const username = users[item.user] || "";
     const transactionId = item.transaction_id || "";
     const amount = item.amount?.toString() || "";
@@ -94,12 +105,12 @@ const ScrapCollectorDashboard = () => {
   });
 
   const toggleMenu = () => {
-      let opt = document.getElementById("navbar");
-      if(opt.style.display === "none") {
-        opt.style.display = "block";
-      } else {
-        opt.style.display = "none";
-      }
+    let opt = document.getElementById("navbar");
+    if (opt.style.display === "none") {
+      opt.style.display = "block";
+    } else {
+      opt.style.display = "none";
+    }
   };
   if (loading) {
     return (
@@ -115,7 +126,9 @@ const ScrapCollectorDashboard = () => {
       <div>
         <header>
           <div className="logosec">
-            <Link className="logo" to="/scrap-collector">{user.username.toUpperCase()}</Link>
+            <Link className="logo" to="/scrap-collector">
+              {user.username.toUpperCase()}
+            </Link>
             <img
               src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
               className="icn menuicn"
@@ -125,37 +138,27 @@ const ScrapCollectorDashboard = () => {
             />
           </div>
 
-          <div className="searchbar">
-            <input type="text" placeholder="Search" />
-            <div className="searchbtn">
-              <img
-                src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180758/Untitled-design-(28).png"
-                className="icn srchicn"
-                alt="search-icon"
-              />
-            </div>
-          </div>
-
           <div className="message">
-            <div className="circle"></div>
-            <img
-              src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png"
-              className="icn"
-              alt=""
-            />
             <div className="dp">
               <Link to="/scrap-collector/profile">
-                <img
-                  src={profileImg}
-                  className="dpicn"
-                  alt="dp"
-                />
+                <img src={profileImg} className="dpicn" alt="dp" />
               </Link>
             </div>
           </div>
         </header>
-         <div className="navbar" id='navbar'>
-          <b onClick={toggleMenu} style={{float: "right", margin: "10px", marginRight: "20px", color:"white", fontSize: "20px"}}>X</b>
+        <div className="navbar" id="navbar">
+          <b
+            onClick={toggleMenu}
+            style={{
+              float: "right",
+              margin: "10px",
+              marginRight: "20px",
+              color: "white",
+              fontSize: "20px",
+            }}
+          >
+            X
+          </b>
           <br />
           <div className="nav-links" id="navLinks">
             <Link to="/scrap-collector">Dashboard</Link>
@@ -169,50 +172,53 @@ const ScrapCollectorDashboard = () => {
           <div className="navcontainer">
             <nav className="nav">
               <div className="nav-upper-options">
-                <div className="nav-option option1">
+                <Link className="nav-option option2" to="/scrap-collector">
                   <img
                     src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
                     className="nav-img"
                     alt="dashboard"
                   />
-                  <h3><Link to="/scrap-collector">Dashboard</Link></h3>
-                </div>
+                  <h3>Dashboard</h3>
+                </Link>
 
-                <div className="opt nav-option">
+                <Link className="opt nav-option" to="/orders">
                   <img
                     src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
                     className="nav-img"
                     alt="articles"
                   />
-                  <h3><Link to="/orders">Orders</Link></h3>
-                </div>
+                  <h3 style={{color: "black"}}>Orders</h3>
+                </Link>
 
-                <div className="nav-option opt">
+                <Link className="nav-option opt" to="/pending-order">
                   <img
                     src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/6.png"
                     className="nav-img"
                     alt="institution"
                   />
-                  <h3><Link to="/pending-order">Pending Payments</Link></h3>
-                </div>
+                  <h3 style={{ color: "black" }}>Pending Payments</h3>
+                </Link>
 
-                <div className="nav-option option6">
+                <Link
+                  className="nav-option option6"
+                  to={`/scrap-collector/profile`}
+                >
                   <img
                     src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/4.png"
                     className="nav-img"
                     alt="settings"
                   />
-                  <h3><Link to={`/scrap-collector/profile`}>Settings</Link></h3>
-                </div>
+                  <h3 style={{ color: "black" }}>Settings</h3>
+                </Link>
 
-                <div className="nav-option logout">
+                <Link className="nav-option logout" onClick={logout}>
                   <img
                     src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
                     className="nav-img"
                     alt="logout"
                   />
-                  <h3><Link onClick={logout}>Logout</Link></h3>
-                </div>
+                  <h3 style={{ color: "black" }}>Logout</h3>
+                </Link>
               </div>
             </nav>
           </div>
@@ -230,7 +236,7 @@ const ScrapCollectorDashboard = () => {
             </div>
 
             <div className="box-container">
-              <Link className="box box1" to='/orders'>
+              <Link className="box box1" to="/orders">
                 <div className="text">
                   <h3 className="topic-heading">60.5kg</h3>
                   <h3 className="topic">Scrap Recycled</h3>
@@ -288,7 +294,7 @@ const ScrapCollectorDashboard = () => {
                     fontSize: "14px",
                     borderRadius: "6px",
                     border: "1px solid #ccc",
-                    outline: "none"
+                    outline: "none",
                   }}
                 />
               </div>
@@ -305,21 +311,25 @@ const ScrapCollectorDashboard = () => {
                 </thead>
                 <tbody>
                   {Object.keys(users).length === 0 ? (
-                    <tr><td colSpan="5">No transaction data found</td></tr>
+                    <tr>
+                      <td colSpan="5">No transaction data found</td>
+                    </tr>
                   ) : (
                     filteredItems.map((item, index) => (
                       <tr className="item1" key={index}>
-                        <td className="t-op-nextlvl">{users[item.user]?.toUpperCase() || 'loading...'}</td>
+                        <td className="t-op-nextlvl">
+                          {users[item.user]?.toUpperCase() || "loading..."}
+                        </td>
                         <td className="t-op-nextlvl">{item.transaction_id}</td>
                         <td className="t-op-nextlvl">{item.amount}</td>
                         <td className="t-op-nextlvl">
-                          {new Date(item.created).toLocaleString('en-US', {
-                            month: 'short',
-                            day: '2-digit',
-                            year: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit',
-                            hour12: false
+                          {new Date(item.created).toLocaleString("en-US", {
+                            month: "short",
+                            day: "2-digit",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            hour12: false,
                           })}
                         </td>
                         <td className="t-op-nextlvl label-tag">Paid</td>

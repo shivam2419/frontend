@@ -40,7 +40,6 @@ const Payment = () => {
     const handlePayment = async (e) => {
         e.preventDefault();
         alert("Service isn't available, try again later");
-        return;
         const amountInPaise = parseInt(amount) * 100;
         if (amountInPaise <= 0 || isNaN(amountInPaise)) {
             alert("Please enter a valid amount!");
@@ -71,7 +70,7 @@ const Payment = () => {
                     currency: "INR",
                     name: "ScrapBridge",
                     description: "Test Transaction",
-                    image: "https://example.com/your_logo",
+                    image: "https://scrapbridge-api.onrender.com/static/logo.png",
                     order_id: data.payment_id,
                     handler: async function (response) {
                         await addPaymentStatus(data.payment_id, user, localStorage.getItem("user_id"), amount);
