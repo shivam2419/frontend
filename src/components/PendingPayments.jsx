@@ -197,10 +197,10 @@ const PendingPayments = () => {
                 <img
                   src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/4.png"
                   className="nav-img"
-                  alt="settings"
+                  alt="profile"
                 />
                 <h3 style={{color: "black"}}>
-                  Settings
+                  Profile
                 </h3>
               </Link>
 

@@ -206,9 +206,9 @@ const ScrapCollectorDashboard = () => {
                   <img
                     src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/4.png"
                     className="nav-img"
-                    alt="settings"
+                    alt="profile"
                   />
-                  <h3 style={{ color: "black" }}>Settings</h3>
+                  <h3 style={{ color: "black" }}>Profile</h3>
                 </Link>
 
                 <Link className="nav-option logout" onClick={logout}>
