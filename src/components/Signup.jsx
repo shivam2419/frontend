@@ -74,6 +74,8 @@ export const Signup = () => {
                 window.location.href = '/login';
             } else if(response.status === 400) {
                 alert('All fields are required');
+            } else if(response.status === 403) {
+                alert('Username already exists');
             } 
         } catch (error) {
             console.error('Error sending data to API:', error);
