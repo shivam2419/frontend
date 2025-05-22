@@ -5,7 +5,7 @@ import "leaflet-routing-machine";
 import "../style/Scrap_Collector/ScrapRequestDetails.css";
 
 const ScrapRequestDetails = () => {
-  const backendUrl = "https://scrapbridge-api.onrender.com/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   const { orderId } = useParams();
   const [userData, setUserData] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
