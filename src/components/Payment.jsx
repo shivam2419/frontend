@@ -39,7 +39,6 @@ const Payment = () => {
 
     const handlePayment = async (e) => {
         e.preventDefault();
-        alert("Service isn't available, try again later");
         const amountInPaise = parseInt(amount) * 100;
         if (amountInPaise <= 0 || isNaN(amountInPaise)) {
             alert("Please enter a valid amount!");
