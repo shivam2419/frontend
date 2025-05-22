@@ -241,14 +241,6 @@ const PendingPayments = () => {
           ) : (
             <div
               className="table-container"
-              style={{
-                background: "#ffffff",
-                padding: "30px",
-                borderRadius: "15px",
-                boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)",
-                width: "95%",
-                margin: "2rem",
-              }}
             >
               <form>
                 {recycledItemData.length > 0 ? (
