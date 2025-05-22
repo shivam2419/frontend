@@ -163,7 +163,7 @@ const ScrapCollectorDashboard = () => {
           <div className="nav-links" id="navLinks">
             <Link to="/scrap-collector">Dashboard</Link>
             <Link to="/orders">Orders</Link>
-            <Link to="/pending-order">Pending orders</Link>
+            <Link to="/pending-order">Pending Payments</Link>
             <Link to="/scrap-collector/profile">Profile</Link>
             <Link onClick={logout}>Logout</Link>
           </div>
