@@ -98,7 +98,7 @@ const ScrapOrders = () => {
                 {new Date(order.created).toLocaleString()}
               </p>
               <p>
-                <strong>Owner ID:</strong> {order.owner_id}
+                <strong>Scrap collector :</strong> {order.organisation_name.replace(/_/g, ' ').toUpperCase()}
               </p>
             </div>
           ))
