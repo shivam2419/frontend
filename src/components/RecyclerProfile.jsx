@@ -40,7 +40,7 @@ const RecyclerProfile = () => {
       <div className="recycler-card">
         <div className="recycler-left">
           <img
-            src={`http://localhost:8000/${profile.image}`}
+            src={`https://scrapbridge-api.onrender.com/${profile.image}`}
             alt="Recycler"
             className="recycler-avatar"
           />
