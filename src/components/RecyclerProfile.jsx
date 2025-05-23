@@ -9,6 +9,11 @@ const RecyclerProfile = () => {
 
   useEffect(() => {
     const fetchOwnerProfile = async () => {
+      if(!localStorage.getItem("access")) {
+        alert("You are not authorized");
+        window.location.href = "/login"
+        return;
+      }
       try {
         const res = await fetch(`${backendUrl}owner/${userId}/`, {
           method: "GET",
