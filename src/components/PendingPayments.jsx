@@ -4,9 +4,9 @@ import "../style/Scrap_Collector/PendingPayments.css";
 import rupeeImg from "../assets/rupee.png";
 import loaderGIF from "../assets/loader.gif";
 const PendingPayments = () => {
-  const backendUrl = "http://127.0.0.1:8000/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   const profileImg =
-    "http://127.0.0.1:8000" +
+    "https://scrapbridge-api.onrender.com" +
     localStorage.getItem("user_profile");
   const user = {
     username: localStorage.getItem("username")

@@ -3,7 +3,7 @@ import '../style/Signup.css';
 import { Link } from 'react-router-dom';
 
 export const Signup = () => {
-    const backendUrl = "http://127.0.0.1:8000/api/";
+    const backendUrl = "https://scrapbridge-api.onrender.com/api/";
     const [password, setPassword] = useState(""); // To get continous updating password
     const [confirmPassword, setConfirmPassword] = useState("");
     const [lengthError, setLengthError] = useState(''); // To show password constraints

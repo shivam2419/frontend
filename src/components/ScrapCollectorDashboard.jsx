@@ -4,13 +4,13 @@ import "../style/Scrap_Collector/Style.css";
 // import '../style/Scrap_Collector/Responsive.css';
 import loaderGIF from "../assets/loader.gif";
 const ScrapCollectorDashboard = () => {
-  const backendUrl = "http://127.0.0.1:8000/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   const [items, setItems] = useState([]);
   const [users, setUsers] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const profileImg =
-    "http://127.0.0.1:8000" + localStorage.getItem("user_profile");
+    "https://scrapbridge-api.onrender.com" + localStorage.getItem("user_profile");
 
   useEffect(() => {
     const fetchData = async () => {

@@ -4,9 +4,9 @@ import "../style/Scrap_Collector/Orders.css"; // You can extract the style into 
 import loaderGIF from "../assets/loader.gif";
 
 const ScrapCollectorOrders = () => {
-  const backendUrl = "http://127.0.0.1:8000/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   const profileImg =
-    "http://127.0.0.1:8000" + localStorage.getItem("user_profile");
+    "https://scrapbridge-api.onrender.com" + localStorage.getItem("user_profile");
   const user = {
     username: localStorage.getItem("username")
       ? localStorage.getItem("username")

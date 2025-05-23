@@ -3,7 +3,7 @@ import "../style/profile.css";
 import loader from "../assets/loader.gif";
 
 const ScrapCollectorProfile = () => {
-  const backendUrl = "http://127.0.0.1:8000/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -121,7 +121,7 @@ const ScrapCollectorProfile = () => {
     setUpdate(false);
   };
 
-  const profileImg = user?.image ? "http://127.0.0.1:8000" + user.image : "";
+  const profileImg = user?.image ? "https://scrapbridge-api.onrender.com" + user.image : "";
 
   return (
     <>

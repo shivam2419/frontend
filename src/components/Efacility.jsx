@@ -9,7 +9,7 @@ import loaderGIF from "../assets/loader.gif";
 import { Link } from "react-router-dom";
 
 const Efacility = () => {
-  const backendUrl = "http://127.0.0.1:8000/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   const [rooms, setRooms] = useState([]);
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -222,7 +222,7 @@ const Efacility = () => {
                     // Did changes here
                       src={
                         item.image
-                          ? `http://127.0.0.1:8000${item.image}`
+                          ? `https://scrapbridge-api.onrender.com${item.image}`
                           : "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
                       }
                       alt="Facility"

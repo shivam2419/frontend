@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const ScrapOrders = () => {
   const userId = localStorage.getItem("user_id"); // Logged-in user ID
-  const backendUrl = "http://127.0.0.1:8000/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
 
   const [currentOrders, setCurrentOrders] = useState([]);
   const [completedOrders, setCompletedOrders] = useState([]);
@@ -70,7 +70,7 @@ const ScrapOrders = () => {
               </p>
               {order.image && (
                 <img
-                  src={`http://127.0.0.1:8000${order.image}`}
+                  src={`https://scrapbridge-api.onrender.com${order.image}`}
                   alt="Scrap"
                   style={styles.image}
                 />

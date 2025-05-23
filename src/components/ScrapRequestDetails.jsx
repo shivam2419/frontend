@@ -5,7 +5,7 @@ import "leaflet-routing-machine";
 import "../style/Scrap_Collector/ScrapRequestDetails.css";
 
 const ScrapRequestDetails = () => {
-  const backendUrl = "http://127.0.0.1:8000/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   const { orderId } = useParams();
   const [userData, setUserData] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
@@ -398,7 +398,7 @@ const ScrapRequestDetails = () => {
           <h2>SCRAP REQUEST DETAILS</h2>
           <img
             src={
-              "http://127.0.0.1:8000" + userData.image ||
+              "https://scrapbridge-api.onrender.com" + userData.image ||
               "../assets/default.jpg"
             }
             alt="User"
@@ -437,7 +437,7 @@ const ScrapRequestDetails = () => {
         <img
           className="scrap-img"
           src={
-            "http://127.0.0.1:8000" + userData.image ||
+            "https://scrapbridge-api.onrender.com" + userData.image ||
             "../assets/default.jpg"
           }
           alt="Scrap"
@@ -457,7 +457,7 @@ const ScrapRequestDetails = () => {
           <img
             className="modal-content"
             src={
-              "http://127.0.0.1:8000" + userData.image ||
+              "https://scrapbridge-api.onrender.com" + userData.image ||
               "../assets/default.jpg"
             }
             alt="Scrap Zoomed"

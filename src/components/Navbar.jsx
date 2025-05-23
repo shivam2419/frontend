@@ -6,7 +6,7 @@ import defaultProfile from "../assets/default.jpg";
 import "../style/Navbar.css";
 
 export const Navbar = () => {
-  const backendUrl = "http://127.0.0.1:8000/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   let userName = localStorage.getItem("username");
   if (userName) {
     userName = userName.toUpperCase();
@@ -14,7 +14,7 @@ export const Navbar = () => {
   let profileImage = localStorage.getItem("user_profile");
   if (profileImage) {
     profileImage =
-      "http://127.0.0.1:8000" + localStorage.getItem("user_profile");
+      "https://scrapbridge-api.onrender.com" + localStorage.getItem("user_profile");
   } else {
     profileImage = defaultProfile;
   }

@@ -3,7 +3,7 @@ import loaderGIF from "../assets/loader.gif";
 import "../style/Notification.css";
 
 const Notifications = () => {
-  const backendUrl = "http://127.0.0.1:8000/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");

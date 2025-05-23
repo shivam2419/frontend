@@ -4,7 +4,7 @@ import "../style/recycle_form.css";
 import loaderGIF from "../assets/loader.gif";
 
 const Recycle_Form = () => {
-  const backendUrl = "http://127.0.0.1:8000/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   const { user_id } = useParams();
   const [item, setItem] = useState([]);
   const [loading, setLoading] = useState(true);

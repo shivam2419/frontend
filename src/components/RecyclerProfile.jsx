@@ -4,7 +4,7 @@ import "../style/RecyclerProfile.css";
 
 const RecyclerProfile = () => {
   const { userId } = useParams();
-  const backendUrl = "http://127.0.0.1:8000/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
