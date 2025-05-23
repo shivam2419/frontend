@@ -74,7 +74,7 @@
     background-color: blue;
     color: white;
     padding: 8px;
-    width: 150px;
+    width: fit-content;
     text-decoration: none;
     border-radius: 5px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;

@@ -3,7 +3,7 @@ import "../style/profile.css";
 import loader from "../assets/loader.gif";
 
 const Profile = () => {
-  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const backendUrl = "http://127.0.0.1:8000/api/";
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [imageFile, setImageFile] = useState(null);
@@ -70,7 +70,7 @@ const Profile = () => {
     profileBtn.innerText = "Update";
   };
 
-  const profileImg = user?.image ? "https://scrapbridge-api.onrender.com" + user.image : "";
+  const profileImg = user?.image ? "http://127.0.0.1:8000" + user.image : "";
 
   return (
     <>

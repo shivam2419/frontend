@@ -27,6 +27,8 @@ import ScrapRequestDetails from './components/ScrapRequestDetails.jsx';
 import PendingPayments from './components/PendingPayments.jsx';
 import Payment from './components/Payment.jsx';
 import ScrapCollectorProfile from './components/ScrapCollectorProfile.jsx';
+import RecyclerProfile from './components/RecyclerProfile.jsx';
+import ScrapOrders from './components/ScrapOrders.jsx';
 function AppContent() {
   const location = useLocation();
   const hideLayoutFor = ['/scrap-collector', '/orders', '/pending-order', '/scrap-collector/profile']; // add more paths if needed
@@ -50,8 +52,10 @@ function AppContent() {
         <Route path="/prices" element={<Price_List />} />
         <Route path="/recycle_main/:user_id" element={<ProtectedRoute><Recycle_Form /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="/scrap-orders" element={<ProtectedRoute><ScrapOrders /></ProtectedRoute>} />
         {/* Scrap collector Routes */}
         <Route path="/scrap-collector" element={<ProtectedRoute><ScrapCollectorDashboard /></ProtectedRoute>} />
+        <Route path="/recycler-profile/:userId" element={<RecyclerProfile />} />
         <Route path="/orders" element={<ProtectedRoute><ScrapCollectorOrders /></ProtectedRoute>} />
         <Route path="/scraprequest-details/:orderId" element={<ProtectedRoute><ScrapRequestDetails /></ProtectedRoute>} />
         <Route path="/pending-order" element={<ProtectedRoute><PendingPayments /></ProtectedRoute>} />

@@ -3,7 +3,7 @@ import "../style/profile.css";
 import loader from "../assets/loader.gif";
 
 const ScrapCollectorProfile = () => {
-  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const backendUrl = "http://127.0.0.1:8000/api/";
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -15,6 +15,17 @@ const ScrapCollectorProfile = () => {
   const [previewImage, setPreviewImage] = useState(false);
   const [update, setUpdate] = useState(false);
 
+  let latitude = "",
+    longitude = "";
+  navigator.geolocation.getCurrentPosition(
+    function (position) {
+      latitude = position.coords.latitude;
+      longitude = position.coords.longitude;
+    },
+    function (error) {
+      alert("Error getting location: " + error.message);
+    }
+  );
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -55,7 +66,10 @@ const ScrapCollectorProfile = () => {
 
   const handleUpdateUser = async (e) => {
     e.preventDefault();
-
+    if (!latitude || !longitude) {
+      alert("Please provide location");
+      return;
+    }
     // Phone number validation
     if (!/^\d{10}$/.test(phone)) {
       alert("Please enter a valid 10-digit phone number.");
@@ -69,6 +83,8 @@ const ScrapCollectorProfile = () => {
     formData.append("city", city);
     formData.append("state", state);
     formData.append("zipcode", zipcode);
+    formData.append("latitude", latitude);
+    formData.append("longitude", longitude);
 
     if (imageFile) {
       formData.append("image", imageFile);
@@ -92,7 +108,7 @@ const ScrapCollectorProfile = () => {
       if (res.ok) {
         alert("User info updated successfully!");
         setUpdate(false);
-        window.location.reload();
+        window.location.href = "/scrap-collector";
       } else {
         console.error("Update failed:", data);
         setUpdate(false);
@@ -105,9 +121,7 @@ const ScrapCollectorProfile = () => {
     setUpdate(false);
   };
 
-  const profileImg = user?.image
-    ? "https://scrapbridge-api.onrender.com" + user.image
-    : "";
+  const profileImg = user?.image ? "http://127.0.0.1:8000" + user.image : "";
 
   return (
     <>

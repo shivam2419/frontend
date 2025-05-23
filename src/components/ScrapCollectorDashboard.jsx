@@ -4,18 +4,42 @@ import "../style/Scrap_Collector/Style.css";
 // import '../style/Scrap_Collector/Responsive.css';
 import loaderGIF from "../assets/loader.gif";
 const ScrapCollectorDashboard = () => {
-  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const backendUrl = "http://127.0.0.1:8000/api/";
   const [items, setItems] = useState([]);
   const [users, setUsers] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const profileImg =
-    "https://scrapbridge-api.onrender.com" + localStorage.getItem("user_profile");
+    "http://127.0.0.1:8000" + localStorage.getItem("user_profile");
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
+        // Sending user to profile page if profile not completed
+        const getOwnerInfoResponse = await fetch(
+          `${backendUrl}owner/${localStorage.getItem(
+            "user_id"
+          )}/`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access")}`,
+            },
+          }
+        );
+        if(getOwnerInfoResponse === 404) {
+          alert("Scrap collector not found");
+          return;
+        }
+        if(getOwnerInfoResponse.ok) {
+          const ownerData = await getOwnerInfoResponse.json();
+          if(!ownerData.city || !ownerData.state || !ownerData.street || !ownerData.latitude || !ownerData.longitude) {
+            alert("Please completed your information first");
+            window.location.href = "/scrap-collector/profile";
+            return;
+          }
+        }
         const response = await fetch(
           `${backendUrl}transaction-details/${localStorage.getItem(
             "user_id"
@@ -27,7 +51,8 @@ const ScrapCollectorDashboard = () => {
             },
           }
         );
-
+        
+        // Setting up transaction done by user
         if (response.ok) {
           const data = await response.json();
           setItems(data.data);
@@ -69,6 +94,8 @@ const ScrapCollectorDashboard = () => {
       } finally {
         setLoading(false);
       }
+
+      
     };
 
     fetchData();

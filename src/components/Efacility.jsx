@@ -6,9 +6,10 @@ import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import axios from "axios";
 import userMapIcon from "../assets/icon.png";
 import loaderGIF from "../assets/loader.gif";
+import { Link } from "react-router-dom";
 
 const Efacility = () => {
-  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const backendUrl = "http://127.0.0.1:8000/api/";
   const [rooms, setRooms] = useState([]);
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -54,7 +55,6 @@ const Efacility = () => {
             );
             return { ...room, distance };
           });
-
           const sortedRooms = roomsWithDistance.sort(
             (a, b) => a.distance - b.distance
           );
@@ -172,7 +172,7 @@ const Efacility = () => {
             )}
             <input
               type="text"
-              placeholder="Search your Shopper"
+              placeholder="Search your Scrap Collector"
               id="q"
               name="q"
               value={searchQuery}
@@ -217,20 +217,21 @@ const Efacility = () => {
               filteredRooms.map((item) => (
                 <div className="facility-card" key={item.organisation_id}>
                   <div className="facility-header">
+                    <Link to={`/recycler-profile/${item.user.id}`} style={{backgroundColor: "white", color: "black", display: "flex", alignItems: "center", gap: "10px"}}>
                     <img
                     // Did changes here
                       src={
                         item.image
-                          ? `https://scrapbridge-api.onrender.com${item.image}`
+                          ? `http://127.0.0.1:8000${item.image}`
                           : "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
                       }
                       alt="Facility"
                       className="facility-image"
                     />
                     <h3 className="org-name">
-                      {item.organisation_name.toUpperCase()} (Id:{" "}
-                      {item.organisation_id})
+                      {item.organisation_name.replace(/_/g, ' ').toUpperCase()}
                     </h3>
+                    </Link>
                   </div>
                   <p className="address">
                     <b>ADDRESS - </b> {item.street}, {item.city}, {item.state},{" "}

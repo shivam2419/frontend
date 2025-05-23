@@ -4,7 +4,7 @@ import "../style/recycle_form.css";
 import loaderGIF from "../assets/loader.gif";
 
 const Recycle_Form = () => {
-  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const backendUrl = "http://127.0.0.1:8000/api/";
   const { user_id } = useParams();
   const [item, setItem] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -145,7 +145,7 @@ const Recycle_Form = () => {
       <li><strong>Item Type:</strong> ${formData.item_type}</li>
       <li><strong>Pickup Date:</strong> ${formData.date}</li>
       <li><strong>Phone:</strong> ${formData.phone}</li>
-      <li><strong>Weight:</strong> ${formData.weight} kg</li>
+      <li><strong>Weight:</strong> ${formData.weight/1000} kg</li>
     </ul>
     <p style="margin-top: 20px;">Thank you for using <strong>Scrapbridge</strong> 🌍</p>
   </div>`,

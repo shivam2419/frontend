@@ -3,7 +3,7 @@ import '../style/Signup.css';
 import { Link } from 'react-router-dom';
 
 export const Signup = () => {
-    const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+    const backendUrl = "http://127.0.0.1:8000/api/";
     const [password, setPassword] = useState(""); // To get continous updating password
     const [confirmPassword, setConfirmPassword] = useState("");
     const [lengthError, setLengthError] = useState(''); // To show password constraints
@@ -14,7 +14,7 @@ export const Signup = () => {
         password: '',
         role: '',
     });
-
+    const [update, setUpdate] = useState(false);
     useEffect(() => {
         // Password contraints
         if (password.length > 0 && password.length < 8) {
@@ -43,13 +43,15 @@ export const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setUpdate(true);
         if (lengthError || matchError || formData.username === "" || formData.email === "") {
             alert('Please fix the errors before submitting.');
+            setUpdate(false);
             return;
         }
         if(formData.role === '') {
             alert('Please choose your role (category)');
+            setUpdate(false);
             return;
         }
         if (formData.username.includes(" ")) {
@@ -75,7 +77,7 @@ export const Signup = () => {
             } else if(response.status === 400) {
                 alert('All fields are required');
             } else if(response.status === 403) {
-                alert('Username already exists');
+                alert('Username or Email already exists');
             } 
         } catch (error) {
             console.error('Error sending data to API:', error);
@@ -85,6 +87,7 @@ export const Signup = () => {
         setPassword('');
         setConfirmPassword('');
         signupButton.innerText = "Signup";
+        setUpdate(false);
     };
 
     return (
@@ -166,7 +169,8 @@ export const Signup = () => {
                         <a href="#">Forget password?</a>
                     </span>
                 </span>
-                <input type="submit" value="Signup" id="signup-btn" />
+                {update ? (<input type="submit" value="Signing up..." id="signup-btn" disabled/>) : (<input type="submit" value="Signup" id="signup-btn" />)}
+                
 
                 <button className="google-btn" type="button" onClick={()=>alert('Service isn\'t available right now')}>
                     <img

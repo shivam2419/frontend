@@ -6,7 +6,7 @@ import defaultProfile from "../assets/default.jpg";
 import "../style/Navbar.css";
 
 export const Navbar = () => {
-  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const backendUrl = "http://127.0.0.1:8000/api/";
   let userName = localStorage.getItem("username");
   if (userName) {
     userName = userName.toUpperCase();
@@ -14,7 +14,7 @@ export const Navbar = () => {
   let profileImage = localStorage.getItem("user_profile");
   if (profileImage) {
     profileImage =
-      "https://scrapbridge-api.onrender.com" + localStorage.getItem("user_profile");
+      "http://127.0.0.1:8000" + localStorage.getItem("user_profile");
   } else {
     profileImage = defaultProfile;
   }
@@ -117,6 +117,7 @@ export const Navbar = () => {
         <Link to="https://huggingface.co/spaces/shivam2419/scrap-classification">
           Classify-Image
         </Link>
+        {isAuthenticated && <Link to="/scrap-orders">Orders</Link>}
         {isAuthenticated && (
           <>
             <Link to="/notification">Notifications</Link>
@@ -167,6 +168,7 @@ export const Navbar = () => {
                 Classify-Image
               </Link>
             </li>
+            <li>{isAuthenticated && <Link to="/scrap-orders">Orders</Link>}</li>
           </ul>
 
           {isAuthenticated && (
