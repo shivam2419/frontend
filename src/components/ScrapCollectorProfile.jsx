@@ -21,9 +21,6 @@ const ScrapCollectorProfile = () => {
     function (position) {
       latitude = position.coords.latitude;
       longitude = position.coords.longitude;
-    },
-    function (error) {
-      alert("Error getting location: " + error.message);
     }
   );
   useEffect(() => {
@@ -67,7 +64,7 @@ const ScrapCollectorProfile = () => {
   const handleUpdateUser = async (e) => {
     e.preventDefault();
     if (!latitude || !longitude) {
-      alert("Please provide location");
+      alert("Please provide location and refresh the page");
       return;
     }
     // Phone number validation
