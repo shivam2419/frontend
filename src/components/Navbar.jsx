@@ -7,20 +7,20 @@ import "../style/Navbar.css";
 
 export const Navbar = () => {
   const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const [unseenCount, setUnseenCount] = useState(0);
   let userName = localStorage.getItem("username");
-  if (userName) {
-    userName = userName.toUpperCase();
-  }
   let profileImage = localStorage.getItem("user_profile");
+
   if (profileImage) {
     profileImage =
-      "https://scrapbridge-api.onrender.com" + localStorage.getItem("user_profile");
+      "https://res.cloudinary.com/dqeftodl5/" +
+      localStorage.getItem("user_profile");
   } else {
     profileImage = defaultProfile;
   }
-
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  if (userName) {
+    userName = userName.toUpperCase();
+  }
   const openNav = () => {
     document.getElementById("mySidebar").style.display = "block";
     document.getElementById("nav-side-btn").style.display = "none";
@@ -46,6 +46,9 @@ export const Navbar = () => {
     }
   };
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Check authentication
   const checkAuth = async () => {
     const token = localStorage.getItem("access");
     if (!token) {
@@ -63,9 +66,35 @@ export const Navbar = () => {
       if (res.status === 401) return; // silent return on 401
 
       const data = await res.json();
-
+      if (data.role === "recycler") {
+        window.location.href = "/scrap-collector";
+        return;
+      }
       if (data.isAuthenticated) {
         setIsAuthenticated(true);
+        const userInfoResponse = await fetch(
+          backendUrl + `get-enduser/${localStorage.getItem("user_id")}/`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const userInfo = await userInfoResponse.json();
+        if (
+          !userInfo.phone ||
+          !userInfo.street ||
+          !userInfo.city ||
+          !userInfo.state ||
+          !userInfo.zipcode
+        ) {
+          if (window.location.pathname !== "/profile") {
+            window.location.href = "/profile";
+          }
+          return;
+        }
       } else {
         setIsAuthenticated(false);
       }
@@ -76,11 +105,11 @@ export const Navbar = () => {
       }
     }
   };
-
   useEffect(() => {
     checkAuth();
   }, []);
 
+  // Handle click outside for sidebar
   useEffect(() => {
     const handleClickOutside = (event) => {
       const sidebar = document.getElementById("mySidebar");
@@ -102,6 +131,33 @@ export const Navbar = () => {
     };
   }, []);
 
+  // Get notification count
+  const getNotificationCount = async () => {
+    const token = localStorage.getItem("access");
+    if (!token) {
+      return;
+    }
+    try {
+      const res = await fetch(backendUrl + "notifications/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+        body: JSON.stringify({ user_id: localStorage.getItem("user_id") }),
+      });
+      const json = await res.json();
+      if (res.ok) {
+        const unseenCount = json.data.filter((n) => !n.seen).length;
+        setUnseenCount(unseenCount);
+      }
+    } catch (err) {
+      console.error("error", err);
+    }
+  };
+  useEffect(() => {
+    getNotificationCount();
+  }, []);
   return (
     <div>
       <div id="mySidebar" className="sidebar">
@@ -111,7 +167,7 @@ export const Navbar = () => {
         <br />
         <Link to="/">Home</Link>
         <Link to="/about">About Us</Link>
-        <Link to="/e-facility">E-Facilities</Link>
+        <Link to="/e-facility">Book Recycling</Link>
         <Link to="/education">Education</Link>
         <Link to="/contact">Contact Us</Link>
         <Link to="https://huggingface.co/spaces/shivam2419/scrap-classification">
@@ -155,7 +211,7 @@ export const Navbar = () => {
               <Link to="/about">About Us</Link>
             </li>
             <li>
-              <Link to="/e-facility">E-Facilities</Link>
+              <Link to="/e-facility">Book Recycling</Link>
             </li>
             <li>
               <Link to="/education">Education</Link>
@@ -173,11 +229,21 @@ export const Navbar = () => {
 
           {isAuthenticated && (
             <div style={{ display: "flex" }}>
-              <button id="notification">
-                <Link to="/notification">
-                  <img src={notificationIcon} alt="Notification" />
+              <button id="notification" className="notification-button">
+                <Link to="/notification" className="notification-link">
+                  <div className="notification-wrapper">
+                    {unseenCount > 0 && (
+                      <span className="notification-badge">{unseenCount}</span>
+                    )}
+                    <img
+                      src={notificationIcon}
+                      alt="Notification"
+                      className="notification-icon"
+                    />
+                  </div>
                 </Link>
               </button>
+
               <Link
                 to="/profile"
                 className="right_side"

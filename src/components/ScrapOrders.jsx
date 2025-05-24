@@ -57,9 +57,6 @@ const ScrapOrders = () => {
                 <strong>Order ID:</strong> {order.order_id}
               </p>
               <p>
-                <strong>Item:</strong> {order.item_type.toUpperCase()}
-              </p>
-              <p>
                 <strong>Weight:</strong> {order.weight/1000} kg
               </p>
               <p>

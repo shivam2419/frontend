@@ -17,8 +17,11 @@ const Notifications = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("access")}`,
           },
-          body: JSON.stringify({ user_id: localStorage.getItem("user_id") }),
+          body: JSON.stringify({
+            user_id: localStorage.getItem("user_id")
+          }),
         });
+        
         const json = await res.json();
         if (res.status !== 200) {
           setLoading(true);
@@ -28,6 +31,18 @@ const Notifications = () => {
           setLoading(false);
         }
         setData(json.data);
+        // Mark data as seen
+        const markSeen = await fetch(backendUrl + "notifications/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+          },
+          body: JSON.stringify({
+            user_id: localStorage.getItem("user_id"),
+            mark_seen: true,
+          }),
+        });
       } catch (err) {
         console.error("error", err);
       }
@@ -122,7 +137,7 @@ const Notifications = () => {
                       .replace(/ /g, "-")}
                   </p>
                 </div>
-                <div className="notification-message">{item.message}</div>
+                <div className="notification-message" id={item.seen ? "notification-message-seen" : "notification-message-unseen"}>{item.message}</div>
               </div>
             ))
           )}

@@ -45,7 +45,7 @@ const Contact = () => {
     <div className="contact-container">
       <div className="contact-left">
         <form onSubmit={handleSubmit}>
-          <h2>Send us your query</h2>
+          <h2>Describe Your Problem</h2>
           <label htmlFor="contact-name">Your name</label>
           <br />
           <input

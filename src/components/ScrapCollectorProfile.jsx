@@ -113,7 +113,7 @@ const ScrapCollectorProfile = () => {
         console.error("Update failed:", data);
         setUpdate(false);
         alert("Something went wrong");
-        window.location.href = "/login";
+        // window.location.href = "/login";
       }
     } catch (err) {
       console.error("Error:", err);
@@ -121,7 +121,10 @@ const ScrapCollectorProfile = () => {
     setUpdate(false);
   };
 
-  const profileImg = user?.image ? "https://scrapbridge-api.onrender.com" + user.image : "";
+  const profileImg = user?.image
+    ? "https://res.cloudinary.com/dqeftodl5/" +
+      localStorage.getItem("user_profile")
+    : "https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg";
 
   return (
     <>

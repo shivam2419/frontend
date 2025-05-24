@@ -31,7 +31,7 @@ import RecyclerProfile from './components/RecyclerProfile.jsx';
 import ScrapOrders from './components/ScrapOrders.jsx';
 function AppContent() {
   const location = useLocation();
-  const hideLayoutFor = ['/scrap-collector', '/orders', '/pending-order', '/scrap-collector/profile']; // add more paths if needed
+  const hideLayoutFor = ['/scrap-collector', '/orders', '/pending-order', '/scrap-collector/profile', '/profile']; // add more paths if needed
   const shouldHideLayout = hideLayoutFor.includes(location.pathname) || location.pathname.startsWith('/scraprequest-details/') || location.pathname.startsWith('/payment/');
   const backendUrl = "https://scrapbridge-api.onrender.com/";
   return (

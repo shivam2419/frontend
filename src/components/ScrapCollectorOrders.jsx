@@ -5,8 +5,10 @@ import loaderGIF from "../assets/loader.gif";
 
 const ScrapCollectorOrders = () => {
   const backendUrl = "https://scrapbridge-api.onrender.com/api/";
-  const profileImg =
-    "https://scrapbridge-api.onrender.com" + localStorage.getItem("user_profile");
+  const profileImg = localStorage.getItem("user_profile")
+    ? "https://res.cloudinary.com/dqeftodl5/" +
+      localStorage.getItem("user_profile")
+    : "https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg";
   const user = {
     username: localStorage.getItem("username")
       ? localStorage.getItem("username")
@@ -94,24 +96,8 @@ const ScrapCollectorOrders = () => {
           />
         </div>
 
-        <div className="searchbar">
-          <input type="text" placeholder="Search" />
-          <div className="searchbtn">
-            <img
-              src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180758/Untitled-design-(28).png"
-              className="icn srchicn"
-              alt="search-icon"
-            />
-          </div>
-        </div>
 
         <div className="message">
-          <div className="circle"></div>
-          <img
-            src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png"
-            className="icn"
-            alt=""
-          />
           <div className="dp">
             <Link to="/scrap-collector/profile">
               <img src={profileImg} className="dpicn" alt="dp" />
@@ -224,14 +210,12 @@ const ScrapCollectorOrders = () => {
                     items.map((item, index) => (
                       <tr key={index}>
                         <td>{index + 1}</td>
-                        <td>{item?.item_type}</td>
+                        <td>{item?.weight} Kg</td>
                         <td>
                           {new Date(item.date).toLocaleString("en-US", {
                             month: "short",
                             day: "2-digit",
                             year: "numeric",
-                            hour: "2-digit",
-                            minute: "2-digit",
                             hour12: false,
                           })}
                         </td>

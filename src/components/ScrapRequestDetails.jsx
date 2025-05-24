@@ -3,15 +3,16 @@ import { Link, useParams } from "react-router-dom";
 import L from "leaflet";
 import "leaflet-routing-machine";
 import "../style/Scrap_Collector/ScrapRequestDetails.css";
-
+import LoaderGIF from "../assets/loader.gif";
 const ScrapRequestDetails = () => {
   const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   const { orderId } = useParams();
   const [userData, setUserData] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
   const [update, setUpdate] = useState(false);
+  const [loader, setLoader] = useState(true);
   const mapRef = useRef(null); // Ref to store map instance
-  console.log(userData)
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,6 +24,10 @@ const ScrapRequestDetails = () => {
           },
         });
         const data = await res.json();
+        if(res.ok) {
+          setLoader(false);
+          console.log(data);
+        }
         const locationArray = data.data.location
           .split(" ")
           .map((coord) => coord.trim());
@@ -161,7 +166,6 @@ const ScrapRequestDetails = () => {
             year: "numeric",
           })
           .replace(/ /g, "-")}</li>
-      <li><strong>Item type:</strong> ${userData.item_type}</li>
       <li><strong>Contact number:</strong> ${
         userData.organisation_phone_number
       }</li>
@@ -202,7 +206,6 @@ const ScrapRequestDetails = () => {
     <p>A new scrap request has been accepted. Here are the details:</p>
     <ul style="padding-left: 20px;">
       <li><strong>Name:</strong> ${userData.user}</li>
-      <li><strong>Item Type:</strong> ${userData.item_type}</li>
       <li><strong>Pickup Date:</strong> ${new Date(userData.date)
         .toLocaleDateString("en-GB", {
           day: "2-digit",
@@ -301,7 +304,6 @@ const ScrapRequestDetails = () => {
           year: "numeric",
         })
         .replace(/ /g, "-")}</li>
-      <li><strong>Item type:</strong> ${userData.item_type}</li>
       <li><strong>Contact number:</strong> ${
         userData.organisation_phone_number
       }</li>
@@ -342,7 +344,6 @@ const ScrapRequestDetails = () => {
     <p>You have rejected a scrap pickup request. Here are the request details:</p>
     <ul style="padding-left: 20px;">
       <li><strong>Name:</strong> ${userData.user}</li>
-      <li><strong>Item Type:</strong> ${userData.item_type}</li>
       <li><strong>Pickup Date:</strong> ${new Date(userData.date)
         .toLocaleDateString("en-GB", {
           day: "2-digit",
@@ -389,23 +390,23 @@ const ScrapRequestDetails = () => {
     setUpdate(false);
   };
 
-  if (!userData) return <p>Loading...</p>;
+  if (loader) return <center><img src={LoaderGIF}></img></center>;
 
   return (
-    <div className="container">
-      <div className="left-section">
-        <div className="user">
+    <div className="scrap-details-container">
+      <div className="scrap-details-left-section">
+        <div className="scrap-details-user">
           <h2>SCRAP REQUEST DETAILS</h2>
           <img
             src={
-              "https://scrapbridge-api.onrender.com" + userData.image ||
-              "../assets/default.jpg"
+              "https://res.cloudinary.com/dqeftodl5/" + userData.image ||
+              "https://res.cloudinary.com/dqeftodl5/image/upload/v1748065619/users/shoes.png"
             }
             alt="User"
           />
         </div>
 
-        <table>
+        <table className="scrap-details-table">
           <tbody>
             <tr>
               <th>Content</th>
@@ -416,20 +417,17 @@ const ScrapRequestDetails = () => {
               <td>{userData.user.toUpperCase()}</td>
             </tr>
             <tr>
-              <td>Scrap Type:</td>
-              <td>{userData.item_type}</td>
-            </tr>
-            <tr>
               <td>Date to reach:</td>
-              <td>{userData.date}</td>
+              <td>{new Date(userData.date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
+</td>
             </tr>
             <tr>
               <td>Scrap quantity:</td>
-              <td>{userData.weight / 1000} Kg</td>
+              <td>{userData.weight} Kg</td>
             </tr>
             <tr>
               <td>Address:</td>
-              <td>{userData.location}</td>
+              <td class="address-cell">{userData.street}, {userData.city}, {userData.state}, {userData.zipcode} </td>
             </tr>
           </tbody>
         </table>
@@ -437,7 +435,7 @@ const ScrapRequestDetails = () => {
         <img
           className="scrap-img"
           src={
-            "https://scrapbridge-api.onrender.com" + userData.image ||
+            "https://res.cloudinary.com/dqeftodl5/" + userData.image ||
             "../assets/default.jpg"
           }
           alt="Scrap"
@@ -457,7 +455,7 @@ const ScrapRequestDetails = () => {
           <img
             className="modal-content"
             src={
-              "https://scrapbridge-api.onrender.com" + userData.image ||
+              "https://res.cloudinary.com/dqeftodl5/" + userData.image ||
               "../assets/default.jpg"
             }
             alt="Scrap Zoomed"
@@ -546,7 +544,7 @@ const ScrapRequestDetails = () => {
         )}
       </div>
 
-      <div className="right-section">
+      <div className="scrap-details-right-section">
         <div id="mapid"></div>
       </div>
     </div>

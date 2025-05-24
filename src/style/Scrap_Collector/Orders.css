@@ -434,9 +434,6 @@ header {
   .navcontainer {
     display: none;
   }
-  .report-header {
-    display: inline;
-  }
   .report-body {
     align-items: center;
   }

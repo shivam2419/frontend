@@ -427,6 +427,11 @@ td:last-child {
     border-radius: 4px;
 }
 /* Responsive Table */
+@media (max-width: 1024px) { 
+    .navcontainer {
+        display: none;
+    }
+}
 @media (max-width: 768px) {
     header {
         padding: 0 10px;
@@ -434,6 +439,10 @@ td:last-child {
     }
     .logo {
         font-size: 16px;
+    }
+    
+    .label-tag {
+        width: 100%;
     }
     table,
     thead,
@@ -468,7 +477,6 @@ td:last-child {
         display: none;
     }
     .report-body {
-        display: block;
         overflow-x: auto;
         white-space: nowrap;
         align-items: center;

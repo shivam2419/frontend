@@ -11,7 +11,6 @@ const Recycle_Form = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [formData, setFormData] = useState({
-    item_type: "",
     date: "",
     phone: "",
     weight: "",
@@ -95,7 +94,7 @@ const Recycle_Form = () => {
     ).padStart(2, "0")}`;
 
     const form = new FormData();
-    form.append("item_type", formData.item_type);
+    form.append("item_type", "Scrap Item");
     form.append("date", formData.date);
     form.append("phone", formData.phone);
     form.append("weight", formData.weight);
@@ -117,7 +116,6 @@ const Recycle_Form = () => {
       if (res.status === 201) {
         alert("Request submitted successfully!");
         setFormData({
-          item_type: "",
           date: "",
           phone: "",
           weight: "",
@@ -142,10 +140,9 @@ const Recycle_Form = () => {
     </p>
     <p><strong>Your submitted details:</strong></p>
     <ul style="padding-left: 20px;">
-      <li><strong>Item Type:</strong> ${formData.item_type}</li>
       <li><strong>Pickup Date:</strong> ${formData.date}</li>
       <li><strong>Phone:</strong> ${formData.phone}</li>
-      <li><strong>Weight:</strong> ${formData.weight/1000} kg</li>
+      <li><strong>Weight:</strong> ${formData.weight} kg</li>
     </ul>
     <p style="margin-top: 20px;">Thank you for using <strong>Scrapbridge</strong> 🌍</p>
   </div>`,
@@ -180,7 +177,6 @@ const Recycle_Form = () => {
     <p>Hello <strong>${item?.organisation_name.toUpperCase()}</strong>,</p>
     <p>A new scrap request has been submitted. Here are the details:</p>
     <ul style="padding-left: 20px;">
-      <li><strong>Item Type:</strong> ${formData.item_type}</li>
       <li><strong>Pickup Date:</strong> ${formData.date}</li>
       <li><strong>Phone:</strong> ${formData.phone}</li>
       <li><strong>Weight:</strong> ${formData.weight} kg</li>
@@ -238,22 +234,6 @@ const Recycle_Form = () => {
       <form onSubmit={handleSubmit}>
         <div className="row-1">
           <div className="recycle-form-col-1">
-            <label>Select item type*</label>
-            <select
-              name="item_type"
-              required
-              value={formData.item_type}
-              onChange={handleChange}
-            >
-              <option value="">Select type</option>
-              <option value="paper">Paper</option>
-              <option value="iron">Iron</option>
-              <option value="copper">Copper</option>
-              <option value="ewaste">E-waste</option>
-              <option value="plastic">Plastic</option>
-            </select>
-          </div>
-          <div className="recycle-form-col-1">
             <label>Select Date of pickup*</label>
             <input
               type="date"
@@ -286,7 +266,7 @@ const Recycle_Form = () => {
               required
               value={formData.weight}
               onChange={handleChange}
-              placeholder="In grams*"
+              placeholder="In Kg*"
             />
           </div>
         </div>

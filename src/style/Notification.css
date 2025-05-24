@@ -54,3 +54,11 @@
   background-color: rgb(255, 105, 105);
   color: white;
 }
+#notification-message-seen {
+  opacity: 70%;
+}
+#notification-message-unseen::after{
+  content: "*";
+  color: red;
+  float: right;
+}

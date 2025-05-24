@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 
 const AutoRefreshToken = () => {
+    const backendUrl = 'https://scrapbridge-api.onrender.com/api/';
     useEffect(() => {
         const refreshToken = async () => {
             try {
-                const res = await fetch("https://scrapbridge-api.onrender.com/api/token/refresh/", {
+                const res = await fetch(backendUrl+"token/refresh/", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ refresh: localStorage.getItem("refresh") }),

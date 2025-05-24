@@ -9,8 +9,10 @@ const ScrapCollectorDashboard = () => {
   const [users, setUsers] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
-  const profileImg =
-    "https://scrapbridge-api.onrender.com" + localStorage.getItem("user_profile");
+  const profileImg = localStorage.getItem("user_profile")
+    ? "https://res.cloudinary.com/dqeftodl5/" +
+      localStorage.getItem("user_profile")
+    : "https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,6 +42,8 @@ const ScrapCollectorDashboard = () => {
             return;
           }
         }
+
+        
         const response = await fetch(
           `${backendUrl}transaction-details/${localStorage.getItem(
             "user_id"
