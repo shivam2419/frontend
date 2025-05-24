@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../style/Scrap_Collector/Orders.css"; // You can extract the style into this file
 import loaderGIF from "../assets/loader.gif";
@@ -16,6 +16,9 @@ const ScrapCollectorOrders = () => {
   };
   const [items, setItem] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const sidebarRef = useRef(null);
+  const toggleBtnRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,19 +78,33 @@ const ScrapCollectorOrders = () => {
     }
   };
   const toggleMenu = () => {
-    let opt = document.getElementById("navbar");
-    if (opt.style.display === "none") {
-      opt.style.display = "block";
-    } else {
-      opt.style.display = "none";
-    }
+    setIsSidebarOpen((prev) => !prev);
   };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target) &&
+        toggleBtnRef.current &&
+        !toggleBtnRef.current.contains(event.target)
+      ) {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
     <>
       <header>
         <div className="logosec">
           <div className="logo">{user.username.toUpperCase()}</div>
           <img
+            ref={toggleBtnRef}
             src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
             className="icn menuicn"
             id="menuicn"
@@ -95,7 +112,6 @@ const ScrapCollectorOrders = () => {
             onClick={toggleMenu}
           />
         </div>
-
 
         <div className="message">
           <div className="dp">
@@ -105,7 +121,12 @@ const ScrapCollectorOrders = () => {
           </div>
         </div>
       </header>
-      <div className="navbar" id="navbar">
+      <div
+        className="navbar"
+        id="navbar"
+        ref={sidebarRef}
+        style={{ display: isSidebarOpen ? "block" : "none" }}
+      >
         <b
           onClick={toggleMenu}
           style={{
@@ -156,7 +177,7 @@ const ScrapCollectorOrders = () => {
                   className="nav-img"
                   alt="institution"
                 />
-                <h3 style={{color: "black"}}>Pending Payments</h3>
+                <h3 style={{ color: "black" }}>Pending Payments</h3>
               </Link>
 
               <Link

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../style/Scrap_Collector/PendingPayments.css";
 import rupeeImg from "../assets/rupee.png";
@@ -14,6 +14,9 @@ const PendingPayments = () => {
       ? localStorage.getItem("username")
       : "Undefined",
   };
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const sidebarRef = useRef(null);
+  const toggleBtnRef = useRef(null);
   const [recycledItemData, setRecycledItemData] = useState([]); // State to store recycled item data (array)
   const [loading, setLoading] = useState(true);
   const user_id = localStorage.getItem("user_id");
@@ -91,19 +94,33 @@ const PendingPayments = () => {
     }
   };
   const toggleMenu = () => {
-      let opt = document.getElementById("navbar");
-      if(opt.style.display === "none") {
-        opt.style.display = "block";
-      } else {
-        opt.style.display = "none";
-      }
+    setIsSidebarOpen((prev) => !prev);
   };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target) &&
+        toggleBtnRef.current &&
+        !toggleBtnRef.current.contains(event.target)
+      ) {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
     <>
       <header>
         <div className="logosec">
           <div className="logo">{user.username.toUpperCase()}</div>
           <img
+            ref={toggleBtnRef}
             src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
             className="icn menuicn"
             id="menuicn"
@@ -118,7 +135,12 @@ const PendingPayments = () => {
           </div>
         </div>
       </header>
-      <div className="navbar" id="navbar">
+      <div
+        className="navbar"
+        id="navbar"
+        ref={sidebarRef}
+        style={{ display: isSidebarOpen ? "block" : "none" }}
+      >
         <b
           onClick={toggleMenu}
           style={{
@@ -150,9 +172,7 @@ const PendingPayments = () => {
                   className="nav-img"
                   alt="dashboard"
                 />
-                <h3 style={{color: "black"}}>
-                  Dashboard
-                </h3>
+                <h3 style={{ color: "black" }}>Dashboard</h3>
               </Link>
 
               <Link className="opt nav-option" to="/orders">
@@ -161,9 +181,7 @@ const PendingPayments = () => {
                   className="nav-img"
                   alt="articles"
                 />
-                <h3 style={{color: "black"}}>
-                  Orders
-                </h3>
+                <h3 style={{ color: "black" }}>Orders</h3>
               </Link>
 
               <Link className="nav-option option4" to="/pending-order">
@@ -172,20 +190,19 @@ const PendingPayments = () => {
                   className="nav-img"
                   alt="institution"
                 />
-                <h3 >
-                  Pending Payments
-                </h3>
+                <h3>Pending Payments</h3>
               </Link>
 
-              <Link className="nav-option option6" to={`/scrap-collector/profile`}>
+              <Link
+                className="nav-option option6"
+                to={`/scrap-collector/profile`}
+              >
                 <img
                   src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/4.png"
                   className="nav-img"
                   alt="profile"
                 />
-                <h3 style={{color: "black"}}>
-                  Profile
-                </h3>
+                <h3 style={{ color: "black" }}>Profile</h3>
               </Link>
 
               <Link className="nav-option logout" onClick={logout}>
@@ -194,9 +211,7 @@ const PendingPayments = () => {
                   className="nav-img"
                   alt="logout"
                 />
-                <h3 style={{color: "black"}}>
-                  Logout
-                </h3>
+                <h3 style={{ color: "black" }}>Logout</h3>
               </Link>
             </div>
           </nav>
@@ -223,9 +238,7 @@ const PendingPayments = () => {
               </center>
             </div>
           ) : (
-            <div
-              className="table-container"
-            >
+            <div className="table-container">
               <form>
                 {recycledItemData.length > 0 ? (
                   <table className="my-table">
