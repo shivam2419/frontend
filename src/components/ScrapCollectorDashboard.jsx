@@ -287,7 +287,7 @@ const ScrapCollectorDashboard = () => {
             </div>
 
             <div className="box-container">
-              <Link className="box box1" to="/orders">
+              <Link className="box box1" >
                 <div className="text">
                   <h3 className="topic-heading">60.5kg</h3>
                   <h3 className="topic">Scrap Recycled</h3>
@@ -298,7 +298,7 @@ const ScrapCollectorDashboard = () => {
                 />
               </Link>
 
-              <Link className="box box2" to="/pending-order">
+              <Link className="box box2" >
                 <div className="text">
                   <h3 className="topic-heading">153</h3>
                   <h3 className="topic">Users handled</h3>
@@ -309,7 +309,7 @@ const ScrapCollectorDashboard = () => {
                 />
               </Link>
 
-              <Link className="box box3" to="/scrap-collector/profile">
+              <Link className="box box3">
                 <div className="text">
                   <h3 className="topic-heading">320</h3>
                   <h3 className="topic">Comments</h3>
@@ -320,7 +320,7 @@ const ScrapCollectorDashboard = () => {
                 />
               </Link>
 
-              <Link className="box box4" onClick={logout}>
+              <Link className="box box4">
                 <div className="text">
                   <h3 className="topic-heading">70k</h3>
                   <h3 className="topic">Earnings</h3>
