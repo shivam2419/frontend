@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../style/Scrap_Collector/Style.css";
 // import '../style/Scrap_Collector/Responsive.css';
@@ -9,6 +9,10 @@ const ScrapCollectorDashboard = () => {
   const [users, setUsers] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const sidebarRef = useRef(null);
+  const toggleBtnRef = useRef(null);
+
   const profileImg = localStorage.getItem("user_profile")
     ? "https://res.cloudinary.com/dqeftodl5/" +
       localStorage.getItem("user_profile")
@@ -20,9 +24,7 @@ const ScrapCollectorDashboard = () => {
       try {
         // Sending user to profile page if profile not completed
         const getOwnerInfoResponse = await fetch(
-          `${backendUrl}owner/${localStorage.getItem(
-            "user_id"
-          )}/`,
+          `${backendUrl}owner/${localStorage.getItem("user_id")}/`,
           {
             method: "GET",
             headers: {
@@ -30,20 +32,25 @@ const ScrapCollectorDashboard = () => {
             },
           }
         );
-        if(getOwnerInfoResponse === 404) {
+        if (getOwnerInfoResponse === 404) {
           alert("Scrap collector not found");
           return;
         }
-        if(getOwnerInfoResponse.ok) {
+        if (getOwnerInfoResponse.ok) {
           const ownerData = await getOwnerInfoResponse.json();
-          if(!ownerData.city || !ownerData.state || !ownerData.street || !ownerData.latitude || !ownerData.longitude) {
+          if (
+            !ownerData.city ||
+            !ownerData.state ||
+            !ownerData.street ||
+            !ownerData.latitude ||
+            !ownerData.longitude
+          ) {
             alert("Please completed your information first");
             window.location.href = "/scrap-collector/profile";
             return;
           }
         }
 
-        
         const response = await fetch(
           `${backendUrl}transaction-details/${localStorage.getItem(
             "user_id"
@@ -55,7 +62,7 @@ const ScrapCollectorDashboard = () => {
             },
           }
         );
-        
+
         // Setting up transaction done by user
         if (response.ok) {
           const data = await response.json();
@@ -98,8 +105,6 @@ const ScrapCollectorDashboard = () => {
       } finally {
         setLoading(false);
       }
-
-      
     };
 
     fetchData();
@@ -136,13 +141,26 @@ const ScrapCollectorDashboard = () => {
   });
 
   const toggleMenu = () => {
-    let opt = document.getElementById("navbar");
-    if (opt.style.display === "none") {
-      opt.style.display = "block";
-    } else {
-      opt.style.display = "none";
-    }
+    setIsSidebarOpen((prev) => !prev);
   };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target) &&
+        toggleBtnRef.current &&
+        !toggleBtnRef.current.contains(event.target)
+      ) {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   if (loading) {
     return (
       <div style={{ textAlign: "center", margin: "20%" }}>
@@ -161,11 +179,12 @@ const ScrapCollectorDashboard = () => {
               {user.username.toUpperCase()}
             </Link>
             <img
+              ref={toggleBtnRef}
               src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
               className="icn menuicn"
               id="menuicn"
               alt="menu-icon"
-              onClick={toggleMenu}
+              onMouseOver={toggleMenu}
             />
           </div>
 
@@ -177,7 +196,8 @@ const ScrapCollectorDashboard = () => {
             </div>
           </div>
         </header>
-        <div className="navbar" id="navbar">
+        <div className="navbar" id="navbar" ref={sidebarRef}
+  style={{ display: isSidebarOpen ? "block" : "none" }}>
           <b
             onClick={toggleMenu}
             style={{
@@ -218,7 +238,7 @@ const ScrapCollectorDashboard = () => {
                     className="nav-img"
                     alt="articles"
                   />
-                  <h3 style={{color: "black"}}>Orders</h3>
+                  <h3 style={{ color: "black" }}>Orders</h3>
                 </Link>
 
                 <Link className="nav-option opt" to="/pending-order">
