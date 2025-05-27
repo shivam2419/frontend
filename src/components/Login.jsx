@@ -42,6 +42,10 @@ export const Login = () => {
 
     const loginBtn = document.getElementById("login-btn");
     loginBtn.innerText = "Logging In...";
+    loginBtn.disabled = true;
+    if(loginBtn.disabled) {
+      loginBtn.style.opacity = "50%"
+    }
     try {
       const response = await fetch(backendUrl + "token/", {
         method: "POST",

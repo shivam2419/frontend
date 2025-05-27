@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import loader from "../assets/loader.gif";
 const ScrapOrders = () => {
   const userId = localStorage.getItem("user_id"); // Logged-in user ID
   const backendUrl = "https://scrapbridge-api.onrender.com/api/";
@@ -7,7 +7,18 @@ const ScrapOrders = () => {
   const [currentOrders, setCurrentOrders] = useState([]);
   const [completedOrders, setCompletedOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState(null);
 
+  const openImageModal = (imgSrc) => {
+    setModalImage(imgSrc);
+    setIsModalOpen(true);
+  };
+
+  const closeImageModal = () => {
+    setIsModalOpen(false);
+    setModalImage(null);
+  };
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -40,14 +51,20 @@ const ScrapOrders = () => {
     if (userId) fetchOrders();
   }, [userId]);
 
-  if (loading) return <p>Loading orders...</p>;
+  if (loading)
+    return (
+      <center>
+        <img src={loader} alt="" />
+        <p>Loading orders...</p>
+      </center>
+    );
 
   return (
     <div style={styles.wrapper}>
-      <h2>Scrap Orders</h2>
+      <h2 style={{ marginBottom: "30px" }}>Scrap Orders</h2>
 
       <section style={styles.section}>
-        <h3>🟡 Ongoing Orders</h3>
+        <h3 style={{ marginBottom: "20px" }}>🟡 Ongoing Orders</h3>
         {currentOrders.length === 0 ? (
           <p>No ongoing orders.</p>
         ) : (
@@ -57,20 +74,34 @@ const ScrapOrders = () => {
                 <strong>Order ID:</strong> {order.order_id}
               </p>
               <p>
-                <strong>Weight:</strong> {order.weight/1000} kg
+                <strong>Weight:</strong> {order.weight / 1000} kg
               </p>
               <p>
                 <strong>Date:</strong> {new Date(order.date).toLocaleString()}
               </p>
               <p>
-                <strong>Scrap collector :</strong> {order.organisation_name.replace(/_/g, ' ').toUpperCase()}
+                <strong>Scrap collector :</strong>{" "}
+                {order.organisation_name.replace(/_/g, " ").toUpperCase()}
               </p>
               {order.image && (
                 <img
-                  src={`https://scrapbridge-api.onrender.com${order.image}`}
+                  src={`${order.image}`}
                   alt="Scrap"
                   style={styles.image}
+                  onClick={() => openImageModal(order.image)}
                 />
+              )}
+              {isModalOpen && (
+                <div style={styles.modalOverlay}>
+                  <span style={styles.closeButton} onClick={closeImageModal}>
+                    ×
+                  </span>
+                  <img
+                    src={modalImage}
+                    alt="Full view"
+                    style={styles.modalImage}
+                  />
+                </div>
               )}
             </div>
           ))
@@ -78,7 +109,7 @@ const ScrapOrders = () => {
       </section>
 
       <section style={styles.section}>
-        <h3>🟢 Completed Orders</h3>
+        <h3 style={{ marginBottom: "20px" }}>🟢 Completed Orders</h3>
         {completedOrders.length === 0 ? (
           <p>No completed orders.</p>
         ) : (
@@ -95,7 +126,8 @@ const ScrapOrders = () => {
                 {new Date(order.created).toLocaleString()}
               </p>
               <p>
-                <strong>Scrap collector :</strong> {order.organisation_name.replace(/_/g, ' ').toUpperCase()}
+                <strong>Scrap collector :</strong>{" "}
+                {order.organisation_name.replace(/_/g, " ").toUpperCase()}
               </p>
             </div>
           ))
@@ -122,11 +154,37 @@ const styles = {
     boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
   },
   image: {
-    width: "100px",
-    height: "100px",
-    objectFit: "contain",
+    width: "150px",
+    cursor: "pointer",
+    borderRadius: "4px",
+    marginTop: "10px"
+  },
+  modalOverlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100vw",
+    height: "100vh",
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1000,
+  },
+  modalImage: {
+    maxWidth: "90%",
+    maxHeight: "90%",
     borderRadius: "8px",
-    marginTop: "10px",
+  },
+  closeButton: {
+    position: "absolute",
+    top: "20px",
+    right: "30px",
+    fontSize: "40px",
+    color: "#fff",
+    cursor: "pointer",
+    fontWeight: "bold",
+    zIndex: 1001,
   },
 };
 

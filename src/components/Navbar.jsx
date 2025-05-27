@@ -4,18 +4,14 @@ import logo from "../assets/logo.png";
 import notificationIcon from "../assets/notification.png";
 import defaultProfile from "../assets/default.jpg";
 import "../style/Navbar.css";
-
 export const Navbar = () => {
   const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   const [unseenCount, setUnseenCount] = useState(0);
   let userName = localStorage.getItem("username");
   let profileImage = localStorage.getItem("user_profile");
-
-  if (profileImage) {
-    profileImage =
-      "https://res.cloudinary.com/dqeftodl5/" +
-      localStorage.getItem("user_profile");
-  } else {
+  const logoutGif = "https://i.pinimg.com/originals/47/03/09/4703093a70ba47001bf2c86319aae091.gif";
+  const [logoutLoader, setLogoutLoader] = useState(false);
+  if (!profileImage) {
     profileImage = defaultProfile;
   }
   if (userName) {
@@ -33,6 +29,7 @@ export const Navbar = () => {
 
   const logout = async () => {
     try {
+      setLogoutLoader(true);
       await fetch(backendUrl + "logout/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -42,6 +39,7 @@ export const Navbar = () => {
       console.error("Logout error", err);
     } finally {
       localStorage.clear();
+      setLogoutLoader(false);
       window.location.href = "/";
     }
   };
@@ -158,6 +156,13 @@ export const Navbar = () => {
   useEffect(() => {
     getNotificationCount();
   }, []);
+  if (logoutLoader) {
+    return (
+      <div style={styles.overlay}>
+        <img src={logoutGif} alt="Logging out..." style={styles.loaderImage} />
+      </div>
+    );
+  }
   return (
     <div>
       <div id="mySidebar" className="sidebar">
@@ -225,6 +230,13 @@ export const Navbar = () => {
               </Link>
             </li>
             <li>{isAuthenticated && <Link to="/scrap-orders">Orders</Link>}</li>
+            <li>
+              {isAuthenticated && (
+                <Link onClick={logout} style={{ color: "red" }}>
+                  Logout
+                </Link>
+              )}
+            </li>
           </ul>
 
           {isAuthenticated && (
@@ -255,7 +267,11 @@ export const Navbar = () => {
               >
                 <li className="nav-item dropdown">
                   <span className="profile-image" id="profileImage">
-                    <img src={profileImage} alt="Profile" />
+                    <img
+                      src={profileImage}
+                      alt="Profile"
+                      style={{ border: "1px solid cyan" }}
+                    />
                     <p>{userName}</p>
                   </span>
                 </li>
@@ -273,4 +289,22 @@ export const Navbar = () => {
       </div>
     </div>
   );
+};
+const styles = {
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100vw",
+    height: "100vh",
+    backgroundColor: "rgba(255, 255, 255, 0.9)", // Optional: light overlay
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 9999, // Ensure it's on top
+  },
+  loaderImage: {
+    maxWidth: "200px", // Adjust as needed
+    maxHeight: "200px",
+  },
 };

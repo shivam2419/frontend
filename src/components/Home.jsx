@@ -112,8 +112,8 @@ const Home = () => {
                     <div className="points-part1" key={part}>
                         {[
                             ["Waste Collection", "A network of certified waste collection facilities..."],
-                            ["Educational Resources", "A network of certified e-waste collection facilities..."],
-                            ["User-Friendly Interface", "A network of certified e-waste collection facilities..."]
+                            ["Educational Resources", "Providing educational resources for users to understand..."],
+                            ["User-Friendly Interface", "User friendly interface for easily integrating with our..."]
                         ].map((item, i) => (
                             <div className="points-card" key={i}>
                                 <div className="points-square">
