@@ -6,8 +6,7 @@ import loaderGIF from "../assets/loader.gif";
 const PendingPayments = () => {
   const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   const profileImg = localStorage.getItem("user_profile")
-    ? "https://res.cloudinary.com/dqeftodl5/" +
-      localStorage.getItem("user_profile")
+    ? localStorage.getItem("user_profile")
     : "https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg";
   const user = {
     username: localStorage.getItem("username")

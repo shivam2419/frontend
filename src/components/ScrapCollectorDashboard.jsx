@@ -14,8 +14,7 @@ const ScrapCollectorDashboard = () => {
   const toggleBtnRef = useRef(null);
 
   const profileImg = localStorage.getItem("user_profile")
-    ? "https://res.cloudinary.com/dqeftodl5/" +
-      localStorage.getItem("user_profile")
+    ? localStorage.getItem("user_profile")
     : "https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg";
 
   useEffect(() => {
