@@ -1,7 +1,7 @@
 import React from 'react';
 import logoFooter from '../assets/logo-footer.png';
 import '../style/Home.css';
-
+import { Link } from 'react-router-dom';
 export const Footer = () => {
     const handleSubmit = () => {
         alert("Thanks for contacting us!")
@@ -28,16 +28,16 @@ export const Footer = () => {
 
             <div className="footer-services">
                 <h3>Our Services</h3>
-                <p>Sell Scrap</p>
-                <p>Bid your item</p>
+                <Link to="/e-facility">Sell Scrap</Link><br />
+                <Link to="">Bid your item</Link>
             </div>
 
             <div className="footer-company">
                 <h3>Company</h3>
-                <a href="/">About Us</a><br />
-                <a href="/">Find Scrap-Collectors</a><br />
-                <a href="/">Education</a><br />
-                <a href="/">Contact Us</a><br />
+                <Link to="/about">About Us</Link><br />
+                <Link to="/e-facility">Find Scrap-Collectors</Link><br />
+                <Link to="/education">Education</Link><br />
+                <Link to="/contact">Contact Us</Link><br />
             </div>
         </footer>
         

@@ -10,6 +10,7 @@ export const Login = () => {
     username: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const [userType, setUserType] = useState("user"); // 'user' or 'recycler'
   const [loading, setLoading] = useState(false);
@@ -43,8 +44,8 @@ export const Login = () => {
     const loginBtn = document.getElementById("login-btn");
     loginBtn.innerText = "Logging In...";
     loginBtn.disabled = true;
-    if(loginBtn.disabled) {
-      loginBtn.style.opacity = "50%"
+    if (loginBtn.disabled) {
+      loginBtn.style.opacity = "50%";
     }
     try {
       const response = await fetch(backendUrl + "token/", {
@@ -86,11 +87,6 @@ export const Login = () => {
     setLoading(false); // <-- Add this
     setFormData({ username: old_username, password: "" });
     loginBtn.innerText = "Login";
-  };
-
-  const togglePassword = () => {
-    const pwd = document.getElementById("password");
-    pwd.type = pwd.type === "password" ? "text" : "password";
   };
 
   const handleGoogleLogin = async (credentialResponse) => {
@@ -158,7 +154,7 @@ export const Login = () => {
         <label htmlFor="password">Password*</label>
         <br />
         <input
-          type="password"
+          type={showPassword ? "text" : "password"}
           name="password"
           id="password"
           placeholder="password"
@@ -174,9 +170,11 @@ export const Login = () => {
               type="checkbox"
               id="show-password-checkbox"
               style={{ width: "20px", marginTop: "10px" }}
-              onChange={togglePassword}
+              onClick={() => setShowPassword((prev) => !prev)}
             />
-            <label htmlFor="show-password-checkbox">Show password</label>
+            <label htmlFor="show-password-checkbox">
+              {showPassword ? "Hide Password" : "Show Password"}
+            </label>
           </span>
         </span>
 

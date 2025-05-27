@@ -34,9 +34,6 @@ const Profile = () => {
           return;
         }
         const data = await res.json();
-        if (data.image) {
-          localStorage.setItem("user_profile", data.image);
-        }
         setUser(data);
         setEmail(data?.user?.email || "");
         setPhone(data?.phone || "");
