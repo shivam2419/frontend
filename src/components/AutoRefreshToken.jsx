@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 const AutoRefreshToken = () => {
-    const backendUrl = 'https://scrapbridge-api.onrender.com/api/';
+    const backendUrl = 'https://scrapbridge-api-978o.onrender.com/api/';
     useEffect(() => {
         const refreshToken = async () => {
             try {
