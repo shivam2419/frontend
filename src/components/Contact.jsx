@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../style/Contact.css';
 const Contact = () => {
-  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const backendUrl = "https://scrapbridge-api-978o.onrender.com/api/";
   const [formData, setFormData] = useState({
     name: '',
     email: '',
