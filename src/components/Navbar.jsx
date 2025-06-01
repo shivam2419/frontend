@@ -5,7 +5,7 @@ import notificationIcon from "../assets/notification.png";
 import defaultProfile from "../assets/default.jpg";
 import "../style/Navbar.css";
 export const Navbar = () => {
-  const backendUrl = "https://scrapbridge-api-978o.onrender.com/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   const [unseenCount, setUnseenCount] = useState(0);
   let userName = localStorage.getItem("username");
   let profileImage = localStorage.getItem("user_profile");
