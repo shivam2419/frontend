@@ -4,7 +4,7 @@ import "../style/Scrap_Collector/PendingPayments.css";
 import rupeeImg from "../assets/rupee.png";
 import loaderGIF from "../assets/loader.gif";
 const PendingPayments = () => {
-  const backendUrl = "https://scrapbridge-api-978o.onrender.com/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   const profileImg = localStorage.getItem("user_profile")
     ? localStorage.getItem("user_profile")
     : "https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg";
