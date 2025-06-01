@@ -9,7 +9,7 @@ import loaderGIF from "../assets/loader.gif";
 import { Link } from "react-router-dom";
 
 const Efacility = () => {
-  const backendUrl = "https://scrapbridge-api-978o.onrender.com/api/";
+  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
   const [rooms, setRooms] = useState([]);
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
