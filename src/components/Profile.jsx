@@ -111,7 +111,7 @@ const Profile = () => {
 
   const profileImg = user?.image
     ?
-      localStorage.getItem("user_profile")
+      "https://res.cloudinary.com/dqeftodl5/"+user.image
     : "https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg";
 
   return (
