@@ -35,6 +35,7 @@ const Profile = () => {
         }
         const data = await res.json();
         setUser(data);
+        console.log(data);
         setEmail(data?.user?.email || "");
         setPhone(data?.phone || "");
         setStreet(data?.street || "");
