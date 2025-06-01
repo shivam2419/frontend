@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import '../style/Scrap_Collector/Payment.css'; // Assuming you have a separate CSS file
 
 const Payment = () => {
-    const backendUrl = "https://scrapbridge-api-978o.onrender.com/api/";
+    const backendUrl = "https://scrapbridge-api.onrender.com/api/";
     const { order_id, user } = useParams();
     const [amount, setAmount] = useState('');
 
@@ -69,7 +69,7 @@ const Payment = () => {
                     currency: "INR",
                     name: "ScrapBridge",
                     description: "Test Transaction",
-                    image: "https://scrapbridge-api-978o.onrender.com/static/logo.png",
+                    image: "https://scrapbridge-api.onrender.com/static/logo.png",
                     order_id: data.payment_id,
                     handler: async function (response) {
                         await addPaymentStatus(data.payment_id, user, localStorage.getItem("user_id"), amount);
