@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import "../style/RecyclerProfile.css";
+import loaderGIF from "../assets/loader.gif";
 
 const RecyclerProfile = () => {
   const { userId } = useParams();
@@ -9,9 +10,9 @@ const RecyclerProfile = () => {
 
   useEffect(() => {
     const fetchOwnerProfile = async () => {
-      if(!localStorage.getItem("access")) {
+      if (!localStorage.getItem("access")) {
         alert("You are not authorized");
-        window.location.href = "/login"
+        window.location.href = "/login";
         return;
       }
       try {
@@ -38,31 +39,54 @@ const RecyclerProfile = () => {
     }
   }, [userId]);
 
-  if (!profile) return <p>Loading profile...</p>;
+  if (!profile)
+    return (
+      <div className="loader-container">
+        <center>
+          <img src={loaderGIF} alt="Loading..." />
+        </center>
+      </div>
+    );
 
   return (
     <div className="recycler-wrapper">
       <div className="recycler-card">
         <div className="recycler-left">
           <img
-            src={`https://scrapbridge-api.onrender.com${profile.image}`}
+            src={
+              profile.image
+                ? `https://res.cloudinary.com/dqeftodl5/${profile.image}`
+                : "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
+            }
             alt="Recycler"
             className="recycler-avatar"
           />
-          <h2 className="recycler-name">{profile.organisation_name.replace(/_/g, ' ').toUpperCase()}</h2>
+          <h2 className="recycler-name">
+            {profile.organisation_name.replace(/_/g, " ").toUpperCase()}
+          </h2>
           <p className="recycler-date">
             Joined: {new Date(profile.created_at).toLocaleDateString()}
           </p>
         </div>
         <div className="recycler-right">
-          <h3 className="recycler-section-title">Contact Info</h3>
-          <p><strong>Phone:</strong> {profile.phone}</p>
+          <h3 className="recycler-section-title">Contact Information</h3>
+          <p>
+            <strong>Phone:</strong> {profile.phone}
+          </p>
 
-          <h3 className="recycler-section-title">Address</h3>
-          <p><strong>Street:</strong> {profile.street}</p>
-          <p><strong>City:</strong> {profile.city}</p>
-          <p><strong>State:</strong> {profile.state}</p>
-          <p><strong>Zipcode:</strong> {profile.zipcode}</p>
+          <h3 className="recycler-section-title">Address Information</h3>
+          <p>
+            <strong>Street:</strong> {profile.street}
+          </p>
+          <p>
+            <strong>City:</strong> {profile.city}
+          </p>
+          <p>
+            <strong>State:</strong> {profile.state}
+          </p>
+          <p>
+            <strong>Zipcode:</strong> {profile.zipcode}
+          </p>
 
           <Link to={`/recycle_main/${userId}`} className="recycler-button">
             Book Recycling

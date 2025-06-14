@@ -87,6 +87,8 @@ export const Login = () => {
     setLoading(false); // <-- Add this
     setFormData({ username: old_username, password: "" });
     loginBtn.innerText = "Login";
+    loginBtn.disabled = false;
+    loginBtn.style.opacity = "100%";
   };
 
   const handleGoogleLogin = async (credentialResponse) => {

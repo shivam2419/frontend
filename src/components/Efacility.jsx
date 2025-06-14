@@ -217,31 +217,56 @@ const Efacility = () => {
               filteredRooms.map((item) => (
                 <div className="facility-card" key={item.organisation_id}>
                   <div className="facility-header">
-                    <Link to={`/recycler-profile/${item.user.id}`} style={{backgroundColor: "white", color: "black", display: "flex", alignItems: "center", gap: "10px"}}>
-                    <img
-                    // Did changes here
-                      src={
-                        item.image
-                          ? `https://res.cloudinary.com/dqeftodl5/${item.image}`
-                          : "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
-                      }
-                      alt="Facility"
-                      className="facility-image"
-                    />
-                    <h3 className="org-name">
-                      {item.organisation_name.replace(/_/g, ' ').toUpperCase()}
-                    </h3>
+                    <Link
+                      to={`/recycler-profile/${item.user.id}`}
+                      style={{
+                        backgroundColor: "white",
+                        color: "black",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
+                      <img
+                        // Did changes here
+                        src={
+                          item.image
+                            ? `https://res.cloudinary.com/dqeftodl5/${item.image}`
+                            : "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
+                        }
+                        alt="Facility"
+                        className="facility-image"
+                      />
+                      <h3 className="org-name">
+                        {item.organisation_name
+                          .replace(/_/g, " ")
+                          .toUpperCase()}
+                      </h3>
                     </Link>
                   </div>
                   <p className="address">
-                    <b>ADDRESS - </b> {item.street}, {item.city}, {item.state},{" "}
-                    {item.zipcode}
+                    {item.street ? (
+                      <div>
+                        <b>Address - </b>
+                        {`${item.street}, ${item.city}, ${item.state} ${item.zipcode}`}
+                      </div>
+                    ) : (<div><b>Address - </b> Address not given</div>)}
                   </p>
                   <p className="distance">
-                    <b>Distance:</b> {item.distance?.toFixed(2)} KM
+                    {item.distance ? (
+                      <div>
+                        <b>Distance : </b>
+                        {`${item.distance?.toFixed(2)} KM`}
+                      </div>
+                    ) : (<div><b>Distance : </b> ♾️ KM</div>)}
                   </p>
                   <p className="contact">
-                    <b>Contact - </b> {item.phone}
+                    {item.phone ? (
+                      <div>
+                        <b>Contact - </b>
+                        {`${item.phone}`}
+                      </div>
+                    ) : (<div><b>Contact - </b> +91-XXXXXXXXX</div>)}
                   </p>
                   <a href={`recycle_main/${item.user.id}`}>Book Recycling</a>
                 </div>

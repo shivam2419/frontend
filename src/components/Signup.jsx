@@ -61,13 +61,17 @@ export const Signup = () => {
       setUpdate(false);
       return;
     }
+    if (formData.username.endsWith(" ")) {
+      // Remove trailing spaces
+      formData.username = formData.username.trimEnd();
+    }
     if (formData.username.includes(" ")) {
       // Replace whitespace with underscores
       formData.username = formData.username.replace(/ /g, "_");
       formData.username = formData.username.toLowerCase();
     }
     const signupButton = document.getElementById("signup-btn");
-    signupButton.innerText = "Logging In...";
+    signupButton.innerText = "Signing Up...";
     try {
       const response = await fetch(backendUrl + "register-user/", {
         method: "POST",

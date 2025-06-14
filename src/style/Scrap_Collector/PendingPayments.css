@@ -117,6 +117,7 @@ header {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    border: 1px solid cyan;
 }
 
 .main-container {

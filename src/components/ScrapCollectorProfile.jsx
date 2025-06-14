@@ -17,12 +17,10 @@ const ScrapCollectorProfile = () => {
 
   let latitude = "",
     longitude = "";
-  navigator.geolocation.getCurrentPosition(
-    function (position) {
-      latitude = position.coords.latitude;
-      longitude = position.coords.longitude;
-    }
-  );
+  navigator.geolocation.getCurrentPosition(function (position) {
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+  });
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -102,6 +100,17 @@ const ScrapCollectorProfile = () => {
       const data = await res.json();
 
       if (res.ok) {
+        if (imageFile) {
+          const user_info = await fetch(backendUrl + "auth/user/", {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access")}`,
+            },
+          });
+          const result = await user_info.json();
+          localStorage.removeItem("user_profile");
+          localStorage.setItem("user_profile", result.user_profile);
+        }
         alert("User info updated successfully!");
         setUpdate(false);
         window.location.href = "/scrap-collector";

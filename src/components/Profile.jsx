@@ -95,6 +95,17 @@ const Profile = () => {
 
       const data = await res.json();
       if (res.ok) {
+        if(imageFile) {
+          const user_info = await fetch(backendUrl + "auth/user/", {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access")}`,
+            },
+          });
+          const result = await user_info.json();
+          localStorage.removeItem("user_profile");
+          localStorage.setItem("user_profile", result.user_profile);
+        }
         window.location.reload();
       } else {
         console.error("Update failed:", data);

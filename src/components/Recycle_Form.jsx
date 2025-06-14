@@ -131,9 +131,7 @@ const Recycle_Form = () => {
   <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; padding: 16px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #f9f9f9;">
     <h2 style="color: #2E86C1;">📦 Scrap Request Sent Successfully!</h2>
     <p>
-      Your request has been successfully sent to <strong style="color: #117A65;">${
-        item?.organisation_name
-      }</strong>.
+      Your request has been successfully sent to <strong style="color: #117A65;">${item?.organisation_name}</strong>.
     </p>
     <p>
       <strong>Scrap collector</strong> will notify you about the next steps shortly.
@@ -230,7 +228,7 @@ const Recycle_Form = () => {
 
   return item?.organisation_name ? (
     <div className="recycleform">
-      <h1>{item.organisation_name.toUpperCase()}</h1>
+      <h1>{item.organisation_name.replace(/_/g, " ").toUpperCase()}</h1>
       <form onSubmit={handleSubmit}>
         <div className="row-1">
           <div className="recycle-form-col-1">
@@ -271,10 +269,17 @@ const Recycle_Form = () => {
           </div>
         </div>
 
-        <div className="row-3">
-          <div className="recycle-form-col-1">
-            <label>Upload items image</label>
-            <input type="file" name="image" required onChange={handleChange} />
+        <div className="row-3" id="recycle-form-scrap-image-div-parent">
+          <div className="recycle-form-col-1" id="recycle-form-scrap-image-div">
+            <label htmlFor="image-upload">Upload item image</label>
+            <input
+              type="file"
+              id="image-upload"
+              name="image"
+              required
+              onChange={handleChange}
+              accept="image/*"
+            />
           </div>
         </div>
 
