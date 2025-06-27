@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import loader from "../assets/loader.gif";
 const ScrapOrders = () => {
   const userId = localStorage.getItem("user_id"); // Logged-in user ID
-  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const backendUrl = "https://scrapbridge-api-r54n.onrender.com/api/";
 
   const [currentOrders, setCurrentOrders] = useState([]);
   const [completedOrders, setCompletedOrders] = useState([]);

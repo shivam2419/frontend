@@ -3,7 +3,7 @@ import "../style/profile.css";
 import loader from "../assets/loader.gif";
 
 const ScrapCollectorProfile = () => {
-  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const backendUrl = "https://scrapbridge-api-r54n.onrender.com/api/";
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");

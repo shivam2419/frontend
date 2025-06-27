@@ -4,7 +4,7 @@ import "../style/Scrap_Collector/Orders.css"; // You can extract the style into 
 import loaderGIF from "../assets/loader.gif";
 
 const ScrapCollectorOrders = () => {
-  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const backendUrl = "https://scrapbridge-api-r54n.onrender.com/api/";
   const profileImg = localStorage.getItem("user_profile")
     ? localStorage.getItem("user_profile")
     : "https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg";

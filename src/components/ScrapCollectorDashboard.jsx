@@ -4,7 +4,7 @@ import "../style/Scrap_Collector/Style.css";
 // import '../style/Scrap_Collector/Responsive.css';
 import loaderGIF from "../assets/loader.gif";
 const ScrapCollectorDashboard = () => {
-  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const backendUrl = "https://scrapbridge-api-r54n.onrender.com/api/";
   const [items, setItems] = useState([]);
   const [users, setUsers] = useState({});
   const [searchQuery, setSearchQuery] = useState("");

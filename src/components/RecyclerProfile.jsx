@@ -5,7 +5,7 @@ import loaderGIF from "../assets/loader.gif";
 
 const RecyclerProfile = () => {
   const { userId } = useParams();
-  const backendUrl = "https://scrapbridge-api.onrender.com/api/";
+  const backendUrl = "https://scrapbridge-api-r54n.onrender.com/api/";
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
