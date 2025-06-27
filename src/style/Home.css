@@ -151,13 +151,13 @@ body {
     width: max-content;
 }
 
-#recycle-btn {
+#home-recycle-btn {
     width: 150px;
     background-color: white;
     color: #4e35f0;
     text-decoration: none;
     border: 1px solid #4e35f0;
-    padding: 10px 20px;
+    padding: 10px;
     border-radius: 3px;
     margin-top: 0px;
     font-size: 14px;

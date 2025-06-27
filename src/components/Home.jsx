@@ -96,7 +96,7 @@ const Home = () => {
                         <br /><br />
                         <div className="btns">
                             <Link to="/contact" id="contact-btn">CONTACT US</Link>
-                            <Link to="/e-facility" id="recycle-btn">RECYCLE SERVICES</Link>
+                            <Link to="/e-facility" id="home-recycle-btn">RECYCLE SERVICES</Link>
                         </div>
                     </div>
                     <div
