@@ -5,6 +5,7 @@ import rupeeImg from "../assets/rupee.png";
 import loaderGIF from "../assets/loader.gif";
 const PendingPayments = () => {
   const backendUrl = "https://scrapbridge-api-r54n.onrender.com/api/";
+    // const backendUrl = 'http://127.0.0.1:8000/api/';
   const profileImg = localStorage.getItem("user_profile")
     ? localStorage.getItem("user_profile")
     : "https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg";

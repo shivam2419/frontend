@@ -4,6 +4,7 @@ import "../style/Notification.css";
 
 const Notifications = () => {
   const backendUrl = "https://scrapbridge-api-r54n.onrender.com/api/";
+    // const backendUrl = 'http://127.0.0.1:8000/api/';
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");

@@ -6,6 +6,7 @@ import defaultProfile from "../assets/default.jpg";
 import "../style/Navbar.css";
 export const Navbar = () => {
   const backendUrl = "https://scrapbridge-api-r54n.onrender.com/api/";
+    // const backendUrl = 'http://127.0.0.1:8000/api/';
   const [unseenCount, setUnseenCount] = useState(0);
   let userName = localStorage.getItem("username");
   let profileImage = localStorage.getItem("user_profile");

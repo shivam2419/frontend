@@ -4,6 +4,7 @@ import '../style/Scrap_Collector/Payment.css'; // Assuming you have a separate C
 
 const Payment = () => {
     const backendUrl = "https://scrapbridge-api-r54n.onrender.com/api/";
+    // const backendUrl = 'http://127.0.0.1:8000/api/';
     const { order_id, user } = useParams();
     const [amount, setAmount] = useState('');
 
