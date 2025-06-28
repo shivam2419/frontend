@@ -1,0 +1,64 @@
+.notification-container {
+  margin: 2%;
+  max-width: 100%;
+  padding: 10px;
+}
+
+.notification-container h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.notification-wrapper {
+  display: flex;
+  flex-direction: column; /* vertical layout */
+  gap: 1rem;
+  align-items: stretch; /* optional: full-width cards */
+}
+
+
+.notification-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+  max-width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.notification-status {
+  padding: 8px;
+  font-weight: bold;
+  background-color: rgb(146, 210, 255);
+}
+
+.notification-message {
+  padding: 10px;
+}
+
+.notification-accepted .notification-status {
+  background-color: rgb(146, 210, 255);
+}
+
+.notification-accepted .notification-message {
+  background-color: rgb(138, 255, 138);
+  color: black;
+}
+
+.notification-rejected .notification-status {
+  background-color: rgb(255, 163, 163);
+}
+
+.notification-rejected .notification-message {
+  background-color: rgb(255, 105, 105);
+  color: white;
+}
+#notification-message-seen {
+  opacity: 70%;
+}
+#notification-message-unseen::after{
+  content: "*";
+  color: red;
+  float: right;
+}

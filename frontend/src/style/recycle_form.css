@@ -1,0 +1,139 @@
+.recycleform {
+  text-align: center;
+  width: 60%;
+  margin: auto;
+  margin-top: 5%;
+  padding: 10px;
+  overflow-x: hidden;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.recycleform h1 {
+  font-size: 2rem;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+form .row-1,
+form .row-2,
+form .row-3,
+form .row-4 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  text-align: left;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+form .row-1 .recycle-form-col-1,
+form .row-2 .recycle-form-col-1,
+form .row-3 .recycle-form-col-1 {
+  flex: 1;
+  min-width: 220px;
+  margin-bottom: 10px;
+}
+
+.recycle-form-col-1 input,
+.recycle-form-col-1 select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 3px;
+  box-sizing: border-box;
+}
+
+#recycle-btn {
+  width: 150px;
+  background-color: blue;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+}
+
+#recycle-btn:hover {
+  background-color: rgb(5, 14, 183);
+  scale: 1.01;
+}
+/* Image upload div */
+/* Parent container with soft background */
+
+
+/* Form card */
+#recycle-form-scrap-image-div {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 24px 28px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Label styling */
+#recycle-form-scrap-image-div label {
+  display: block;
+  font-size: 1rem;
+  color: #1f2937;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+/* Clean file input */
+#recycle-form-scrap-image-div input[type="file"] {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: #f9fafb;
+  font-size: 0.95rem;
+  color: #374151;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+#recycle-form-scrap-image-div input[type="file"]:hover {
+  border-color: #9ca3af;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+#recycle-form-scrap-image-div input[type="file"]:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Responsive for screens smaller than 500px */
+@media screen and (max-width: 500px) {
+  .recycleform {
+    width: 95%;
+    max-height: none; /* prevent clipping */
+  }
+
+  .recycleform h1 {
+    font-size: 1.5rem;
+    word-break: break-word;
+  }
+
+  form .row-1,
+  form .row-2,
+  form .row-3,
+  form .row-4 {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  form .recycle-form-col-1 {
+    width: 100%;
+  }
+  #recycle-form-scrap-image-div {
+    padding: 12px;
+    max-width: 100%;
+  }
+}

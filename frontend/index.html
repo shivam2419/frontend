@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-787CQTGSGH"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-787CQTGSGH");
+    </script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./src/assets/title-logo.png" />
+    <link rel="stylesheet" href="./src/index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ScrapBridge</title>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-TLQBKNQX");
+    </script>
+    <!-- End Google Tag Manager -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <!-- Leaflet Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css"
+    />
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Razorpay linking -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  </head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-TLQBKNQX"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- Custom Vertical Translate Button -->
+    <div id="translateDiv">
+      🌐
+      <span id="translateText">Translate</span>
+    </div>
+
+    <!-- Hidden Google Translate Widget -->
+    <div id="translatePopup" class="translate-popup" style="display: none">
+      <div class="translate-popup-content">
+        <p style="margin-bottom: 10px">Select Language</p>
+        <div id="google_translate_element" class="styled-select">
+          <!-- Options will be replaced by Google Translate widget dynamically -->
+        </div>
+        <span class="close-btn" onclick="toggleTranslatePopup()">&times;</span>
+      </div>
+    </div>
+
+    <script>
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+          },
+          "google_translate_element"
+        );
+      }
+
+      function toggleTranslatePopup() {
+        const popup = document.getElementById("translatePopup");
+        popup.style.display =
+          popup.style.display === "block" ? "none" : "block";
+      }
+
+      // Attach the click event listener to your translate button
+      document.getElementById("translateDiv").addEventListener("click", toggleTranslatePopup);
+
+
+      window.onclick = function (event) {
+        const popup = document.getElementById("translatePopup");
+        if (event.target === popup) {
+          popup.style.display = "none";
+        }
+      };
+    </script>
+
+    <script>
+      const translateDiv = document.getElementById("translateDiv");
+
+      // Toggle expanded on click (for mobile)
+      translateDiv.addEventListener("click", (e) => {
+        e.stopPropagation(); // prevent immediate close by document click
+        translateDiv.classList.toggle("expanded");
+      });
+
+      // Close expanded if clicking outside
+      document.addEventListener("click", () => {
+        translateDiv.classList.remove("expanded");
+      });
+
+      // Keyboard toggle (Enter / Space)
+      translateDiv.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          translateDiv.classList.toggle("expanded");
+        }
+      });
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+
+    <!-- Start of OpenWidget (www.openwidget.com) code -->
+    <script>
+      window.__ow = window.__ow || {};
+      window.__ow.organizationId = "e195fccb-61e5-46cb-812a-c340d4a6f663";
+      window.__ow.integration_name = "manual_settings";
+      window.__ow.product_name = "openwidget";
+      (function (n, t, c) {
+        function i(n) {
+          return e._h ? e._h.apply(null, n) : e._q.push(n);
+        }
+        var e = {
+          _q: [],
+          _h: null,
+          _v: "2.0",
+          on: function () {
+            i(["on", c.call(arguments)]);
+          },
+          once: function () {
+            i(["once", c.call(arguments)]);
+          },
+          off: function () {
+            i(["off", c.call(arguments)]);
+          },
+          get: function () {
+            if (!e._h)
+              throw new Error(
+                "[OpenWidget] You can't use getters before load."
+              );
+            return i(["get", c.call(arguments)]);
+          },
+          call: function () {
+            i(["call", c.call(arguments)]);
+          },
+          init: function () {
+            var n = t.createElement("script");
+            (n.async = !0),
+              (n.type = "text/javascript"),
+              (n.src = "https://cdn.openwidget.com/openwidget.js"),
+              t.head.appendChild(n);
+          },
+        };
+        !n.__ow.asyncInit && e.init(), (n.OpenWidget = n.OpenWidget || e);
+      })(window, document, [].slice);
+    </script>
+    <noscript
+      >You need to
+      <a
+        href="https://www.openwidget.com/enable-javascript"
+        rel="noopener nofollow"
+        >enable JavaScript</a
+      >
+      to use the communication tool powered by
+      <a
+        href="https://www.openwidget.com/"
+        rel="noopener nofollow"
+        target="_blank"
+        >OpenWidget</a
+      ></noscript
+    >
+    <!-- End of OpenWidget code -->
+    <script>
+      const dragBtn = document.querySelector(".custom-translate-btn");
+
+      dragBtn.addEventListener("mousedown", function (e) {
+        e.preventDefault();
+        dragBtn.style.cursor = "grabbing";
+        dragBtn.style.pointerEvents = "none"; // Prevent unintended layout changes
+
+        let shiftX = e.clientX - dragBtn.getBoundingClientRect().left;
+        let shiftY = e.clientY - dragBtn.getBoundingClientRect().top;
+
+        function moveAt(pageX, pageY) {
+          dragBtn.style.left = pageX - shiftX + "px";
+          dragBtn.style.top = pageY - shiftY + "px";
+          dragBtn.style.right = "auto"; // Prevent right from conflicting
+          dragBtn.style.bottom = "auto";
+        }
+
+        function onMouseMove(e) {
+          moveAt(e.pageX, e.pageY);
+        }
+
+        document.addEventListener("mousemove", onMouseMove);
+
+        document.addEventListener(
+          "mouseup",
+          function () {
+            document.removeEventListener("mousemove", onMouseMove);
+            dragBtn.style.cursor = "grab";
+            dragBtn.style.pointerEvents = "auto";
+          },
+          { once: true }
+        );
+      });
+
+      dragBtn.ondragstart = () => false;
+    </script>
+  </body>
+</html>

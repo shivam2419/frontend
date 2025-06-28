@@ -1,0 +1,277 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #6acbff;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
+}
+body {
+  font-family: "Merriweather", serif;
+}
+/* Sidebar */
+#mySidebar {
+  display: none;
+}
+.sidebar {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  padding-top: 20px;
+  transition: 0.5s;
+  overflow: hidden;
+  display: none;
+  align-items: center;
+  overflow: hidden;
+  z-index: 10;
+}
+.sidebar a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+.sidebar a:hover {
+  background-color: #575d63;
+  border-radius: 10px;
+}
+.sidebar .closebtn {
+  position: absolute;
+  top: 0px;
+  right: 20px;
+  font-size: 36px;
+}
+.closebtn {
+  background-color: #111;
+  color: white;
+  border: none;
+  height: 0;
+  cursor: pointer;
+}
+.openbtn {
+  font-size: 24px;
+  font-weight: bolder;
+  cursor: pointer;
+  color: black;
+  border: none;
+  background-color: white;
+  margin-right: 10px;
+}
+.openbtn:hover {
+  scale: 1.1;
+}
+.main-content {
+  margin-left: 0;
+  transition: margin-left 0.5s;
+}
+nav {
+  background-color: white; /* Background color for the navbar */
+  padding: 10px 10px; /* Padding for the navbar */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav span button {
+  height: 40px;
+  align-items: center;
+}
+/* Logo styles */
+.logo {
+  background-color: white;
+}
+.logo img {
+  height: 35px;
+  zoom: 150%;
+  background-color: white;
+  text-decoration: none;
+  margin-bottom: -10px;
+  border-radius: 50%;
+}
+
+/* Navbar links styles */
+.navbar-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  background-color: white;
+}
+
+.navbar-links li {
+  margin-right: 20px; /* Adjust spacing between links */
+}
+
+.navbar-links li:last-child {
+  margin-right: 0; /* Remove margin from the last link */
+}
+
+.navbar-links a {
+  color: black;
+  text-decoration: none;
+  background-color: white;
+  padding: 5px;
+  font-size: 1rem;
+}
+.navbar-links a:hover {
+  transition: 1s ease-in-out;
+  border-bottom: 1px solid black;
+}
+
+/* Button styles */
+.btn {
+  background-color: white; /* Green background color */
+  border: 2px solid #4e35f0;
+  border-radius: 3px;
+  color: #4e35f0;
+  font-weight: bolder;
+  font-family: "Roboto", sans-serif;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 20px; /* Adjust button's spacing from the last link */
+}
+/* If loggedin */
+.dropdown {
+  list-style: none;
+}
+.nav-item {
+  margin-right: 30px;
+}
+.profile-image {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile-image p {
+  margin-left: 10px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+}
+#notification {
+  border: none;
+  background-color: white;
+  margin-right: 10px;
+  height: 30px;
+  margin-top: 5px;
+}
+#notification img {
+  height: 30px;
+}
+.notification-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.notification-icon {
+  width: 30px; /* adjust as needed */
+  height: 30px;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.profile-image img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: auto;
+  object-fit: cover;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  padding: 10px;
+  width: 120px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.dropdown-menu a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f0f0f0;
+}
+/* Responsive Adjustments */
+
+@media (max-width: 825px) {
+  .navbar-links {
+    display: none;
+  }
+
+  .sidebar {
+    height: 100%;
+    width: 300px;
+  }
+
+  .profile-image {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
+    padding: 5px;
+  }
+  .sidebar {
+    width: 300px;
+    height: 100%;
+    position: absolute;
+  }
+  .logo img,
+  .profile-image img {
+    height: 40px;
+    width: 40px;
+  }
+  .nav-item {
+    margin-right: 10px;
+  }
+  #notification img {
+    margin-top: 0px;
+  }
+  .profile-image p {
+    display: none;
+  }
+}
