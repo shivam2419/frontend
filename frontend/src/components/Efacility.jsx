@@ -254,7 +254,7 @@ const Efacility = () => {
                     ) : (<div><b>Address - </b> Address not given</div>)}
                   </p>
                   <p className="distance">
-                    {item.distance ? (
+                    {item.distance || item.distance === 0 ? (
                       <div>
                         <b>Distance : </b>
                         {`${item.distance?.toFixed(2)} KM`}

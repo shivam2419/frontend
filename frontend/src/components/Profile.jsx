@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../style/profile.css";
 import loader from "../assets/loader.gif";
+import defaultProfile from "../assets/default.jpg";
 
 const Profile = () => {
   const backendUrl = "https://scrapbridge-api-r54n.onrender.com/api/";
@@ -137,6 +138,10 @@ const Profile = () => {
                 className="profile-img"
                 onClick={() => setPreviewImage(true)}
                 style={{ cursor: "pointer" }}
+                onError={(e) => {
+                  e.target.onerror = null; // prevent infinite loop
+                  e.target.src = defaultProfile; // fallback image path
+                }}
               />
               <h2 className="username">
                 {localStorage.getItem("username")?.toUpperCase()}
@@ -273,7 +278,10 @@ const Profile = () => {
             className="image-preview-container"
             onClick={(e) => e.stopPropagation()}
           >
-            <img src={profileImg} alt="Zoomed" className="preview-img" />
+            <img src={profileImg} alt="Zoomed" className="preview-img" onError={(e) => {
+                  e.target.onerror = null; // prevent infinite loop
+                  e.target.src = defaultProfile; // fallback image path
+                }}  />
           </div>
         </div>
       )}

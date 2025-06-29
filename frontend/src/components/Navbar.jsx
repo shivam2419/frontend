@@ -272,6 +272,10 @@ export const Navbar = () => {
                       src={profileImage}
                       alt="Profile"
                       style={{ border: "1px solid cyan" }}
+                      onError={(e) => {
+                        e.target.onerror = null; // prevent infinite loop
+                        e.target.src = defaultProfile; // fallback image path
+                      }}
                     />
                     <p>{userName}</p>
                   </span>
