@@ -132,7 +132,6 @@ const Chat = () => {
 
       {/* Chat Window */}
       <div className="chat-window">
-
         {loading ? (
           <div className="loader">Loading chats...</div>
         ) : !activeOrder ? (
@@ -140,7 +139,7 @@ const Chat = () => {
         ) : (
           <>
             <div className="chat-header">
-              <span>
+              <div className="chat-header-left">
                 {!sidebarOpen && (
                   <button
                     className="sidebar-toggle-open"
@@ -149,15 +148,17 @@ const Chat = () => {
                     <FaBars />
                   </button>
                 )}
-              </span>
-              <span>
+                <span className="brand-name">SCRAPBRIDGE</span>
+              </div>
+
+              <div className="chat-header-right">
                 <h3>Chat - Order {activeOrder.order_id}</h3>
                 {!canChat && (
                   <span className="chat-disabled">
                     Chat not allowed for this order
                   </span>
                 )}
-              </span>
+              </div>
             </div>
 
             <div className="chat-messages">
@@ -186,9 +187,12 @@ const Chat = () => {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && sendMessage()} // Enter key support
                   placeholder="Type a message..."
                 />
-                <button onClick={sendMessage}>Send</button>
+                <button onClick={sendMessage} className="send-btn">
+                  Send
+                </button>
               </div>
             )}
           </>

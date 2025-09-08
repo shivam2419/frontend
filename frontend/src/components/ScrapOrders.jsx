@@ -99,7 +99,7 @@ const ScrapOrders = () => {
                   to={`/chat/${order.order_id}/${userId}/${order.organisation_id}`}
                   className="chat-button"
                   style={{
-                    backgroundColor: "blue",
+                    backgroundColor: "#67cd3f",
                     padding: "5px 10px",
                     marginTop: "20px",
                     color: "white",
