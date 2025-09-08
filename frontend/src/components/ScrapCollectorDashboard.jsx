@@ -194,7 +194,13 @@ const ScrapCollectorDashboard = () => {
                 <img src={profileImg} className="dpicn" alt="dp" />
               </Link>
             </div>
+            <div className="chat">
+              <Link to="/scrap-collector/chats">
+                <img src="https://www.shutterstock.com/image-vector/chat-icon-logo-template-600w-779557519.jpg" className="chaticn" alt="chat" />
+              </Link>
+            </div>
           </div>
+          
         </header>
         <div className="navbar" id="navbar" ref={sidebarRef}
   style={{ display: isSidebarOpen ? "block" : "none" }}>

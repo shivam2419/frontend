@@ -29,10 +29,12 @@ import Payment from './components/Payment.jsx';
 import ScrapCollectorProfile from './components/ScrapCollectorProfile.jsx';
 import RecyclerProfile from './components/RecyclerProfile.jsx';
 import ScrapOrders from './components/ScrapOrders.jsx';
+import Chat from './components/Chat.jsx';
+import ScrapCollectorChat from './components/ScrapCollectorChat.jsx';
 function AppContent() {
   const location = useLocation();
   const hideLayoutFor = ['/scrap-collector', '/orders', '/pending-order', '/scrap-collector/profile', '/profile']; // add more paths if needed
-  const shouldHideLayout = hideLayoutFor.includes(location.pathname) || location.pathname.startsWith('/scraprequest-details/') || location.pathname.startsWith('/payment/');
+  const shouldHideLayout = hideLayoutFor.includes(location.pathname) || location.pathname.startsWith('/scraprequest-details/') || location.pathname.startsWith('/payment/') || location.pathname.startsWith('/chat/') || location.pathname.startsWith('/scrap-collector/');
   const backendUrl = "https://scrapbridge-api.onrender.com/";
   return (
     <>
@@ -46,6 +48,7 @@ function AppContent() {
         <Route path="/about" element={<About />} />
         <Route path="/education" element={<Education />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/chat/:orderId/:userId/:collectorId" element={<Chat />} />
         {/* <Route path="/classify-image" element={<ImageClassifier />} /> */}
         <Route path="/e-facility" element={<Efacility />} />
         <Route path="/notification" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
@@ -61,6 +64,7 @@ function AppContent() {
         <Route path="/pending-order" element={<ProtectedRoute><PendingPayments /></ProtectedRoute>} />
         <Route path="/payment/:order_id/:user/" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
         <Route path="/scrap-collector/profile/" element={<ProtectedRoute><ScrapCollectorProfile /></ProtectedRoute>} />
+        <Route path="/scrap-collector/chats/" element={<ProtectedRoute><ScrapCollectorChat /></ProtectedRoute>} />
       </Routes>
 
       {!shouldHideLayout && <Footer />}

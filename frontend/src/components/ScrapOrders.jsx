@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import loader from "../assets/loader.gif";
+import { Link } from "react-router-dom";
 const ScrapOrders = () => {
   const userId = localStorage.getItem("user_id"); // Logged-in user ID
   const backendUrl = "https://scrapbridge-api-r54n.onrender.com/api/";
-    // const backendUrl = 'http://127.0.0.1:8000/api/';
+  // const backendUrl = "http://127.0.0.1:8000/api/";
 
   const [currentOrders, setCurrentOrders] = useState([]);
   const [completedOrders, setCompletedOrders] = useState([]);
@@ -40,7 +41,7 @@ const ScrapOrders = () => {
           throw new Error(`HTTP error! Status: ${res.status}`);
         }
         const data = await res.json();
-
+        console.log(data.ongoing_orders);
         setCurrentOrders(data.ongoing_orders || []);
         setCompletedOrders(data.completed_orders || []);
         setLoading(false);
@@ -75,7 +76,7 @@ const ScrapOrders = () => {
                 <strong>Order ID:</strong> {order.order_id}
               </p>
               <p>
-                <strong>Weight:</strong> {order.weight / 1000} kg
+                <strong>Weight:</strong> {order.weight} kg
               </p>
               <p>
                 <strong>Date:</strong> {new Date(order.date).toLocaleString()}
@@ -92,6 +93,26 @@ const ScrapOrders = () => {
                   onClick={() => openImageModal(order.image)}
                 />
               )}
+              <br /><br />
+              {order.status && (
+                <Link
+                  to={`/chat/${order.order_id}/${userId}/${order.organisation_id}`}
+                  className="chat-button"
+                  style={{
+                    backgroundColor: "blue",
+                    padding: "5px 10px",
+                    marginTop: "20px",
+                    color: "white",
+                    borderRadius: "5px",
+                    boxShadow: "2px 2px 5px grey",
+                    textDecoration: "none",
+                  }}
+                >
+                  Chat with Scrap Collector
+                </Link>
+              )}
+
+              <br />
               {isModalOpen && (
                 <div style={styles.modalOverlay}>
                   <span style={styles.closeButton} onClick={closeImageModal}>
@@ -158,7 +179,7 @@ const styles = {
     width: "150px",
     cursor: "pointer",
     borderRadius: "4px",
-    marginTop: "10px"
+    marginTop: "10px",
   },
   modalOverlay: {
     position: "fixed",
