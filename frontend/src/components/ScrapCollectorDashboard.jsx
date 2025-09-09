@@ -222,6 +222,7 @@ const ScrapCollectorDashboard = () => {
             <Link to="/orders">Orders</Link>
             <Link to="/pending-order">Pending Payments</Link>
             <Link to="/scrap-collector/profile">Profile</Link>
+            <Link to="/scrap-collector/chats">Chats</Link>
             <Link onClick={logout}>Logout</Link>
           </div>
         </div>
