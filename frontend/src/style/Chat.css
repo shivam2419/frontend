@@ -20,6 +20,33 @@
   overflow-y: auto;
   transition: transform 0.3s ease-in-out;
 }
+/* Sidebar Header */
+.chat-sidebar h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  padding: 10px 15px;
+  color: white;
+}
+
+/* Search Bar Styling */
+.chat-search {
+  width: calc(100% - 30px);
+  margin: 0 auto 15px auto;
+  display: block;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.chat-search:focus {
+  border: 1px solid #4CAF50;
+  box-shadow: 0 0 4px rgba(76, 175, 80, 0.4);
+}
+
 
 .chat-sidebar.closed {
   transform: translateX(-100%);

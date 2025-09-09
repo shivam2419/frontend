@@ -4,10 +4,10 @@ import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import axios from "axios";
 import "../style/Chat.css";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const ScrapCollectorChat = () => {
   const backendUrl = "https://scrapbridge-api-r54n.onrender.com/api/";
-  // const backendUrl = 'http://127.0.0.1:8000/api/';
   const { orderId } = useParams();
   const collectorId = localStorage.getItem("user_id");
   const [orders, setOrders] = useState([]);
@@ -17,12 +17,16 @@ const ScrapCollectorChat = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [canChat, setCanChat] = useState(false);
-  const [searchQuery, setSearchQuery] = useState(""); // 🔹 New state
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const messagesEndRef = useRef(null);
 
   const token = localStorage.getItem("access");
-  const socket = io("https://scrapbridge-chat-app-backend.onrender.com", { auth: { token } });
+  const socket = io("https://scrapbridge-chat-app-backend.onrender.com", {
+    auth: { token },
+  });
 
+  // Fetch collector orders
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -39,6 +43,7 @@ const ScrapCollectorChat = () => {
     if (collectorId) fetchOrders();
   }, [collectorId, token]);
 
+  // Chat setup
   useEffect(() => {
     if (!activeOrder) return;
 
@@ -68,10 +73,9 @@ const ScrapCollectorChat = () => {
     };
   }, [activeOrder]);
 
+  // Auto scroll
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   const sendMessage = () => {
@@ -87,7 +91,7 @@ const ScrapCollectorChat = () => {
     setInput("");
   };
 
-  // 🔹 Filter orders based on search
+  // Filter orders
   const filteredOrders = orders.filter((order) =>
     order.order_id.toString().includes(searchQuery.trim())
   );
@@ -95,10 +99,17 @@ const ScrapCollectorChat = () => {
   return (
     <div className="chat-main-container">
       {/* Sidebar */}
-      <div className="chat-sidebar">
-        <h3>Assigned Orders</h3>
-
-        {/* 🔹 Search bar */}
+      <div className={`chat-sidebar ${sidebarOpen ? "open" : "closed"}`}>
+        <div className="sidebar-header">
+          <h3>Assigned Orders</h3>
+          <button
+            className="sidebar-toggle"
+            onClick={() => setSidebarOpen(false)}
+          >
+            <FaTimes />
+          </button>
+        </div>
+        {/* Search bar */}
         <input
           type="text"
           className="chat-search"
@@ -138,15 +149,31 @@ const ScrapCollectorChat = () => {
           <div className="no-chat">Select an order to chat</div>
         ) : (
           <>
+            {/* Header */}
             <div className="chat-header">
-              <h3>Chat - Order {activeOrder.order_id}</h3>
-              {!canChat && (
-                <span className="chat-disabled">
-                  Chat not allowed for this order
-                </span>
-              )}
+              <div className="chat-header-left">
+                {!sidebarOpen && (
+                  <button
+                    className="sidebar-toggle-open"
+                    onClick={() => setSidebarOpen(true)}
+                  >
+                    <FaBars />
+                  </button>
+                )}
+                <span className="brand-name">SCRAPBRIDGE</span>
+              </div>
+
+              <div className="chat-header-right">
+                <h3>Chat - Order {activeOrder.order_id}</h3>
+                {!canChat && (
+                  <span className="chat-disabled">
+                    Chat not allowed for this order
+                  </span>
+                )}
+              </div>
             </div>
 
+            {/* Messages */}
             <div className="chat-messages">
               {messages.map((msg, i) => (
                 <div
@@ -167,15 +194,19 @@ const ScrapCollectorChat = () => {
               <div ref={messagesEndRef} />
             </div>
 
+            {/* Input */}
             {canChat && (
               <div className="chat-input">
                 <input
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && sendMessage()}
                   placeholder="Type a message..."
                 />
-                <button onClick={sendMessage}>Send</button>
+                <button onClick={sendMessage} className="send-btn">
+                  Send
+                </button>
               </div>
             )}
           </>
