@@ -12,7 +12,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 5%;
-    background-color: rgb(194 232, 255);
+    background-color: #c8e6ff;
 }
 
 .content-left p {
