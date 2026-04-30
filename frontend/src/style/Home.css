@@ -12,7 +12,6 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 5%;
-    background-color: #c8e6ff;
 }
 
 .content-left p {
