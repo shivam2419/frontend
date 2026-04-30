@@ -30,7 +30,7 @@ const Home = () => {
 
     return (
         <div>
-            <div className="content">
+            <div className="content" style="background-color: #c8e6ff;">
                 <div className="content-left">
                     <p>-Welcome to ScrapBridge</p>
                     <h1>
